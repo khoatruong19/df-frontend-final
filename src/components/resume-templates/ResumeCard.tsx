@@ -1,12 +1,25 @@
+'use client';
+
 import Image from 'next/image';
 import React from 'react';
 import { Button } from '../ui/button';
+import { useRouter } from 'next/navigation';
+import { APP_ROUTES } from '@/utils/constants';
 
 type Props = {};
 
 const ResumeCard = (props: Props) => {
+  const router = useRouter();
+
+  const handleCreateNewResume = () => {
+    router.push(`${APP_ROUTES.EDIT_TEMPLATE.path + 'df'}`);
+  };
+
   return (
-    <div className="relative w-full py-5 bg-black/5 cursor-pointer hover:bg-black/10 group">
+    <div
+      onClick={handleCreateNewResume}
+      className="relative w-full py-5 bg-black/5 cursor-pointer hover:bg-black/10 group"
+    >
       <div className="relative w-full h-[450px] ">
         <Image
           src={

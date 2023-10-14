@@ -1,7 +1,7 @@
 import MainLayout from '@/components/layouts/MainLayout';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import { APP_ROUTES } from './utils/constants';
+import { APP_ROUTES } from '../utils/constants';
 
 export default function Home() {
   return (

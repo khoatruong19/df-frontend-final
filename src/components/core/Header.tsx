@@ -2,14 +2,14 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { APP_ROUTES } from '@/app/utils/constants';
+import { APP_ROUTES } from '@/utils/constants';
 import { Button } from '../ui/button';
 import { SignInButton } from '@clerk/clerk-react';
 import { useUser } from '@clerk/nextjs';
 
 const Header = () => {
   const { user } = useUser();
-  console.log([user]);
+
   return (
     <header className="font-display p-4 flex items-center justify-between">
       <nav>
@@ -27,7 +27,7 @@ const Header = () => {
       {!user ? (
         <SignInButton
           mode="modal"
-          redirectUrl={APP_ROUTES.RESUME_TEMPLATES.path}
+          // redirectUrl={APP_ROUTES.RESUME_TEMPLATES.path}
         >
           <Button size={'lg'}>Log In</Button>
         </SignInButton>
