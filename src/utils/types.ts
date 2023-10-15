@@ -24,3 +24,19 @@ export type EmploymentHistory = {
   city?: string;
   description?: string;
 };
+
+export type Education = {
+  id: string;
+  school?: string;
+  degree?: string;
+  startDate?: string;
+  endDate?: string;
+  city?: string;
+  description?: string;
+};
+
+export type SocialLink = {
+  id: string;
+  platform?: string;
+  link?: string;
+};

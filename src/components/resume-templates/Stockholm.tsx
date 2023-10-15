@@ -1,6 +1,7 @@
 import { User, Briefcase, GraduationCap } from 'lucide-react';
 import React, { useEffect, useRef } from 'react';
 import { Doc } from '../../../convex/_generated/dataModel';
+import { SocialIcon } from 'react-social-icons';
 
 type StockholmProps = {
   resume: Doc<'resume'>;
@@ -23,7 +24,7 @@ const Stockholm = ({ resume }: StockholmProps) => {
   return (
     <section
       ref={sectionRef}
-      className="max-h-screen py-9 px-12 bg-white aspect-[12/16] rounded-md overflow-hidden"
+      className="min-h-screen py-9 px-12 bg-white aspect-[12/16] rounded-md overflow-hidden"
     >
       <div className="flex items-center gap-5 justify-start">
         <img
@@ -60,7 +61,7 @@ const Stockholm = ({ resume }: StockholmProps) => {
           {resume?.employmentHistory.length > 0 && (
             <div className="flex">
               <div className="w-6">
-                <Briefcase className="mt-0.5" size={15} strokeWidth={3} />
+                <Briefcase className="mt-1" size={13} strokeWidth={3} />
               </div>
               <div className="max-w-[90%]">
                 <h2 className=" font-semibold">Employment History</h2>
@@ -74,10 +75,10 @@ const Stockholm = ({ resume }: StockholmProps) => {
                     endDate,
                     startDate,
                   }) => (
-                    <div key={id} className="mb-4">
+                    <div key={id}>
                       {(jobTitle || company || city) && (
                         <h3 className="text-xs font-semibold">
-                          {jobTitle} - {company} {city && `,${city}`}
+                          {jobTitle} - {company} {city && `, ${city}`}
                         </h3>
                       )}
                       {(startDate || endDate) && (
@@ -98,24 +99,45 @@ const Stockholm = ({ resume }: StockholmProps) => {
           )}
 
           {/* Education */}
-          <div className="flex">
-            <div className="w-6">
-              <GraduationCap className="mt-0.5" size={15} strokeWidth={3} />
-            </div>
-            <div className="max-w-[90%]">
-              <h2 className="font-semibold">Education</h2>
-              <div>
-                <h3 className="text-xs font-semibold">Bach Khoa University</h3>
-                <p className="text-xxs">February 2023 - July 2023</p>
-                <p className="mt-1.5 text-xs  break-all">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Magnam aliquam voluptates voluptatibus repudiandae? Iure
-                  officiis nulla doloremque quos rem, aliquam, hic id nam itaque
-                  autem, adipisci consectetur rerum tempora. Tenetur.
-                </p>
+          {resume?.education.length > 0 && (
+            <div className="flex">
+              <div className="w-6">
+                <GraduationCap className="mt-0.5" size={15} strokeWidth={3} />
+              </div>
+              <div className="max-w-[90%]">
+                <h2 className=" font-semibold">Employment History</h2>
+                {resume?.education.map(
+                  ({
+                    id,
+                    city,
+                    degree,
+                    description,
+                    school,
+                    endDate,
+                    startDate,
+                  }) => (
+                    <div key={id}>
+                      {(school || degree || city) && (
+                        <h3 className="text-xs font-semibold">
+                          {school} - {degree} {city && `, ${city}`}
+                        </h3>
+                      )}
+                      {(startDate || endDate) && (
+                        <p className="text-xxs">
+                          {startDate} - {endDate}
+                        </p>
+                      )}
+                      {description && (
+                        <p className="mt-1.5 text-xs  break-all">
+                          {description}
+                        </p>
+                      )}
+                    </div>
+                  )
+                )}
               </div>
             </div>
-          </div>
+          )}
         </div>
 
         <div className="w-1/3 pl-6 flex flex-col gap-4">
@@ -146,10 +168,24 @@ const Stockholm = ({ resume }: StockholmProps) => {
           )}
 
           {/* Links */}
-          <div>
-            <h3 className="text-xs font-semibold mb-0.5">Links</h3>
-            <p className="text-xxs text-blue-500">Github</p>
-          </div>
+          {resume?.socialLinks?.length > 0 && (
+            <div>
+              <h3 className="text-xs font-semibold mb-0.5">Links</h3>
+              {resume?.socialLinks?.map((socialLink) => (
+                <div key={socialLink.id}>
+                  <SocialIcon
+                    style={{ height: 15, width: 15 }}
+                    color="red"
+                    url={socialLink.link}
+                    as="span"
+                  />
+                  <span className="text-xxs text-blue-500 break-all ml-1">
+                    {socialLink.link}
+                  </span>
+                </div>
+              ))}
+            </div>
+          )}
 
           {/* Skills */}
           <div>

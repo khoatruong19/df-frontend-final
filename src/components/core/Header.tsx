@@ -32,7 +32,14 @@ const Header = () => {
           <Button size={'lg'}>Log In</Button>
         </SignInButton>
       ) : (
-        <div>{user.fullName}</div>
+        <div className="flex items-center gap-2">
+          <img
+            className="w-10 h-10 object-cover rounded-full"
+            src={user.imageUrl}
+            alt=""
+          />
+          <span className="font-semibold">{user.fullName}</span>
+        </div>
       )}
     </header>
   );

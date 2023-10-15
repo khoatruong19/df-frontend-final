@@ -1,5 +1,6 @@
 import { mutation, query } from './_generated/server';
 import { v } from 'convex/values';
+import { v4 as uuid } from 'uuid';
 
 export const create = mutation({
   args: {},
@@ -137,7 +138,6 @@ export const updateProfileSummary = mutation({
 export const addEmploymentHistory = mutation({
   args: {
     id: v.id('resume'),
-    employmentId: v.string(),
   },
   handler: async (ctx, args) => {
     const identity = await ctx.auth.getUserIdentity();
@@ -146,15 +146,17 @@ export const addEmploymentHistory = mutation({
       throw new Error('Not authenticated');
     }
 
-    const userId = identity.subject;
-
-    const { id, employmentId } = args;
+    const { id } = args;
 
     const document = await ctx.db.get(id);
 
+    if (!document) {
+      throw new Error('Resume not found!');
+    }
+
     const employmentHistory = document?.employmentHistory ?? [];
 
-    employmentHistory.push({ id: employmentId });
+    employmentHistory.push({ id: uuid() });
 
     await ctx.db.patch(id, { employmentHistory });
 
@@ -233,6 +235,209 @@ export const deleteEmploymentHistory = mutation({
     );
 
     await ctx.db.patch(resumeId, { employmentHistory });
+
+    return document;
+  },
+});
+
+export const addEducation = mutation({
+  args: {
+    id: v.id('resume'),
+  },
+  handler: async (ctx, args) => {
+    const identity = await ctx.auth.getUserIdentity();
+
+    if (!identity) {
+      throw new Error('Not authenticated');
+    }
+
+    const { id } = args;
+
+    const document = await ctx.db.get(id);
+
+    if (!document) {
+      throw new Error('Resume not found!');
+    }
+
+    const education = document?.education ?? [];
+
+    education.push({ id: uuid() });
+
+    await ctx.db.patch(id, { education });
+
+    return document;
+  },
+});
+
+export const updateEducation = mutation({
+  args: {
+    resumeId: v.id('resume'),
+    id: v.string(),
+    school: v.optional(v.string()),
+    degree: v.optional(v.string()),
+    startDate: v.optional(v.string()),
+    endDate: v.optional(v.string()),
+    city: v.optional(v.string()),
+    description: v.optional(v.string()),
+  },
+  handler: async (ctx, args) => {
+    const identity = await ctx.auth.getUserIdentity();
+
+    if (!identity) {
+      throw new Error('Not authenticated');
+    }
+
+    const { resumeId, id, ...rest } = args;
+
+    const document = await ctx.db.get(resumeId);
+
+    if (!document) {
+      throw new Error('Resume not found');
+    }
+
+    let educations = document?.education ?? [];
+
+    educations = educations.map((education) => {
+      if (education.id === id) {
+        return {
+          id: education.id,
+          ...rest,
+        };
+      }
+      return education;
+    });
+
+    await ctx.db.patch(resumeId, { education: educations });
+
+    return document;
+  },
+});
+
+export const deleteEducation = mutation({
+  args: {
+    resumeId: v.id('resume'),
+    id: v.string(),
+  },
+  handler: async (ctx, args) => {
+    const identity = await ctx.auth.getUserIdentity();
+
+    if (!identity) {
+      throw new Error('Not authenticated');
+    }
+
+    const { resumeId, id } = args;
+
+    const document = await ctx.db.get(resumeId);
+
+    if (!document) {
+      throw new Error('Not found resume');
+    }
+
+    let educations = document?.education ?? [];
+
+    educations = educations.filter((education) => education.id !== id);
+
+    await ctx.db.patch(resumeId, { education: educations });
+
+    return document;
+  },
+});
+
+export const addSocialLink = mutation({
+  args: {
+    id: v.id('resume'),
+  },
+  handler: async (ctx, args) => {
+    const identity = await ctx.auth.getUserIdentity();
+
+    if (!identity) {
+      throw new Error('Not authenticated');
+    }
+
+    const { id } = args;
+
+    const document = await ctx.db.get(id);
+
+    if (!document) {
+      throw new Error('Resume not found!');
+    }
+
+    const socialLinks = document?.socialLinks ?? [];
+
+    socialLinks.push({ id: uuid() });
+
+    await ctx.db.patch(id, { socialLinks });
+
+    return document;
+  },
+});
+
+export const updateSocialLink = mutation({
+  args: {
+    resumeId: v.id('resume'),
+    id: v.string(),
+    platform: v.optional(v.string()),
+    link: v.optional(v.string()),
+  },
+  handler: async (ctx, args) => {
+    const identity = await ctx.auth.getUserIdentity();
+
+    if (!identity) {
+      throw new Error('Not authenticated');
+    }
+
+    const { resumeId, id, link: linkValue, platform } = args;
+
+    const document = await ctx.db.get(resumeId);
+
+    if (!document) {
+      throw new Error('Resume not found');
+    }
+
+    let socialLinks = document?.socialLinks ?? [];
+
+    socialLinks = socialLinks.map((socialLink) => {
+      if (socialLink.id === id) {
+        return {
+          id: socialLink.id,
+          platform,
+          link: linkValue === '' ? undefined : linkValue,
+        };
+      }
+      return socialLink;
+    });
+
+    await ctx.db.patch(resumeId, { socialLinks });
+
+    return document;
+  },
+});
+
+export const deleteSocialLink = mutation({
+  args: {
+    resumeId: v.id('resume'),
+    id: v.string(),
+  },
+  handler: async (ctx, args) => {
+    const identity = await ctx.auth.getUserIdentity();
+
+    if (!identity) {
+      throw new Error('Not authenticated');
+    }
+
+    const { resumeId, id } = args;
+
+    const document = await ctx.db.get(resumeId);
+
+    if (!document) {
+      throw new Error('Not found resume');
+    }
+
+    let socialLinks = document?.socialLinks ?? [];
+
+    socialLinks = socialLinks.filter((socialLink) => socialLink.id !== id);
+
+    await ctx.db.patch(resumeId, { socialLinks });
 
     return document;
   },
