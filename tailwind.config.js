@@ -70,6 +70,13 @@ module.exports = {
           to: { height: 0 },
         },
       },
+      scale: {
+        80: '0.8',
+        85: '0.85',
+      },
+      fontSize: {
+        xxs: '0.65rem',
+      },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',

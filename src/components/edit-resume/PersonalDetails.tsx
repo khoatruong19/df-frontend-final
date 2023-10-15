@@ -1,36 +1,85 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import FieldControl from './FieldControl';
+import { ResumePersonalDetails } from '@/utils/types';
+import { useMutation } from 'convex/react';
+import { api } from '../../../convex/_generated/api';
+import { useDebounce } from '@/hooks/useDebounce';
+import { Id } from '../../../convex/_generated/dataModel';
 
-type Props = {};
+type PersonalDetailsProps = {
+  resumeId: Id<'resume'>;
+  details: ResumePersonalDetails;
+};
 
-const PersonalDetails = (props: Props) => {
-  const [jobTitle, setJobTitle] = useState('');
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [email, setEmail] = useState('');
-  const [phone, setPhone] = useState('');
-  const [country, setCountry] = useState('');
-  const [city, setCity] = useState('');
-  const [address, setAddress] = useState('');
-  const [dateOfBirth, setDateOfBirth] = useState('');
+const PersonalDetails = ({ resumeId, details }: PersonalDetailsProps) => {
+  const [jobTitle, setJobTitle] = useState(details?.jobTitle ?? '');
+  const [firstName, setFirstName] = useState(details?.firstName ?? '');
+  const [lastName, setLastName] = useState(details?.lastName ?? '');
+  const [email, setEmail] = useState(details?.email ?? '');
+  const [phone, setPhone] = useState(details?.phone ?? '');
+  const [country, setCountry] = useState(details?.country ?? '');
+  const [city, setCity] = useState(details?.city ?? '');
+  const [address, setAddress] = useState(details?.address ?? '');
+  const [dateOfBirth, setDateOfBirth] = useState(details?.dateOfBirth ?? '');
+
+  const memoDetails = useMemo(
+    () => ({
+      jobTitle,
+      address,
+      city,
+      country,
+      dateOfBirth,
+      email,
+      firstName,
+      lastName,
+      phone,
+    }),
+    [
+      jobTitle,
+      address,
+      city,
+      country,
+      dateOfBirth,
+      email,
+      firstName,
+      lastName,
+      phone,
+    ]
+  );
+
+  const debouncedValues = useDebounce<ResumePersonalDetails>(memoDetails, 500);
+
+  const updatePersonalDetails = useMutation(api.resume.updateProfileDetail);
+
+  useEffect(() => {
+    const cleanedValues: ResumePersonalDetails = {};
+
+    Object.entries(debouncedValues).forEach(([key, value]) => {
+      if (value.length > 0) {
+        cleanedValues[key as keyof ResumePersonalDetails] = value;
+      }
+    });
+
+    updatePersonalDetails({ id: resumeId, ...cleanedValues });
+  }, [debouncedValues]);
 
   return (
     <section>
       <h3 className="mb-3 text-xl">Personal Details</h3>
 
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-2 gap-y-5 gap-x-10">
         <FieldControl
           value={jobTitle}
           setValue={setJobTitle}
           label="Job Title"
         />
-        <FieldControl
+        {/* <FieldControl
           value={jobTitle}
           setValue={setJobTitle}
           label="Job Title"
-        />
+        /> */}
         <FieldControl
           value={firstName}
           setValue={setFirstName}

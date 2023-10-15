@@ -1,8 +1,29 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
-type Props = {};
+import { useMutation } from 'convex/react';
+import { api } from '../../../convex/_generated/api';
+import { useDebounce } from '@/hooks/useDebounce';
+import { Id } from '../../../convex/_generated/dataModel';
 
-const ProfessionalSummary = (props: Props) => {
+type ProfessionalSummaryProps = {
+  resumeId: Id<'resume'>;
+  profileSummary?: string;
+};
+
+const ProfessionalSummary = ({
+  resumeId,
+  profileSummary,
+}: ProfessionalSummaryProps) => {
+  const [value, setValue] = useState(profileSummary ?? '');
+
+  const debouncedValue = useDebounce<string>(value, 500);
+
+  const updatePersonalDetails = useMutation(api.resume.updateProfileSummary);
+
+  useEffect(() => {
+    updatePersonalDetails({ id: resumeId, profileSummary: debouncedValue });
+  }, [debouncedValue]);
+
   return (
     <section>
       <div className="mb-3">
@@ -14,7 +35,11 @@ const ProfessionalSummary = (props: Props) => {
         </p>
       </div>
 
-      <textarea className="w-full min-h-[200px] bg-slate-200"></textarea>
+      <textarea
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
+        className="w-full min-h-[200px] bg-slate-200 text-lg font-medium px-2"
+      ></textarea>
     </section>
   );
 };

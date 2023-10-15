@@ -5,14 +5,22 @@ import React from 'react';
 import { Button } from '../ui/button';
 import { useRouter } from 'next/navigation';
 import { APP_ROUTES } from '@/utils/constants';
+import { ResumeTemplate } from '@/utils/types';
+import { useMutation } from 'convex/react';
+import { api } from '../../../convex/_generated/api';
 
-type Props = {};
+type ResumeCardProps = {
+  template: ResumeTemplate;
+};
 
-const ResumeCard = (props: Props) => {
+const ResumeCard = ({ template }: ResumeCardProps) => {
   const router = useRouter();
+  const createResume = useMutation(api.resume.create);
 
   const handleCreateNewResume = () => {
-    router.push(`${APP_ROUTES.EDIT_TEMPLATE.path + 'df'}`);
+    createResume().then((documentId) =>
+      router.push(`${APP_ROUTES.EDIT_TEMPLATE.path + documentId}`)
+    );
   };
 
   return (
@@ -21,14 +29,7 @@ const ResumeCard = (props: Props) => {
       className="relative w-full py-5 bg-black/5 cursor-pointer hover:bg-black/10 group"
     >
       <div className="relative w-full h-[450px] ">
-        <Image
-          src={
-            'https://marketplace.canva.com/EAFRuCp3DcY/1/0/1131w/canva-black-white-minimalist-cv-resume-f5JNR-K5jjw.jpg'
-          }
-          alt=""
-          fill
-          objectFit="contain"
-        />
+        <Image src={template.coverImage} alt="" fill objectFit="contain" />
       </div>
       <div className="absolute top-0 left-0 w-full h-full hidden group-hover:grid place-items-center ">
         <Button size={'lg'} textSize={'xl'} className="shadow-md h-14">

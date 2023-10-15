@@ -1,7 +1,7 @@
 import MainLayout from '@/components/layouts/MainLayout';
 import ResumeCard from '@/components/resume-templates/ResumeCard';
 import { Button } from '@/components/ui/button';
-import { APP_ROUTES } from '@/utils/constants';
+import { APP_ROUTES, RESUME_TEMPLATES } from '@/utils/constants';
 import Link from 'next/link';
 
 export default function ResumeTemplatesPage() {
@@ -24,9 +24,12 @@ export default function ResumeTemplatesPage() {
         </Link>
 
         <section className="w-full grid grid-cols-3 pt-5 border-t-2 gap-x-4">
-          <ResumeCard />
-          <ResumeCard />
-          <ResumeCard />
+          {RESUME_TEMPLATES.map((template) => (
+            <ResumeCard
+              key={`${template.name + Math.random() * 1}`}
+              template={template}
+            />
+          ))}
         </section>
       </div>
     </MainLayout>
