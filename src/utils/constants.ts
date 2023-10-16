@@ -1,3 +1,4 @@
+import { GraduationCap, Settings2, Trophy } from 'lucide-react';
 import { ResumeTemplate } from './types';
 
 export const APP_ROUTES = {
@@ -62,5 +63,23 @@ export const SKILL_LEVELS = [
     name: 'expert',
     color: '#713ABE',
     progress: '100%',
+  },
+];
+
+export const ADD_SECTIONS = [
+  {
+    name: 'Custom Section',
+    icon: Settings2,
+    dataField: 'customSection',
+  },
+  {
+    name: 'Courses',
+    icon: GraduationCap,
+    dataField: 'courses',
+  },
+  {
+    name: 'Hobbies',
+    icon: Trophy,
+    dataField: 'hobbies',
   },
 ];

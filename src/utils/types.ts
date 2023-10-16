@@ -46,3 +46,12 @@ export type Skill = {
   skill?: string;
   level: string;
 };
+
+export type CustomSectionItem = {
+  id: string;
+  content?: string;
+  city?: string;
+  startDate?: string;
+  endDate?: string;
+  description?: string;
+};

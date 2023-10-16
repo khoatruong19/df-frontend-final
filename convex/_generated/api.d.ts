@@ -14,6 +14,7 @@ import type {
   FilterApi,
   FunctionReference,
 } from "convex/server";
+import type * as customSection from "../customSection";
 import type * as resume from "../resume";
 
 /**
@@ -25,6 +26,7 @@ import type * as resume from "../resume";
  * ```
  */
 declare const fullApi: ApiFromModules<{
+  customSection: typeof customSection;
   resume: typeof resume;
 }>;
 export declare const api: FilterApi<

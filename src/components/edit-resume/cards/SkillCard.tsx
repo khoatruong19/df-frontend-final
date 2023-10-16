@@ -16,9 +16,9 @@ import { Skill } from '@/utils/types';
 import { useMutation } from 'convex/react';
 import { ChevronDown, Trash } from 'lucide-react';
 import { useEffect, useMemo, useState } from 'react';
-import { api } from '../../../convex/_generated/api';
-import { Id } from '../../../convex/_generated/dataModel';
-import FieldControl from './FieldControl';
+import { api } from '../../../../convex/_generated/api';
+import { Id } from '../../../../convex/_generated/dataModel';
+import FieldControl from '../FieldControl';
 import { getSkillByName } from '@/utils/helpers';
 
 type SkillCardProps = {
@@ -73,11 +73,11 @@ const SkillCard = ({ resumeId, skill }: SkillCardProps) => {
         </div>
       </CollapsibleTrigger>
       <CollapsibleContent>
-        <div className="grid grid-cols-2 gap-x-10 mt-3">
+        <div className="flex items-end gap-x-10 mt-3">
           <FieldControl value={name} setValue={setName} label="Skill" />
           <Select onValueChange={onChangeSkillLevel}>
-            <SelectTrigger className="w-[180px]">
-              <SelectValue placeholder={level.name} />
+            <SelectTrigger className="w-full capitalize">
+              {level.name}
             </SelectTrigger>
             <SelectContent>
               {SKILL_LEVELS.map((skill) => (

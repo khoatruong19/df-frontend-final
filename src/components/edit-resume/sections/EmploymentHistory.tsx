@@ -1,9 +1,9 @@
 import { EmploymentHistory } from '@/utils/types';
 import { useMutation } from 'convex/react';
 import { PlusIcon } from 'lucide-react';
-import { api } from '../../../convex/_generated/api';
-import { Id } from '../../../convex/_generated/dataModel';
-import EmploymentCard from './EmploymentCard';
+import { api } from '../../../../convex/_generated/api';
+import { Id } from '../../../../convex/_generated/dataModel';
+import EmploymentCard from '../cards/EmploymentCard';
 
 type EmploymentHistoryProps = {
   resumeId: Id<'resume'>;

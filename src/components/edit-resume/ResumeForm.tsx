@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import PersonalDetails from './PersonalDetails';
-import ProfessionalSummary from './ProfessionalSummary';
-import EmploymentHistory from './EmploymentHistory';
-import Education from './Education';
+import PersonalDetails from './sections/PersonalDetails';
+import ProfessionalSummary from './sections/ProfessionalSummary';
+import EmploymentHistory from './sections/EmploymentHistory';
+import Education from './sections/Education';
 import { Doc } from '../../../convex/_generated/dataModel';
 import { useDebounce } from '@/hooks/useDebounce';
-import { useMutation } from 'convex/react';
+import { useMutation, useQuery } from 'convex/react';
 import { api } from '../../../convex/_generated/api';
-import SocialLinks from './SocialLinks';
-import Skills from './Skills';
+import SocialLinks from './sections/SocialLinks';
+import Skills from './sections/Skills';
+import AddSection from './sections/AddSection';
+import CustomSection from './sections/CustomSection';
 
 type ResumeFormProps = {
   resume: Doc<'resume'>;
@@ -16,6 +18,10 @@ type ResumeFormProps = {
 
 const ResumeForm = ({ resume }: ResumeFormProps) => {
   const [title, setTitle] = useState(resume.title);
+
+  const customSections = useQuery(api.customSection.getAll, {
+    resumeId: resume._id,
+  });
 
   const debouncedValue = useDebounce<string>(title, 500);
 
@@ -51,6 +57,11 @@ const ResumeForm = ({ resume }: ResumeFormProps) => {
         <Education resumeId={resume._id} educations={resume.education} />
         <SocialLinks resumeId={resume._id} socialLinks={resume.socialLinks} />
         <Skills resumeId={resume._id} skills={resume.skills} />
+        {customSections &&
+          customSections.map((section) => (
+            <CustomSection key={section._id} customSection={section} />
+          ))}
+        <AddSection resume={resume} />
       </div>
     </section>
   );

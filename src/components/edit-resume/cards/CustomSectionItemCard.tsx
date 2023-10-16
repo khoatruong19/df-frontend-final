@@ -4,72 +4,66 @@ import {
   CollapsibleTrigger,
 } from '@/components/ui/collapsible';
 import { useDebounce } from '@/hooks/useDebounce';
-import { EmploymentHistory } from '@/utils/types';
+import { CustomSectionItem } from '@/utils/types';
 import { useMutation } from 'convex/react';
 import { ChevronDown, Trash } from 'lucide-react';
 import { useEffect, useMemo, useState } from 'react';
-import { api } from '../../../convex/_generated/api';
-import { Id } from '../../../convex/_generated/dataModel';
-import { DatePicker } from './DatePicker';
-import FieldControl from './FieldControl';
+import { Id } from '../../../../convex/_generated/dataModel';
+import { api } from '../../../../convex/_generated/api';
+import FieldControl from '../FieldControl';
+import { DatePicker } from '../DatePicker';
 
-type EmploymentCardProps = {
-  resumeId: Id<'resume'>;
-  employment: EmploymentHistory;
+type CustomSectionCardProps = {
+  customSectionId: Id<'customSection'>;
+  item: CustomSectionItem;
 };
 
-const EmploymentCard = ({ resumeId, employment }: EmploymentCardProps) => {
-  const [jobTitle, setJobTitle] = useState(employment.jobTitle ?? '');
-  const [company, setCompany] = useState(employment.company ?? '');
-  const [city, setCity] = useState(employment.city ?? '');
-  const [description, setDescription] = useState(employment.description ?? '');
-  const [startDate, setStartDate] = useState(employment.startDate ?? '');
-  const [endDate, setEndDate] = useState(employment.endDate ?? '');
+const CustomSectionCard = ({
+  customSectionId,
+  item,
+}: CustomSectionCardProps) => {
+  const [content, setContent] = useState(item.content ?? '');
+  const [city, setCity] = useState(item.city ?? '');
+  const [description, setDescription] = useState(item.description ?? '');
+  const [startDate, setStartDate] = useState(item.startDate ?? '');
+  const [endDate, setEndDate] = useState(item.endDate ?? '');
 
   const hasBasicInfo =
-    employment.jobTitle ||
-    employment.company ||
-    employment.startDate ||
-    employment.endDate;
+    item.content || item.city || item.startDate || item.endDate;
 
   const memoDetails = useMemo(
     () => ({
-      jobTitle,
-      company,
+      content,
       city,
       description,
       startDate,
       endDate,
     }),
-    [jobTitle, company, city, description, startDate, endDate]
+    [content, city, description, startDate, endDate]
   );
 
-  const debouncedValues = useDebounce<Omit<EmploymentHistory, 'id'>>(
+  const debouncedValues = useDebounce<Omit<CustomSectionItem, 'id'>>(
     memoDetails,
     1000
   );
 
-  const updateEmploymentHistory = useMutation(
-    api.resume.updateEmploymentHistory
-  );
+  const updateSectionItem = useMutation(api.customSection.updateSectionItem);
 
-  const deleteEmploymentHistory = useMutation(
-    api.resume.deleteEmploymentHistory
-  );
+  const deleteSectionItem = useMutation(api.customSection.deleteSectionItem);
 
-  const deleteEmployementHistoryOnClick = () =>
-    deleteEmploymentHistory({ resumeId, id: employment.id });
+  const deleteSectionItemOnClick = () =>
+    deleteSectionItem({ customSectionId, id: item.id });
 
   useEffect(() => {
-    const cleanedValues: EmploymentHistory = { id: employment.id };
+    const cleanedValues: CustomSectionItem = { id: item.id };
 
     Object.entries(debouncedValues).forEach(([key, value]) => {
       if (value.length > 0) {
-        cleanedValues[key as keyof EmploymentHistory] = value;
+        cleanedValues[key as keyof CustomSectionItem] = value;
       }
     });
 
-    updateEmploymentHistory({ resumeId, ...cleanedValues });
+    updateSectionItem({ customSectionId, ...cleanedValues });
   }, [debouncedValues]);
 
   return (
@@ -80,7 +74,7 @@ const EmploymentCard = ({ resumeId, employment }: EmploymentCardProps) => {
           {hasBasicInfo && (
             <div>
               <h3>
-                {jobTitle} - {company}
+                {content} - {city}
               </h3>
               <p className="text-sm text-gray-400">
                 {startDate} - {endDate}
@@ -93,12 +87,12 @@ const EmploymentCard = ({ resumeId, employment }: EmploymentCardProps) => {
       <CollapsibleContent>
         <div className="grid grid-cols-2 gap-y-5 gap-x-10 mt-3">
           <FieldControl
-            value={jobTitle}
-            setValue={setJobTitle}
-            label="Job Title"
+            value={content}
+            setValue={setContent}
+            label="Aсtivity name, job title, book title etc."
           />
 
-          <FieldControl value={company} setValue={setCompany} label="Company" />
+          <FieldControl value={city} setValue={setCity} label="City" />
 
           <div className="flex flex-col gap-2 w-full">
             <label className="text-sm text-gray-400">Start & End Date</label>
@@ -127,8 +121,6 @@ const EmploymentCard = ({ resumeId, employment }: EmploymentCardProps) => {
               />
             </div>
           </div>
-
-          <FieldControl value={city} setValue={setCity} label="City" />
         </div>
 
         <div className="mt-5">
@@ -141,7 +133,7 @@ const EmploymentCard = ({ resumeId, employment }: EmploymentCardProps) => {
         </div>
       </CollapsibleContent>
       <button
-        onClick={deleteEmployementHistoryOnClick}
+        onClick={deleteSectionItemOnClick}
         className="hidden group-hover:flex absolute top-5 right-[-40px] px-2 py-1 justify-end hover:opacity-80 text-red-500"
       >
         <Trash />
@@ -150,4 +142,4 @@ const EmploymentCard = ({ resumeId, employment }: EmploymentCardProps) => {
   );
 };
 
-export default EmploymentCard;
+export default CustomSectionCard;

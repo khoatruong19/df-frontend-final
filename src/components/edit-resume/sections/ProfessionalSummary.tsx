@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 
 import { useMutation } from 'convex/react';
-import { api } from '../../../convex/_generated/api';
+import { api } from '../../../../convex/_generated/api';
 import { useDebounce } from '@/hooks/useDebounce';
-import { Id } from '../../../convex/_generated/dataModel';
+import { Id } from '../../../../convex/_generated/dataModel';
 
 type ProfessionalSummaryProps = {
   resumeId: Id<'resume'>;

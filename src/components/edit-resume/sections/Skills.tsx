@@ -1,10 +1,10 @@
 import React from 'react';
-import SkillBadge from './SkillBadge';
+import SkillBadge from '../SkillBadge';
 import { Skill } from '@/utils/types';
-import SkillCard from './SkillCard';
-import { Id } from '../../../convex/_generated/dataModel';
+import SkillCard from '../cards/SkillCard';
+import { Id } from '../../../../convex/_generated/dataModel';
 import { useMutation } from 'convex/react';
-import { api } from '../../../convex/_generated/api';
+import { api } from '../../../../convex/_generated/api';
 import { PlusIcon } from 'lucide-react';
 
 type SkillsProps = {

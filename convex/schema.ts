@@ -55,4 +55,19 @@ export default defineSchema({
       })
     ),
   }),
+  customSection: defineTable({
+    userId: v.string(),
+    resumeId: v.id('resume'),
+    title: v.string(),
+    items: v.array(
+      v.object({
+        id: v.string(),
+        content: v.optional(v.string()),
+        city: v.optional(v.string()),
+        startDate: v.optional(v.string()),
+        endDate: v.optional(v.string()),
+        description: v.optional(v.string()),
+      })
+    ),
+  }),
 });

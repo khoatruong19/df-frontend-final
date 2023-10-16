@@ -1,9 +1,9 @@
 import { Education } from '@/utils/types';
 import React from 'react';
-import { Id } from '../../../convex/_generated/dataModel';
-import EducationCard from './EducationCard';
+import { Id } from '../../../../convex/_generated/dataModel';
+import EducationCard from '../cards/EducationCard';
 import { useMutation } from 'convex/react';
-import { api } from '../../../convex/_generated/api';
+import { api } from '../../../../convex/_generated/api';
 import { PlusIcon } from 'lucide-react';
 
 type EducationProps = {

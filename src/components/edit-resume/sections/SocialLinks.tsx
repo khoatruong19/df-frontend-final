@@ -1,9 +1,9 @@
 import React from 'react';
-import { Id } from '../../../convex/_generated/dataModel';
+import { Id } from '../../../../convex/_generated/dataModel';
 import { SocialLink } from '@/utils/types';
-import SocialLinkCard from './SocialLinkCard';
+import SocialLinkCard from '../cards/SocialLinkCard';
 import { useMutation } from 'convex/react';
-import { api } from '../../../convex/_generated/api';
+import { api } from '../../../../convex/_generated/api';
 import { PlusIcon } from 'lucide-react';
 
 type SocialLinksProps = {

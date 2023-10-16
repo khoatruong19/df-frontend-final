@@ -8,10 +8,10 @@ import { Education } from '@/utils/types';
 import { useMutation } from 'convex/react';
 import { ChevronDown, Trash } from 'lucide-react';
 import { useEffect, useMemo, useState } from 'react';
-import { api } from '../../../convex/_generated/api';
-import { Id } from '../../../convex/_generated/dataModel';
-import { DatePicker } from './DatePicker';
-import FieldControl from './FieldControl';
+import { api } from '../../../../convex/_generated/api';
+import { Id } from '../../../../convex/_generated/dataModel';
+import { DatePicker } from '../DatePicker';
+import FieldControl from '../FieldControl';
 
 type EducationCardProps = {
   resumeId: Id<'resume'>;
