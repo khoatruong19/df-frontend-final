@@ -1,6 +1,7 @@
 import { mutation, query } from './_generated/server';
 import { v } from 'convex/values';
 import { v4 as uuid } from 'uuid';
+import { SKILL_LEVELS } from '../src/utils/constants';
 
 export const create = mutation({
   args: {},
@@ -438,6 +439,107 @@ export const deleteSocialLink = mutation({
     socialLinks = socialLinks.filter((socialLink) => socialLink.id !== id);
 
     await ctx.db.patch(resumeId, { socialLinks });
+
+    return document;
+  },
+});
+
+export const addSkill = mutation({
+  args: {
+    id: v.id('resume'),
+    name: v.optional(v.string()),
+  },
+  handler: async (ctx, args) => {
+    const identity = await ctx.auth.getUserIdentity();
+
+    if (!identity) {
+      throw new Error('Not authenticated');
+    }
+
+    const { id, name } = args;
+
+    const document = await ctx.db.get(id);
+
+    if (!document) {
+      throw new Error('Resume not found!');
+    }
+
+    const skills = document?.skills ?? [];
+
+    skills.push({ id: uuid(), level: SKILL_LEVELS[0].name, skill: name });
+
+    await ctx.db.patch(id, { skills });
+
+    return document;
+  },
+});
+
+export const updateSkill = mutation({
+  args: {
+    resumeId: v.id('resume'),
+    id: v.string(),
+    name: v.optional(v.string()),
+    level: v.string(),
+  },
+  handler: async (ctx, args) => {
+    const identity = await ctx.auth.getUserIdentity();
+
+    if (!identity) {
+      throw new Error('Not authenticated');
+    }
+
+    const { resumeId, id, name, level } = args;
+
+    const document = await ctx.db.get(resumeId);
+
+    if (!document) {
+      throw new Error('Resume not found');
+    }
+
+    let skills = document?.skills ?? [];
+
+    skills = skills.map((skill) => {
+      if (skill.id === id) {
+        return {
+          id: skill.id,
+          skill: name === '' ? undefined : name,
+          level,
+        };
+      }
+      return skill;
+    });
+
+    await ctx.db.patch(resumeId, { skills });
+
+    return document;
+  },
+});
+
+export const deleteSkill = mutation({
+  args: {
+    resumeId: v.id('resume'),
+    id: v.string(),
+  },
+  handler: async (ctx, args) => {
+    const identity = await ctx.auth.getUserIdentity();
+
+    if (!identity) {
+      throw new Error('Not authenticated');
+    }
+
+    const { resumeId, id } = args;
+
+    const document = await ctx.db.get(resumeId);
+
+    if (!document) {
+      throw new Error('Not found resume');
+    }
+
+    let skills = document?.skills ?? [];
+
+    skills = skills.filter((skill) => skill.id !== id);
+
+    await ctx.db.patch(resumeId, { skills });
 
     return document;
   },

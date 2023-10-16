@@ -2,6 +2,7 @@ import { User, Briefcase, GraduationCap } from 'lucide-react';
 import React, { useEffect, useRef } from 'react';
 import { Doc } from '../../../convex/_generated/dataModel';
 import { SocialIcon } from 'react-social-icons';
+import { getSkillProgress } from '@/utils/helpers';
 
 type StockholmProps = {
   resume: Doc<'resume'>;
@@ -159,7 +160,6 @@ const Stockholm = ({ resume }: StockholmProps) => {
           )}
 
           {/* Date of birth */}
-
           {details?.email && (
             <div>
               <h3 className="text-xs font-semibold mb-0.5">Date of birth</h3>
@@ -188,13 +188,20 @@ const Stockholm = ({ resume }: StockholmProps) => {
           )}
 
           {/* Skills */}
-          <div>
-            <h3 className="text-xs font-semibold mb-0.5">Skills</h3>
+          {resume?.skills?.length > 0 && (
             <div>
-              <p className="text-xxs">Teamwork</p>
-              <span className="block h-0.5 w-full bg-blue-400 mt-0.5" />
+              <h3 className="text-xs font-semibold mb-0.5">Skills</h3>
+              {resume?.skills.map((skill) => (
+                <div key={skill.id} className="mb-2">
+                  <p className="text-xxs">{skill.skill}</p>
+                  <span
+                    style={{ width: getSkillProgress(skill?.level ?? '') }}
+                    className="block h-0.5 bg-blue-400 mt-0.5"
+                  />
+                </div>
+              ))}
             </div>
-          </div>
+          )}
         </div>
       </div>
     </section>

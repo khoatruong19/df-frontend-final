@@ -8,6 +8,7 @@ import { useDebounce } from '@/hooks/useDebounce';
 import { useMutation } from 'convex/react';
 import { api } from '../../../convex/_generated/api';
 import SocialLinks from './SocialLinks';
+import Skills from './Skills';
 
 type ResumeFormProps = {
   resume: Doc<'resume'>;
@@ -49,6 +50,7 @@ const ResumeForm = ({ resume }: ResumeFormProps) => {
         />
         <Education resumeId={resume._id} educations={resume.education} />
         <SocialLinks resumeId={resume._id} socialLinks={resume.socialLinks} />
+        <Skills resumeId={resume._id} skills={resume.skills} />
       </div>
     </section>
   );

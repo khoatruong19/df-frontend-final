@@ -40,3 +40,9 @@ export type SocialLink = {
   platform?: string;
   link?: string;
 };
+
+export type Skill = {
+  id: string;
+  skill?: string;
+  level: string;
+};

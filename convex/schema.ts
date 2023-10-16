@@ -51,7 +51,7 @@ export default defineSchema({
       v.object({
         id: v.string(),
         skill: v.optional(v.string()),
-        level: v.optional(v.string()),
+        level: v.string(),
       })
     ),
   }),
