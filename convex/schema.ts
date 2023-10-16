@@ -5,6 +5,12 @@ export default defineSchema({
   resume: defineTable({
     title: v.string(),
     profileImage: v.optional(v.string()),
+    coverImage: v.optional(
+      v.object({
+        id: v.string(),
+        url: v.string(),
+      })
+    ),
     userId: v.string(),
     personalDetails: v.object({
       jobTitle: v.optional(v.string()),

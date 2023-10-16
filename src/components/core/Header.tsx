@@ -6,9 +6,11 @@ import { APP_ROUTES } from '@/utils/constants';
 import { Button } from '../ui/button';
 import { SignInButton } from '@clerk/clerk-react';
 import { useUser } from '@clerk/nextjs';
+import { useRouter } from 'next/navigation';
 
 const Header = () => {
   const { user } = useUser();
+  const router = useRouter();
 
   return (
     <header className="font-display p-4 flex items-center justify-between">
@@ -32,7 +34,10 @@ const Header = () => {
           <Button size={'lg'}>Log In</Button>
         </SignInButton>
       ) : (
-        <div className="flex items-center gap-2">
+        <div
+          className="flex items-center gap-2"
+          onClick={() => router.push('/resumes')}
+        >
           <img
             className="w-10 h-10 object-cover rounded-full"
             src={user.imageUrl}

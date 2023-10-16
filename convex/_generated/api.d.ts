@@ -16,6 +16,7 @@ import type {
 } from "convex/server";
 import type * as customSection from "../customSection";
 import type * as resume from "../resume";
+import type * as upload from "../upload";
 
 /**
  * A utility for referencing Convex functions in your app's API.
@@ -28,6 +29,7 @@ import type * as resume from "../resume";
 declare const fullApi: ApiFromModules<{
   customSection: typeof customSection;
   resume: typeof resume;
+  upload: typeof upload;
 }>;
 export declare const api: FilterApi<
   typeof fullApi,

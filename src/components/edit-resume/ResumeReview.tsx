@@ -14,21 +14,14 @@ const ResumeReview = ({ resume }: ResumeReviewProps) => {
     resumeId: resume._id,
   });
 
-  const [imgs, setImgs] = useState<string[]>([]);
-
-  useEffect(() => {
-    exportAsImage().then((image) => setImgs((prev) => [image]));
-  }, []);
-
-  console.log({ imgs });
-
   return (
-    <section className="w-[50%] relative flex flex-col items-center justify-center">
-      <div id="test-section">
-        <Stockholm resume={resume} customSections={customSections ?? []} />
-      </div>
-      <div
-        className="absolute top-0 left-0 w-full h-full z-50 flex items-center justify-center"
+    <section
+      id="viewing-resume"
+      className="w-[50%] relative flex flex-col items-center justify-center scale-85"
+    >
+      <Stockholm resume={resume} customSections={customSections ?? []} />
+      {/* <div
+        className="absolute top-0 left-0 w-full h-fit z-50 "
         style={{
           backgroundColor: 'black',
         }}
@@ -38,10 +31,10 @@ const ResumeReview = ({ resume }: ResumeReviewProps) => {
             key={idx}
             alt=""
             src={image}
-            className="w-auto h-[90%] object-contain"
+            className="w-[80%] h-[90%] object-contain"
           />
         ))}
-      </div>
+      </div> */}
     </section>
   );
 };

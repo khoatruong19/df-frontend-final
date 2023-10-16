@@ -1,7 +1,8 @@
-import { mutation, query } from './_generated/server';
+import { action, internalMutation, mutation, query } from './_generated/server';
 import { v } from 'convex/values';
 import { v4 as uuid } from 'uuid';
 import { SKILL_LEVELS } from '../src/utils/constants';
+import { api, internal } from './_generated/api';
 
 export const create = mutation({
   args: {},
@@ -55,6 +56,26 @@ export const getById = query({
   },
 });
 
+export const getAll = query({
+  args: {},
+  handler: async (ctx, args) => {
+    const identity = await ctx.auth.getUserIdentity();
+
+    if (!identity) {
+      throw new Error('Not authenticated');
+    }
+
+    const userId = identity.subject;
+
+    const documents = await ctx.db
+      .query('resume')
+      .filter((q) => q.eq(q.field('userId'), userId))
+      .collect();
+
+    return documents;
+  },
+});
+
 export const updateTitle = mutation({
   args: {
     id: v.id('resume'),
@@ -64,7 +85,7 @@ export const updateTitle = mutation({
     const identity = await ctx.auth.getUserIdentity();
 
     if (!identity) {
-      throw new Error('Not authenticated');
+      throw Error('Not authenticated');
     }
 
     const userId = identity.subject;
@@ -542,5 +563,51 @@ export const deleteSkill = mutation({
     await ctx.db.patch(resumeId, { skills });
 
     return document;
+  },
+});
+
+export const updateResumeCoverImage = action({
+  args: {
+    resumeId: v.id('resume'),
+    storageId: v.string(),
+  },
+  handler: async (ctx, args) => {
+    const { resumeId, storageId } = args;
+
+    const document = await ctx.runQuery(api.resume.getById, { id: resumeId });
+
+    if (!document) {
+      throw new Error('Not found resume');
+    }
+
+    const exisitingImage = document?.coverImage?.id;
+
+    if (exisitingImage && (await ctx.storage.getUrl(exisitingImage))) {
+      await ctx.storage.delete(exisitingImage);
+    }
+
+    await ctx.runMutation(internal.resume.storeCoverImage, {
+      resumeId,
+      storageId,
+    });
+  },
+});
+
+export const storeCoverImage = internalMutation({
+  args: {
+    resumeId: v.id('resume'),
+    storageId: v.string(),
+  },
+  handler: async (ctx, args) => {
+    const { resumeId, storageId } = args;
+
+    const url = (await ctx.storage.getUrl(storageId)) ?? '';
+    console.log({ resumeId, url });
+    await ctx.db.patch(resumeId, {
+      coverImage: {
+        id: storageId,
+        url,
+      },
+    });
   },
 });

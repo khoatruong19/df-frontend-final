@@ -7,6 +7,7 @@ import { useMutation } from 'convex/react';
 import { api } from '../../../../convex/_generated/api';
 import { useDebounce } from '@/hooks/useDebounce';
 import { Id } from '../../../../convex/_generated/dataModel';
+import useUploadResumeCoverImg from '@/hooks/useUploadResumeCoverImg';
 
 type PersonalDetailsProps = {
   resumeId: Id<'resume'>;

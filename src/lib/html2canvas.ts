@@ -1,20 +1,17 @@
 import html2canvas from 'html2canvas';
+import { jsPDF } from 'jspdf';
 
 export const exportAsImage = async () => {
-  const ele = document.getElementById('test-section');
+  const ele = document.getElementById('viewing-resume');
+
   const canvas = await html2canvas(ele!, {
     useCORS: true,
     logging: true,
     allowTaint: false,
     backgroundColor: '#ffffff',
     scale: 1,
-    // y: ele!.clientHeight,
   });
-
   const image = canvas.toDataURL('image/png');
-
-  //   const element = document.getElementById('test') as HTMLImageElement;
-  //   element.src = image;
 
   //   const link = document.createElement('a');
 

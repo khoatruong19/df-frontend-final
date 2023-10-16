@@ -16,29 +16,28 @@ const Stockholm = ({ resume, customSections }: StockholmProps) => {
 
   const sectionRef = useRef<HTMLElement | null>(null);
 
-  useEffect(() => {
-    if (!sectionRef || !sectionRef.current) return;
+  // useEffect(() => {
+  //   if (!sectionRef || !sectionRef.current) return;
 
-    const element = sectionRef.current;
-    const hasOverflowingChildren =
-      element.offsetHeight < element.scrollHeight ||
-      element.offsetWidth < element.scrollWidth;
+  //   const element = sectionRef.current;
+  //   const hasOverflowingChildren =
+  //     element.offsetHeight < element.scrollHeight ||
+  //     element.offsetWidth < element.scrollWidth;
 
-    // if (hasOverflowingChildren) printImage();
-  }, [resume]);
+  //   // if (hasOverflowingChildren) printImage();
+  // }, [resume]);
 
   return (
     <section
       ref={sectionRef}
-      className="min-h-screen py-9 px-12 bg-white aspect-[12/16] rounded-md overflow-hidden"
+      className="min-h-screen py-9 px-12 bg-white aspect-[12/16] rounded-md overflow-auto scrollbar-thin scrollbar-track-gray-100 scrollbar-thumb-neutral-400"
     >
-      <div className="flex items-center gap-5 justify-start">
+      <div className="flex items-center gap-5 justify-start ">
         <img
           id="test"
           src="https://avatars.githubusercontent.com/u/85026053?v=4"
           alt=""
-          // className="w-14 h-14 object-cover"
-          style={{ width: '40px', height: '40px' }}
+          className="w-14 h-14 object-cover"
         />
 
         <div>
@@ -48,7 +47,6 @@ const Stockholm = ({ resume, customSections }: StockholmProps) => {
           <p className="text-xxs">{jobTitle}</p>
         </div>
       </div>
-
       <div className="mt-5 flex items-start">
         <div className="w-2/3 flex flex-col gap-5">
           {/* Profile Summary */}
@@ -65,7 +63,7 @@ const Stockholm = ({ resume, customSections }: StockholmProps) => {
               </div>
               <div className="max-w-[90%]">
                 <h2 className=" font-semibold">Profile</h2>
-                <p className="text-xs break-all">{resume?.profileSummary}</p>
+                <p className="text-xs break-words">{resume?.profileSummary}</p>
               </div>
             </div>
           )}
@@ -100,7 +98,7 @@ const Stockholm = ({ resume, customSections }: StockholmProps) => {
                         </p>
                       )}
                       {description && (
-                        <p className="mt-1.5 text-xs  break-all">
+                        <p className="mt-1.5 text-xs  break-words">
                           {description}
                         </p>
                       )}
@@ -141,7 +139,7 @@ const Stockholm = ({ resume, customSections }: StockholmProps) => {
                         </p>
                       )}
                       {description && (
-                        <p className="mt-1.5 text-xs  break-all">
+                        <p className="mt-1.5 text-xs  break-words">
                           {description}
                         </p>
                       )}
@@ -186,7 +184,7 @@ const Stockholm = ({ resume, customSections }: StockholmProps) => {
                           </p>
                         )}
                         {description && (
-                          <p className="mt-1.5 text-xs  break-all">
+                          <p className="mt-1.5 text-xs  break-words">
                             {description}
                           </p>
                         )}
@@ -239,7 +237,7 @@ const Stockholm = ({ resume, customSections }: StockholmProps) => {
                     />
                   </span>
 
-                  <p className="text-xxs text-blue-500 break-all ml-1 h-2 ">
+                  <p className="text-xxs text-blue-500 break-words ml-1 h-2 ">
                     {socialLink.link}
                   </p>
                 </div>
@@ -253,7 +251,7 @@ const Stockholm = ({ resume, customSections }: StockholmProps) => {
               <h3 className="text-xs font-semibold mb-0.5">Skills</h3>
               {resume?.skills.map((skill) => (
                 <div key={skill.id} className="mb-2">
-                  <p className="text-xs">{skill.skill}</p>
+                  <p className="text-xs break-all">{skill.skill}</p>
                   <span
                     style={{ width: getSkillProgress(skill?.level ?? '') }}
                     className="block h-0.5 bg-blue-400 mt-0.5"
