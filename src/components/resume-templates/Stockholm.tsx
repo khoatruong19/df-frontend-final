@@ -1,8 +1,9 @@
 import { User, Briefcase, School, Star } from 'lucide-react';
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Doc } from '../../../convex/_generated/dataModel';
 import { SocialIcon } from 'react-social-icons';
 import { getSkillProgress } from '@/utils/helpers';
+import { exportAsImage } from '@/lib/html2canvas';
 
 type StockholmProps = {
   resume: Doc<'resume'>;
@@ -17,10 +18,13 @@ const Stockholm = ({ resume, customSections }: StockholmProps) => {
 
   useEffect(() => {
     if (!sectionRef || !sectionRef.current) return;
+
     const element = sectionRef.current;
     const hasOverflowingChildren =
       element.offsetHeight < element.scrollHeight ||
       element.offsetWidth < element.scrollWidth;
+
+    // if (hasOverflowingChildren) printImage();
   }, [resume]);
 
   return (
@@ -30,9 +34,11 @@ const Stockholm = ({ resume, customSections }: StockholmProps) => {
     >
       <div className="flex items-center gap-5 justify-start">
         <img
+          id="test"
           src="https://avatars.githubusercontent.com/u/85026053?v=4"
           alt=""
-          className="w-14 h-14 object-cover"
+          // className="w-14 h-14 object-cover"
+          style={{ width: '40px', height: '40px' }}
         />
 
         <div>

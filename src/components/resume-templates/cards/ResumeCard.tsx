@@ -2,12 +2,12 @@
 
 import Image from 'next/image';
 import React from 'react';
-import { Button } from '../ui/button';
+import { Button } from '../../ui/button';
 import { useRouter } from 'next/navigation';
 import { APP_ROUTES } from '@/utils/constants';
 import { ResumeTemplate } from '@/utils/types';
 import { useMutation } from 'convex/react';
-import { api } from '../../../convex/_generated/api';
+import { api } from '../../../../convex/_generated/api';
 
 type ResumeCardProps = {
   template: ResumeTemplate;

@@ -1,5 +1,5 @@
 import MainLayout from '@/components/layouts/MainLayout';
-import ResumeCard from '@/components/resume-templates/ResumeCard';
+import ResumeCard from '@/components/resume-templates/cards/ResumeCard';
 import { Button } from '@/components/ui/button';
 import { APP_ROUTES, RESUME_TEMPLATES } from '@/utils/constants';
 import Link from 'next/link';
