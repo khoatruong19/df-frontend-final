@@ -3,8 +3,8 @@
 import ResumeForm from '@/components/edit-resume/ResumeForm';
 import ResumeReview from '@/components/edit-resume/ResumeReview';
 import { useQuery } from 'convex/react';
-import { api } from '../../../../convex/_generated/api';
-import { Id } from '../../../../convex/_generated/dataModel';
+import { Id } from '../../../../../convex/_generated/dataModel';
+import { api } from '../../../../../convex/_generated/api';
 
 type EditResumePageProps = {
   params: { id: Id<'resume'> };

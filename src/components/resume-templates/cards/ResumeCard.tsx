@@ -1,13 +1,14 @@
 'use client';
 
 import Image from 'next/image';
-import React from 'react';
+import React, { useRef } from 'react';
 import { Button } from '../../ui/button';
 import { useRouter } from 'next/navigation';
 import { APP_ROUTES } from '@/utils/constants';
 import { ResumeTemplate } from '@/utils/types';
-import { useMutation } from 'convex/react';
+import { useConvexAuth, useMutation } from 'convex/react';
 import { api } from '../../../../convex/_generated/api';
+import { SignInButton } from '@clerk/clerk-react';
 
 type ResumeCardProps = {
   template: ResumeTemplate;
@@ -15,9 +16,16 @@ type ResumeCardProps = {
 
 const ResumeCard = ({ template }: ResumeCardProps) => {
   const router = useRouter();
+  const { isAuthenticated } = useConvexAuth();
+
   const createResume = useMutation(api.resume.create);
+  const signInButtonRef = useRef<HTMLButtonElement | null>(null);
 
   const handleCreateNewResume = () => {
+    if (!isAuthenticated) {
+      signInButtonRef.current?.click();
+      return;
+    }
     createResume().then((documentId) =>
       router.push(`${APP_ROUTES.EDIT_TEMPLATE.path + documentId}`)
     );
@@ -35,6 +43,11 @@ const ResumeCard = ({ template }: ResumeCardProps) => {
         <Button size={'lg'} textSize={'xl'} className="shadow-md h-14">
           Use this template
         </Button>
+      </div>
+      <div className="absolute bottom-[-20px] opacity-0">
+        <SignInButton redirectUrl={APP_ROUTES.RESUME_TEMPLATES.path}>
+          <button ref={signInButtonRef}></button>
+        </SignInButton>
       </div>
     </div>
   );

@@ -13,6 +13,10 @@ export type ResumePersonalDetails = {
   city?: string;
   address?: string;
   dateOfBirth?: string;
+  profileImage?: {
+    id: string;
+    url: string;
+  };
 };
 
 export type EmploymentHistory = {
@@ -54,4 +58,9 @@ export type CustomSectionItem = {
   startDate?: string;
   endDate?: string;
   description?: string;
+};
+
+export type ProfileImage = {
+  id: string;
+  url: string;
 };

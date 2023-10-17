@@ -8,6 +8,7 @@ import { api } from '../../../../convex/_generated/api';
 import { useDebounce } from '@/hooks/useDebounce';
 import { Id } from '../../../../convex/_generated/dataModel';
 import useUploadResumeCoverImg from '@/hooks/useUploadResumeCoverImg';
+import ProfileImageUpload from '../ProfileImageUpload';
 
 type PersonalDetailsProps = {
   resumeId: Id<'resume'>;
@@ -50,16 +51,20 @@ const PersonalDetails = ({ resumeId, details }: PersonalDetailsProps) => {
     ]
   );
 
-  const debouncedValues = useDebounce<ResumePersonalDetails>(memoDetails, 500);
+  const debouncedValues = useDebounce<
+    Omit<ResumePersonalDetails, 'profileImage'>
+  >(memoDetails, 500);
 
   const updatePersonalDetails = useMutation(api.resume.updateProfileDetail);
 
   useEffect(() => {
-    const cleanedValues: ResumePersonalDetails = {};
+    const cleanedValues: Omit<ResumePersonalDetails, 'profileImage'> = {};
 
     Object.entries(debouncedValues).forEach(([key, value]) => {
       if (value.length > 0) {
-        cleanedValues[key as keyof ResumePersonalDetails] = value;
+        cleanedValues[
+          key as keyof Omit<ResumePersonalDetails, 'profileImage'>
+        ] = value;
       }
     });
 
@@ -76,11 +81,10 @@ const PersonalDetails = ({ resumeId, details }: PersonalDetailsProps) => {
           setValue={setJobTitle}
           label="Job Title"
         />
-        {/* <FieldControl
-          value={jobTitle}
-          setValue={setJobTitle}
-          label="Job Title"
-        /> */}
+        <ProfileImageUpload
+          resumeId={resumeId}
+          profileImage={details.profileImage}
+        />
         <FieldControl
           value={firstName}
           setValue={setFirstName}

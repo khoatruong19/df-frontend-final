@@ -119,13 +119,22 @@ export const updateProfileDetail = mutation({
       throw new Error('Not authenticated');
     }
 
-    const userId = identity.subject;
-
     const { id, ...rest } = args;
 
-    const document = await ctx.db.patch(id, {
+    const document = await ctx.db.get(id);
+
+    if (!document) {
+      throw Error('Resume not found!');
+    }
+
+    const userId = identity.subject;
+
+    await ctx.db.patch(id, {
       userId,
-      personalDetails: rest,
+      personalDetails: {
+        ...document.personalDetails,
+        ...rest,
+      },
     });
 
     return document;
@@ -602,12 +611,74 @@ export const storeCoverImage = internalMutation({
     const { resumeId, storageId } = args;
 
     const url = (await ctx.storage.getUrl(storageId)) ?? '';
-    console.log({ resumeId, url });
+
     await ctx.db.patch(resumeId, {
       coverImage: {
         id: storageId,
         url,
       },
     });
+  },
+});
+
+export const updateResumeProfileImage = mutation({
+  args: {
+    resumeId: v.id('resume'),
+    storageId: v.string(),
+  },
+  handler: async (ctx, args) => {
+    const { resumeId, storageId } = args;
+
+    const document = await ctx.db.get(resumeId);
+
+    if (!document) {
+      throw new Error('Not found resume');
+    }
+
+    const exisitingImage = document?.personalDetails.profileImage?.id;
+
+    if (exisitingImage && (await ctx.storage.getUrl(exisitingImage))) {
+      await ctx.storage.delete(exisitingImage);
+    }
+
+    const url = (await ctx.storage.getUrl(storageId)) ?? '';
+
+    await ctx.db.patch(resumeId, {
+      personalDetails: {
+        ...document.personalDetails,
+        profileImage: {
+          id: storageId,
+          url,
+        },
+      },
+    });
+  },
+});
+
+export const deleteResumeProfileImage = mutation({
+  args: {
+    resumeId: v.id('resume'),
+  },
+  handler: async (ctx, args) => {
+    const { resumeId } = args;
+
+    const document = await ctx.db.get(resumeId);
+
+    if (!document) {
+      throw new Error('Not found resume');
+    }
+
+    const exisitingImage = document?.personalDetails.profileImage?.id;
+
+    if (exisitingImage && (await ctx.storage.getUrl(exisitingImage))) {
+      await ctx.storage.delete(exisitingImage);
+
+      await ctx.db.patch(resumeId, {
+        personalDetails: {
+          ...document.personalDetails,
+          profileImage: undefined,
+        },
+      });
+    } else throw Error('Profile image not found!');
   },
 });

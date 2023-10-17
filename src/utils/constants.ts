@@ -18,6 +18,10 @@ export const APP_ROUTES = {
     path: '/edit-resume/',
     isPublic: false,
   },
+  MY_RESUMES: {
+    path: '/resumes',
+    isPublic: false,
+  },
 };
 
 export const RESUME_TEMPLATES: ResumeTemplate[] = [

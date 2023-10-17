@@ -27,7 +27,7 @@ const ResumeForm = ({ resume }: ResumeFormProps) => {
   const debouncedValue = useDebounce<string>(title, 500);
   const updateResumeTitle = useMutation(api.resume.updateTitle);
 
-  useUploadResumeCoverImg({ resumeId: resume._id });
+  // useUploadResumeCoverImg({ resumeId: resume._id });
 
   useEffect(() => {
     updateResumeTitle({ id: resume._id, title });

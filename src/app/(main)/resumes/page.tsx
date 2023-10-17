@@ -2,8 +2,8 @@
 
 import MainLayout from '@/components/layouts/MainLayout';
 import { useQuery } from 'convex/react';
-import { api } from '../../../convex/_generated/api';
 import Link from 'next/link';
+import { api } from '../../../../convex/_generated/api';
 
 export default function ResumePage() {
   const resumes = useQuery(api.resume.getAll);

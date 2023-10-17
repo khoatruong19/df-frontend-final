@@ -1,13 +1,17 @@
+'use client';
+
 import MainLayout from '@/components/layouts/MainLayout';
 import ResumeCard from '@/components/resume-templates/cards/ResumeCard';
 import { Button } from '@/components/ui/button';
 import { APP_ROUTES, RESUME_TEMPLATES } from '@/utils/constants';
+import { useUser } from '@clerk/clerk-react';
 import Link from 'next/link';
 
 export default function ResumeTemplatesPage() {
+  const { user } = useUser();
   return (
     <MainLayout>
-      <div className="font-display text-center flex-1 w-full max-w-6xl mx-auto flex flex-col gap-6 items-center justify-center">
+      <div className="font-display text-center flex-1 w-full max-w-6xl mx-auto flex flex-col gap-5 items-center justify-center">
         <h1 className="text-5xl font-semibold max-w-xl italic">
           Job-winning resume templates
         </h1>
@@ -17,11 +21,22 @@ export default function ResumeTemplatesPage() {
           faster with field-tested resume templates.
         </p>
 
-        <Link href={APP_ROUTES.CHOOSE_TEMPLATE.path}>
-          <Button size={'lg'} textSize={'xl'} className="h-14">
-            Create My Resume
-          </Button>
-        </Link>
+        <div className="flex flex-col items-center">
+          {user && (
+            <>
+              <Link href={APP_ROUTES.MY_RESUMES.path}>
+                <Button size={'lg'} textSize={'xl'} className="h-14">
+                  My Resumes
+                </Button>
+              </Link>
+
+              <span className="mt-3">OR</span>
+            </>
+          )}
+          <p className="mt-1 font-semibold text-xl">
+            Choose one of templates below to begin with a new resume!
+          </p>
+        </div>
 
         <section className="w-full grid grid-cols-3 pt-5 border-t-2 gap-x-4">
           {RESUME_TEMPLATES.map((template) => (

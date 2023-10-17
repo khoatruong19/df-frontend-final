@@ -5,6 +5,8 @@ const nextConfig = {
       'marketplace.canva.com',
       's3.resume.io',
       'avatars.githubusercontent.com',
+      'www.politihogskolen.no',
+      'dapper-condor-940.convex.cloud',
     ],
   },
 };

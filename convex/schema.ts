@@ -4,7 +4,6 @@ import { v } from 'convex/values';
 export default defineSchema({
   resume: defineTable({
     title: v.string(),
-    profileImage: v.optional(v.string()),
     coverImage: v.optional(
       v.object({
         id: v.string(),
@@ -22,6 +21,12 @@ export default defineSchema({
       city: v.optional(v.string()),
       address: v.optional(v.string()),
       dateOfBirth: v.optional(v.string()),
+      profileImage: v.optional(
+        v.object({
+          id: v.string(),
+          url: v.string(),
+        })
+      ),
     }),
     profileSummary: v.optional(v.string()),
     employmentHistory: v.array(

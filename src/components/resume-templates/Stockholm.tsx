@@ -4,6 +4,7 @@ import { Doc } from '../../../convex/_generated/dataModel';
 import { SocialIcon } from 'react-social-icons';
 import { getSkillProgress } from '@/utils/helpers';
 import { exportAsImage } from '@/lib/html2canvas';
+import Image from 'next/image';
 
 type StockholmProps = {
   resume: Doc<'resume'>;
@@ -11,7 +12,8 @@ type StockholmProps = {
 };
 
 const Stockholm = ({ resume, customSections }: StockholmProps) => {
-  const { firstName, lastName, jobTitle, ...details } = resume.personalDetails;
+  const { firstName, lastName, jobTitle, profileImage, ...details } =
+    resume.personalDetails;
   const personalDetailsInArray = Object.entries(details);
 
   const sectionRef = useRef<HTMLElement | null>(null);
@@ -33,12 +35,15 @@ const Stockholm = ({ resume, customSections }: StockholmProps) => {
       className="min-h-screen py-9 px-12 bg-white aspect-[12/16] rounded-md overflow-auto scrollbar-thin scrollbar-track-gray-100 scrollbar-thumb-neutral-400"
     >
       <div className="flex items-center gap-5 justify-start ">
-        <img
-          id="test"
-          src="https://avatars.githubusercontent.com/u/85026053?v=4"
-          alt=""
-          className="w-14 h-14 object-cover"
-        />
+        {profileImage && (
+          <Image
+            src={profileImage.url}
+            alt=""
+            width={56}
+            height={56}
+            className="object-cover rounded-md"
+          />
+        )}
 
         <div>
           <h2 className="text-2xl font-semibold">
@@ -227,7 +232,7 @@ const Stockholm = ({ resume, customSections }: StockholmProps) => {
             <div>
               <h3 className="text-xs font-semibold mb-0.5">Links</h3>
               {resume?.socialLinks?.map((socialLink) => (
-                <div key={socialLink.id} className="flex mb-3">
+                <div key={socialLink.id} className="flex items-center mb-2">
                   <span>
                     <SocialIcon
                       style={{ height: 15, width: 15 }}
@@ -237,7 +242,7 @@ const Stockholm = ({ resume, customSections }: StockholmProps) => {
                     />
                   </span>
 
-                  <p className="text-xxs text-blue-500 break-words ml-1 h-2 ">
+                  <p className="text-xxs text-blue-500 break-all ml-1 h-2 mb-1 leading-3">
                     {socialLink.link}
                   </p>
                 </div>
