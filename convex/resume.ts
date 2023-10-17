@@ -29,6 +29,33 @@ export const create = mutation({
   },
 });
 
+export const deleteOne = mutation({
+  args: {
+    id: v.id('resume'),
+  },
+  handler: async (ctx, args) => {
+    const identity = await ctx.auth.getUserIdentity();
+
+    if (!identity) {
+      throw new Error('Not authenticated');
+    }
+
+    const userId = identity.subject;
+
+    const document = await ctx.db.get(args.id);
+
+    if (!document) {
+      throw new Error('Resume not found');
+    }
+
+    if (document?.userId !== userId) {
+      throw new Error('Not authenticated');
+    }
+
+    await ctx.db.delete(args.id);
+  },
+});
+
 export const getById = query({
   args: {
     id: v.id('resume'),
