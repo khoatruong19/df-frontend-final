@@ -5,6 +5,7 @@ import { SocialIcon } from 'react-social-icons';
 import { getSkillProgress } from '@/utils/helpers';
 import { exportAsImage } from '@/lib/html2canvas';
 import Image from 'next/image';
+import DOMPurify from 'isomorphic-dompurify';
 
 type StockholmProps = {
   resume: Doc<'resume'>;
@@ -28,7 +29,6 @@ const Stockholm = ({ resume, customSections }: StockholmProps) => {
 
   //   // if (hasOverflowingChildren) printImage();
   // }, [resume]);
-
   return (
     <section
       ref={sectionRef}
@@ -68,7 +68,12 @@ const Stockholm = ({ resume, customSections }: StockholmProps) => {
               </div>
               <div className="max-w-[90%]">
                 <h2 className=" font-semibold">Profile</h2>
-                <p className="text-xs break-words">{resume?.profileSummary}</p>
+                <div
+                  className="text-xs break-words"
+                  dangerouslySetInnerHTML={{
+                    __html: DOMPurify.sanitize(resume?.profileSummary),
+                  }}
+                ></div>
               </div>
             </div>
           )}
@@ -103,9 +108,12 @@ const Stockholm = ({ resume, customSections }: StockholmProps) => {
                         </p>
                       )}
                       {description && (
-                        <p className="mt-1.5 text-xs  break-words">
-                          {description}
-                        </p>
+                        <div
+                          className="mt-1.5 text-xs break-words"
+                          dangerouslySetInnerHTML={{
+                            __html: DOMPurify.sanitize(description),
+                          }}
+                        ></div>
                       )}
                     </div>
                   )
@@ -144,9 +152,12 @@ const Stockholm = ({ resume, customSections }: StockholmProps) => {
                         </p>
                       )}
                       {description && (
-                        <p className="mt-1.5 text-xs  break-words">
-                          {description}
-                        </p>
+                        <div
+                          className="mt-1.5 text-xs break-words"
+                          dangerouslySetInnerHTML={{
+                            __html: DOMPurify.sanitize(description),
+                          }}
+                        ></div>
                       )}
                     </div>
                   )
@@ -189,9 +200,12 @@ const Stockholm = ({ resume, customSections }: StockholmProps) => {
                           </p>
                         )}
                         {description && (
-                          <p className="mt-1.5 text-xs  break-words">
-                            {description}
-                          </p>
+                          <div
+                            className="mt-1.5 text-xs break-words"
+                            dangerouslySetInnerHTML={{
+                              __html: DOMPurify.sanitize(description),
+                            }}
+                          ></div>
                         )}
                       </div>
                     )

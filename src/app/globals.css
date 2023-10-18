@@ -73,6 +73,12 @@
   * {
     @apply border-border;
   }
+  ul {
+    @apply list-disc;
+  }
+  ol {
+    @apply list-decimal;
+  }
 }
 
 body {

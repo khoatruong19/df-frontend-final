@@ -12,6 +12,7 @@ import { api } from '../../../../convex/_generated/api';
 import { Id } from '../../../../convex/_generated/dataModel';
 import { DatePicker } from '../DatePicker';
 import FieldControl from '../FieldControl';
+import Editor from '../editor/Editor';
 
 type EmploymentCardProps = {
   resumeId: Id<'resume'>;
@@ -131,13 +132,9 @@ const EmploymentCard = ({ resumeId, employment }: EmploymentCardProps) => {
           <FieldControl value={city} setValue={setCity} label="City" />
         </div>
 
-        <div className="mt-5">
+        <div>
           <label className="text-sm text-gray-400">Description</label>
-          <textarea
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            className="w-full min-h-[200px] bg-slate-200 text-lg font-medium px-2"
-          ></textarea>
+          <Editor value={description} setValue={setDescription} />
         </div>
       </CollapsibleContent>
       <button

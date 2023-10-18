@@ -12,6 +12,7 @@ import { Id } from '../../../../convex/_generated/dataModel';
 import { api } from '../../../../convex/_generated/api';
 import FieldControl from '../FieldControl';
 import { DatePicker } from '../DatePicker';
+import Editor from '../editor/Editor';
 
 type CustomSectionCardProps = {
   customSectionId: Id<'customSection'>;
@@ -125,11 +126,7 @@ const CustomSectionCard = ({
 
         <div className="mt-5">
           <label className="text-sm text-gray-400">Description</label>
-          <textarea
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            className="w-full min-h-[200px] bg-slate-200 text-lg font-medium px-2"
-          ></textarea>
+          <Editor value={description} setValue={setDescription} />
         </div>
       </CollapsibleContent>
       <button
