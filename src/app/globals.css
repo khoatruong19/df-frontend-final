@@ -104,5 +104,13 @@ blockquote {
 }
 
 .ProseMirror {
-  padding: 1rem !important;
+  padding: 1rem 0 !important;
+}
+
+[data-value~='taskList'] {
+  display: flex !important;
+}
+
+.prose {
+  max-width: 85ch !important;
 }

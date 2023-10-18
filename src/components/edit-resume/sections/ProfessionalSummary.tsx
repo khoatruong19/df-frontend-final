@@ -4,6 +4,12 @@ import { api } from '../../../../convex/_generated/api';
 import { useDebounce } from '@/hooks/useDebounce';
 import { Id } from '../../../../convex/_generated/dataModel';
 import Editor from '../editor/Editor';
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from '@/components/ui/collapsible';
+import { Check, Pencil } from 'lucide-react';
 
 type ProfessionalSummaryProps = {
   resumeId: Id<'resume'>;
@@ -15,6 +21,7 @@ const ProfessionalSummary = ({
   profileSummary,
 }: ProfessionalSummaryProps) => {
   const [value, setValue] = useState(profileSummary ?? '');
+  const [openEditor, setOpenEditor] = useState(false);
 
   const debouncedValue = useDebounce(value, 500);
 
@@ -34,8 +41,31 @@ const ProfessionalSummary = ({
           best qualities and skills.
         </p>
       </div>
-
-      <Editor value={value} setValue={setValue} />
+      <Collapsible
+        open={openEditor}
+        onOpenChange={(value) => setOpenEditor(value)}
+        className="group relative border-2 cursor-pointer px-5 py-2"
+      >
+        <CollapsibleTrigger asChild>
+          <div className="text-lg flex items-center justify-center gap-2 h-10 hover:opacity-60">
+            {openEditor && (
+              <>
+                <Check size={18} />
+                <span>Done</span>
+              </>
+            )}
+            {!openEditor && (
+              <>
+                <Pencil size={18} />
+                <span>Edit</span>
+              </>
+            )}
+          </div>
+        </CollapsibleTrigger>
+        <CollapsibleContent>
+          <Editor value={value} setValue={setValue} />
+        </CollapsibleContent>
+      </Collapsible>
     </section>
   );
 };
