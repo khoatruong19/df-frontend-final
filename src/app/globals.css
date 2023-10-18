@@ -88,3 +88,21 @@ body {
     ),
     rgb(0, 0, 0);
 }
+
+ul > li,
+ol > li {
+  margin-bottom: 0.05rem !important;
+}
+
+ul,
+ol {
+  margin-top: 0rem !important;
+}
+
+blockquote {
+  padding: 0.2rem !important;
+}
+
+.ProseMirror {
+  padding: 1rem !important;
+}

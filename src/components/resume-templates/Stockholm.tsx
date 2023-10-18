@@ -18,6 +18,7 @@ const Stockholm = ({ resume, customSections }: StockholmProps) => {
   const personalDetailsInArray = Object.entries(details);
 
   const sectionRef = useRef<HTMLElement | null>(null);
+  console.log(resume?.profileSummary);
 
   // useEffect(() => {
   //   if (!sectionRef || !sectionRef.current) return;
@@ -56,7 +57,7 @@ const Stockholm = ({ resume, customSections }: StockholmProps) => {
         <div className="w-2/3 flex flex-col gap-5">
           {/* Profile Summary */}
 
-          {resume?.profileSummary && (
+          {resume?.profileSummary && resume?.profileSummary.length > 0 && (
             <div className="flex">
               <div className="w-6">
                 <User
@@ -69,7 +70,7 @@ const Stockholm = ({ resume, customSections }: StockholmProps) => {
               <div className="max-w-[90%]">
                 <h2 className=" font-semibold">Profile</h2>
                 <div
-                  className="text-xs break-words"
+                  className="text-xs break-words prose"
                   dangerouslySetInnerHTML={{
                     __html: DOMPurify.sanitize(resume?.profileSummary),
                   }}
