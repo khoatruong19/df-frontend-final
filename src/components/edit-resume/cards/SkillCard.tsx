@@ -76,7 +76,7 @@ const SkillCard = ({ resumeId, skill }: SkillCardProps) => {
         <div className="flex items-end gap-x-10 mt-3">
           <FieldControl value={name} setValue={setName} label="Skill" />
           <Select onValueChange={onChangeSkillLevel}>
-            <SelectTrigger className="w-full capitalize">
+            <SelectTrigger className="h-12 px-3 capitalize text-center ">
               {level.name}
             </SelectTrigger>
             <SelectContent>

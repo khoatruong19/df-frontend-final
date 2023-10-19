@@ -114,3 +114,7 @@ blockquote {
 .prose {
   max-width: 85ch !important;
 }
+
+.custom-scrollbar {
+  @apply scrollbar-thin scrollbar-track-gray-100 scrollbar-thumb-neutral-400;
+}

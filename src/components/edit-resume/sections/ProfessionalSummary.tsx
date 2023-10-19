@@ -1,15 +1,16 @@
-import React, { useEffect, useState } from 'react';
-import { useMutation } from 'convex/react';
-import { api } from '../../../../convex/_generated/api';
-import { useDebounce } from '@/hooks/useDebounce';
-import { Id } from '../../../../convex/_generated/dataModel';
-import Editor from '../editor/Editor';
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
 } from '@/components/ui/collapsible';
-import { Check, Pencil } from 'lucide-react';
+import { useDebounce } from '@/hooks/useDebounce';
+import { useMutation } from 'convex/react';
+import { Check, Pencil, Plus } from 'lucide-react';
+import { useEffect, useMemo, useState } from 'react';
+import { api } from '../../../../convex/_generated/api';
+import { Id } from '../../../../convex/_generated/dataModel';
+import Editor from '../editor/Editor';
+import ProfessionalSummaryPhrasesPopup from '../pre-written-phrases-popups/ProfessionalSummaryPhrasesPopup';
 
 type ProfessionalSummaryProps = {
   resumeId: Id<'resume'>;
@@ -22,8 +23,32 @@ const ProfessionalSummary = ({
 }: ProfessionalSummaryProps) => {
   const [value, setValue] = useState(profileSummary ?? '');
   const [openEditor, setOpenEditor] = useState(false);
+  const [refreshEditor, setRefreshEditor] = useState(false);
 
   const debouncedValue = useDebounce(value, 500);
+
+  const parsedValue: { type: string; content: any[] } = useMemo(() => {
+    let result = { type: 'doc', content: [] };
+    try {
+      result = JSON.parse(debouncedValue);
+    } catch (error) {
+      console.log(error);
+    }
+    return result;
+  }, [debouncedValue]);
+
+  const selectPrewrittenPhrase = (phrase: string) => {
+    setRefreshEditor(true);
+    const paragraph = {
+      type: 'text',
+      text: phrase.replaceAll(`\n`, ''),
+    };
+    parsedValue.content.push(paragraph);
+    setValue(JSON.stringify(parsedValue));
+    setTimeout(() => {
+      setRefreshEditor(false);
+    }, 500);
+  };
 
   const updatePersonalDetails = useMutation(api.resume.updateProfileSummary);
 
@@ -32,7 +57,7 @@ const ProfessionalSummary = ({
   }, [debouncedValue]);
 
   return (
-    <section>
+    <section className="relative">
       <div className="mb-3">
         <h3 className="mb-2 text-xl">Professional Summary</h3>
         <p className="text-sm text-gray-400">
@@ -63,9 +88,22 @@ const ProfessionalSummary = ({
           </div>
         </CollapsibleTrigger>
         <CollapsibleContent>
-          <Editor value={value} setValue={setValue} />
+          <Editor isRefresh={refreshEditor} value={value} setValue={setValue} />
         </CollapsibleContent>
       </Collapsible>
+
+      {openEditor && (
+        <ProfessionalSummaryPhrasesPopup
+          wrapperClass="absolute top-14 right-0 z-50 "
+          triggerElement={
+            <button className="flex items-center gap-2 hover:text-blue-400">
+              <span className="text-base">Pre-written phase</span>
+              <Plus size={18} />
+            </button>
+          }
+          selectPrewrittenPhrase={selectPrewrittenPhrase}
+        />
+      )}
     </section>
   );
 };

@@ -8,7 +8,7 @@ import { api } from '../../../../convex/_generated/api';
 import { useDebounce } from '@/hooks/useDebounce';
 import { Id } from '../../../../convex/_generated/dataModel';
 import useUploadResumeCoverImg from '@/hooks/useUploadResumeCoverImg';
-import ProfileImageUpload from '../ProfileImageUpload';
+import ProfileImageUpload from '../profile-image-upload/ProfileImageUpload';
 
 type PersonalDetailsProps = {
   resumeId: Id<'resume'>;

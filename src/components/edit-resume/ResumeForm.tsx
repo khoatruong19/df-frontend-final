@@ -36,7 +36,7 @@ const ResumeForm = ({ resume }: ResumeFormProps) => {
   return (
     <section
       className="w-[50%] py-8 px-10 flex flex-col gap-4 text-2xl font-semibold overflow-auto 
-    scrollbar-thin scrollbar-track-gray-100 scrollbar-thumb-neutral-400  font-display"
+    custom-scrollbar font-display"
     >
       <input
         value={title}

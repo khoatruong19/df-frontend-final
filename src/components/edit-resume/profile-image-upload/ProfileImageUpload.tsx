@@ -1,13 +1,13 @@
 import { ProfileImage } from '@/utils/types';
 import Image from 'next/image';
 import React, { useRef, useState } from 'react';
-import { Button } from '../ui/button';
+import { Button } from '../../ui/button';
 import { Dialog, DialogTrigger } from '@radix-ui/react-dialog';
 import CropProfileImage from './CropProfileImage';
 import { Trash } from 'lucide-react';
 import { useMutation } from 'convex/react';
-import { api } from '../../../convex/_generated/api';
-import { Id } from '../../../convex/_generated/dataModel';
+import { api } from '../../../../convex/_generated/api';
+import { Id } from '../../../../convex/_generated/dataModel';
 
 type ProfileImageUploadProps = {
   profileImage?: ProfileImage;

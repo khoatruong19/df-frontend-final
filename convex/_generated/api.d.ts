@@ -14,6 +14,7 @@ import type {
   FilterApi,
   FunctionReference,
 } from "convex/server";
+import type * as chat from "../chat";
 import type * as customSection from "../customSection";
 import type * as resume from "../resume";
 import type * as upload from "../upload";
@@ -27,6 +28,7 @@ import type * as upload from "../upload";
  * ```
  */
 declare const fullApi: ApiFromModules<{
+  chat: typeof chat;
   customSection: typeof customSection;
   resume: typeof resume;
   upload: typeof upload;

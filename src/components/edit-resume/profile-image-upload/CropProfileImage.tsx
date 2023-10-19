@@ -8,8 +8,8 @@ import {
 } from '@/components/ui/dialog';
 import getCroppedImg from '@/utils/cropImage';
 import Cropper, { Area } from 'react-easy-crop';
-import { Button } from '../ui/button';
-import { Slider } from '../ui/slider';
+import { Button } from '../../ui/button';
+import { Slider } from '../../ui/slider';
 
 type CropProfileImage = {
   photoURL: string;
