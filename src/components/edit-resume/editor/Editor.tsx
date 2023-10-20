@@ -2,6 +2,7 @@
 import { Editor as TipTapEditor } from '@tiptap/react';
 import React, { useMemo } from 'react';
 import { Editor as NovelEditor } from 'novel';
+import LoadingSpinner from '@/components/core/LoadingSpinner';
 
 type EditorProps = {
   value: string;
@@ -32,7 +33,11 @@ const Editor = (props: EditorProps) => {
 
   return (
     <div className="border-2 bg-slate-200 px-2 z-[999999] min-h-[300px] ">
-      {isRefresh && 'Refreshing....'}
+      {isRefresh && (
+        <div className="mt-8 w-fit mx-auto">
+          <LoadingSpinner />
+        </div>
+      )}
       {!isRefresh && (
         <NovelEditor
           disableLocalStorage={true}

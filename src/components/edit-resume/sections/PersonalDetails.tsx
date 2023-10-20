@@ -16,6 +16,7 @@ type PersonalDetailsProps = {
 };
 
 const PersonalDetails = ({ resumeId, details }: PersonalDetailsProps) => {
+  const [title, setTitle] = useState(details.title);
   const [jobTitle, setJobTitle] = useState(details?.jobTitle ?? '');
   const [firstName, setFirstName] = useState(details?.firstName ?? '');
   const [lastName, setLastName] = useState(details?.lastName ?? '');
@@ -28,6 +29,7 @@ const PersonalDetails = ({ resumeId, details }: PersonalDetailsProps) => {
 
   const memoDetails = useMemo(
     () => ({
+      title,
       jobTitle,
       address,
       city,
@@ -39,6 +41,7 @@ const PersonalDetails = ({ resumeId, details }: PersonalDetailsProps) => {
       phone,
     }),
     [
+      title,
       jobTitle,
       address,
       city,
@@ -58,7 +61,9 @@ const PersonalDetails = ({ resumeId, details }: PersonalDetailsProps) => {
   const updatePersonalDetails = useMutation(api.resume.updateProfileDetail);
 
   useEffect(() => {
-    const cleanedValues: Omit<ResumePersonalDetails, 'profileImage'> = {};
+    const cleanedValues: Omit<ResumePersonalDetails, 'profileImage'> = {
+      title,
+    };
 
     Object.entries(debouncedValues).forEach(([key, value]) => {
       if (value.length > 0) {
@@ -71,9 +76,18 @@ const PersonalDetails = ({ resumeId, details }: PersonalDetailsProps) => {
     updatePersonalDetails({ id: resumeId, ...cleanedValues });
   }, [debouncedValues]);
 
+  useEffect(() => {
+    if (title !== details.title) setTitle(details.title);
+  }, [details]);
+
   return (
     <section>
-      <h3 className="mb-3 text-xl">Personal Details</h3>
+      <input
+        className="mb-3 text-xl font-semibold bg-transparent outline-none"
+        type="text"
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+      />
 
       <div className="grid grid-cols-2 gap-y-5 gap-x-10">
         <FieldControl

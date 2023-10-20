@@ -4,6 +4,7 @@ export type ResumeTemplate = {
 };
 
 export type ResumePersonalDetails = {
+  title: string;
   jobTitle?: string;
   firstName?: string;
   lastName?: string;

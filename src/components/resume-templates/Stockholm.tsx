@@ -15,8 +15,14 @@ type StockholmProps = {
 };
 
 const Stockholm = ({ resume, customSections }: StockholmProps) => {
-  const { firstName, lastName, jobTitle, profileImage, ...details } =
-    resume.personalDetails;
+  const {
+    firstName,
+    lastName,
+    jobTitle,
+    profileImage,
+    title: detailsTitle,
+    ...details
+  } = resume.personalDetails;
   const personalDetailsInArray = Object.entries(details);
 
   const sectionRef = useRef<HTMLElement | null>(null);
@@ -113,7 +119,7 @@ const Stockholm = ({ resume, customSections }: StockholmProps) => {
                       )}
                       {description && (
                         <div
-                          className="mt-1.5 text-xs break-words"
+                          className="mt-1.5 text-xs break-words prose"
                           dangerouslySetInnerHTML={{
                             __html: generateHTMLFromJSON(description),
                           }}
@@ -157,7 +163,7 @@ const Stockholm = ({ resume, customSections }: StockholmProps) => {
                       )}
                       {description && (
                         <div
-                          className="mt-1.5 text-xs break-words"
+                          className="mt-1.5 text-xs break-words prose"
                           dangerouslySetInnerHTML={{
                             __html: generateHTMLFromJSON(description),
                           }}
@@ -205,7 +211,7 @@ const Stockholm = ({ resume, customSections }: StockholmProps) => {
                         )}
                         {description && (
                           <div
-                            className="mt-1.5 text-xs break-words"
+                            className="mt-1.5 text-xs break-words prose"
                             dangerouslySetInnerHTML={{
                               __html: generateHTMLFromJSON(description),
                             }}
@@ -223,7 +229,7 @@ const Stockholm = ({ resume, customSections }: StockholmProps) => {
           {/* Details */}
           {personalDetailsInArray.length > 0 && (
             <div>
-              <h3 className="text-xs font-semibold mb-0.5">Details</h3>
+              <h3 className="text-xs font-semibold mb-0.5">{detailsTitle}</h3>
               {personalDetailsInArray.map(([key, value]) => (
                 <p
                   key={key}
@@ -238,7 +244,7 @@ const Stockholm = ({ resume, customSections }: StockholmProps) => {
           )}
 
           {/* Date of birth */}
-          {details?.email && (
+          {details?.dateOfBirth && (
             <div>
               <h3 className="text-xs font-semibold mb-0.5">Date of birth</h3>
               <p className="text-xxs">{details?.dateOfBirth}</p>

@@ -45,3 +45,43 @@ export const findProfessionalSummaries = action({
     return summaries;
   },
 });
+
+export const findEmploymentHistories = action({
+  args: {
+    keyword: v.string(),
+  },
+  handler: async (ctx, args) => {
+    const identity = await ctx.auth.getUserIdentity();
+
+    if (!identity) {
+      throw new Error('Not authenticated!');
+    }
+
+    const completion = await openai.chat.completions.create({
+      messages: [
+        {
+          role: 'user',
+          content: `Give me some at most five detailed employments summaries which looks like this "Learned and followed 
+          all store policies and procedures, resulting in fewer mistakes and improved customer service" in one array about 
+          '${args.keyword}' in a json format like this:
+          {
+            employmentHistories: string[]
+          }
+      `,
+        },
+      ],
+      model: 'gpt-3.5-turbo',
+    });
+
+    const response = completion.choices[0].message.content ?? '';
+
+    let employmentHistories: string[] = [];
+    try {
+      employmentHistories = JSON.parse(response).employmentHistories;
+    } catch (error) {
+      throw new Error('Fail to parse response from OpenAI');
+    }
+
+    return employmentHistories;
+  },
+});

@@ -12,6 +12,7 @@ export default defineSchema({
     ),
     userId: v.string(),
     personalDetails: v.object({
+      title: v.string(),
       jobTitle: v.optional(v.string()),
       firstName: v.optional(v.string()),
       lastName: v.optional(v.string()),

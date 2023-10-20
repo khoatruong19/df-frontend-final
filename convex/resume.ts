@@ -3,6 +3,7 @@ import { v } from 'convex/values';
 import { v4 as uuid } from 'uuid';
 import { SKILL_LEVELS } from '../src/utils/constants';
 import { api, internal } from './_generated/api';
+import { DEFAULT_RESUME_SECTION_TITLES } from './constants';
 
 export const create = mutation({
   args: {},
@@ -18,7 +19,9 @@ export const create = mutation({
     const document = await ctx.db.insert('resume', {
       userId,
       title: 'Untitled',
-      personalDetails: {},
+      personalDetails: {
+        title: DEFAULT_RESUME_SECTION_TITLES.PROFILE_DETAILS,
+      },
       education: [],
       employmentHistory: [],
       socialLinks: [],
@@ -138,6 +141,7 @@ export const updateProfileDetail = mutation({
     city: v.optional(v.string()),
     address: v.optional(v.string()),
     dateOfBirth: v.optional(v.string()),
+    title: v.string(),
   },
   handler: async (ctx, args) => {
     const identity = await ctx.auth.getUserIdentity();
@@ -161,6 +165,10 @@ export const updateProfileDetail = mutation({
       personalDetails: {
         ...document.personalDetails,
         ...rest,
+        title:
+          rest.title === ''
+            ? DEFAULT_RESUME_SECTION_TITLES.PROFILE_DETAILS
+            : rest.title,
       },
     });
 

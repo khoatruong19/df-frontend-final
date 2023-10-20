@@ -37,3 +37,25 @@ export const POPULAR_SUMMARIES = [
     maximizing opportunities for financial growth. Adept in analytical thinking, strategic planning, leadership, and 
     building strong relationships with business partners.`,
 ];
+
+export const POPULAR_EMPLOYMENT_HISTORIES = [
+  `Greeted customer in a friendly and professional manner`,
+
+  ` Handled customer complaints calmly and professionally, resolving customer issues in a timely manner`,
+
+  `Created reports and documents as requested by the office manager`,
+
+  `Learned and followed all store policies and procedures, resulting in fewer mistakes and improved customer service`,
+
+  `Utilized sales techniques and strategies to build customer relationships and close sales, resulting in a X% increase in sales`,
+
+  `Operated cash register, credit card machine, and other electronic equipment accurately and efficiently`,
+
+  `Assisted customers with locating items and providing product information`,
+
+  `Processed transactions accurately and efficiently, ensuring that all transactions were completed within the established timeframe`,
+
+  `Worked with project managers to develop and implement strategies for cost savings and resource optimization`,
+
+  `Recognized and responded to students’ individual needs and learning styles`,
+];

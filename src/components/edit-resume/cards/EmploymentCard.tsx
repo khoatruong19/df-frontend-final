@@ -6,13 +6,14 @@ import {
 import { useDebounce } from '@/hooks/useDebounce';
 import { EmploymentHistory } from '@/utils/types';
 import { useMutation } from 'convex/react';
-import { ChevronDown, Trash } from 'lucide-react';
+import { ChevronDown, Plus, Trash } from 'lucide-react';
 import { useEffect, useMemo, useState } from 'react';
 import { api } from '../../../../convex/_generated/api';
 import { Id } from '../../../../convex/_generated/dataModel';
 import { DatePicker } from '../DatePicker';
 import FieldControl from '../FieldControl';
 import Editor from '../editor/Editor';
+import EmploymentHistoryPhrasesPopup from '../pre-written-phrases-popups/EmploymentHistoryPhrasesPopup';
 
 type EmploymentCardProps = {
   resumeId: Id<'resume'>;
@@ -26,6 +27,8 @@ const EmploymentCard = ({ resumeId, employment }: EmploymentCardProps) => {
   const [description, setDescription] = useState(employment.description ?? '');
   const [startDate, setStartDate] = useState(employment.startDate ?? '');
   const [endDate, setEndDate] = useState(employment.endDate ?? '');
+  const [openEditor, setOpenEditor] = useState(false);
+  const [refreshEditor, setRefreshEditor] = useState(false);
 
   const hasBasicInfo =
     employment.jobTitle ||
@@ -58,6 +61,32 @@ const EmploymentCard = ({ resumeId, employment }: EmploymentCardProps) => {
     api.resume.deleteEmploymentHistory
   );
 
+  const parsedDescription: { type: string; content: any[] } = useMemo(() => {
+    let result = { type: 'doc', content: [] };
+
+    if (!debouncedValues?.description) return result;
+
+    try {
+      result = JSON.parse(debouncedValues.description);
+    } catch (error) {
+      console.log(error);
+    }
+    return result;
+  }, [debouncedValues]);
+
+  const selectPrewrittenPhrase = (phrase: string) => {
+    setRefreshEditor(true);
+    const paragraph = {
+      type: 'text',
+      text: phrase.replaceAll(`\n`, ''),
+    };
+    parsedDescription.content.push(paragraph);
+    setDescription(JSON.stringify(parsedDescription));
+    setTimeout(() => {
+      setRefreshEditor(false);
+    }, 500);
+  };
+
   const deleteEmployementHistoryOnClick = () =>
     deleteEmploymentHistory({ resumeId, id: employment.id });
 
@@ -74,7 +103,11 @@ const EmploymentCard = ({ resumeId, employment }: EmploymentCardProps) => {
   }, [debouncedValues]);
 
   return (
-    <Collapsible className="group relative border-2 cursor-pointer px-5 py-2">
+    <Collapsible
+      open={openEditor}
+      onOpenChange={(value) => setOpenEditor(value)}
+      className="group relative border-2 cursor-pointer px-5 py-2"
+    >
       <CollapsibleTrigger asChild>
         <div className=" relative text-base min-h-[56px] flex items-center justify-between hover:opacity-60">
           {!hasBasicInfo && <p>&#40;Not specified&#41;</p>}
@@ -134,7 +167,11 @@ const EmploymentCard = ({ resumeId, employment }: EmploymentCardProps) => {
 
         <div>
           <label className="text-sm text-gray-400">Description</label>
-          <Editor value={description} setValue={setDescription} />
+          <Editor
+            isRefresh={refreshEditor}
+            value={description}
+            setValue={setDescription}
+          />
         </div>
       </CollapsibleContent>
       <button
@@ -143,6 +180,19 @@ const EmploymentCard = ({ resumeId, employment }: EmploymentCardProps) => {
       >
         <Trash />
       </button>
+      {openEditor && (
+        <EmploymentHistoryPhrasesPopup
+          jobTitle={debouncedValues.jobTitle}
+          wrapperClass="absolute top-60 right-0 z-50 mt-2 mr-4 "
+          triggerElement={
+            <button className="flex items-center gap-2 hover:text-blue-400">
+              <span className="text-base">Pre-written phase</span>
+              <Plus size={18} />
+            </button>
+          }
+          selectPrewrittenPhrase={selectPrewrittenPhrase}
+        />
+      )}
     </Collapsible>
   );
 };

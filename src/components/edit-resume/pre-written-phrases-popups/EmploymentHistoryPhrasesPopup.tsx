@@ -1,57 +1,62 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import LoadingSpinner from '@/components/core/LoadingSpinner';
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover';
-import { ChevronLeft, Search } from 'lucide-react';
-import { POPULAR_SUMMARIES } from './constants';
-import { useAction } from 'convex/react';
-import { api } from '../../../../convex/_generated/api';
 import { useDebounce } from '@/hooks/useDebounce';
-import LoadingSpinner from '@/components/core/LoadingSpinner';
+import { useAction } from 'convex/react';
+import { ChevronLeft, Search } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
+import { api } from '../../../../convex/_generated/api';
+import { POPULAR_EMPLOYMENT_HISTORIES } from './constants';
+import { findEmploymentHistories } from '../../../../convex/chat';
 
-type ProfessionalSummaryPhrasesPopupProps = {
+type EmploymentHistoryPhrasesPopupProps = {
+  jobTitle?: string;
   wrapperClass?: string;
   triggerElement: React.ReactNode;
   selectPrewrittenPhrase: (phrase: string) => void;
 };
 
-const ProfessionalSummaryPhrasesPopup = ({
+const EmploymentHistoryPhrasesPopup = ({
+  jobTitle = '',
   wrapperClass = '',
   triggerElement,
   selectPrewrittenPhrase,
-}: ProfessionalSummaryPhrasesPopupProps) => {
+}: EmploymentHistoryPhrasesPopupProps) => {
   const [keyword, setKeyword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [summaries, setSummaries] = useState(POPULAR_SUMMARIES);
+  const [histories, setHistories] = useState(POPULAR_EMPLOYMENT_HISTORIES);
 
   const debouncedValue = useDebounce(keyword, 1000);
 
-  const setSummariesFromAI = async () => {
+  const setHistoriesFromAI = async () => {
     setIsLoading(true);
     try {
-      const aiSummaries = await findProfessionalSummaries({
+      const aiHistories = await findEmploymentHistories({
         keyword: debouncedValue,
       });
-      setSummaries(aiSummaries);
+      setHistories(aiHistories);
     } catch (error) {
       console.log(error);
     }
     setIsLoading(false);
   };
 
-  const findProfessionalSummaries = useAction(
-    api.chat.findProfessionalSummaries
-  );
+  const findEmploymentHistories = useAction(api.chat.findEmploymentHistories);
 
   useEffect(() => {
     if (debouncedValue === '') {
-      setSummaries(POPULAR_SUMMARIES);
+      setHistories(POPULAR_EMPLOYMENT_HISTORIES);
       return;
     }
-    setSummariesFromAI();
+    setHistoriesFromAI();
   }, [debouncedValue]);
+
+  useEffect(() => {
+    setKeyword(jobTitle);
+  }, [jobTitle]);
 
   return (
     <aside className={wrapperClass}>
@@ -76,7 +81,7 @@ const ProfessionalSummaryPhrasesPopup = ({
                 </div>
               )}
               {!isLoading &&
-                summaries.map((summary, idx) => (
+                histories.map((summary, idx) => (
                   <div key={idx} className="flex items-start gap-3">
                     <button
                       onClick={() => selectPrewrittenPhrase(summary)}
@@ -106,4 +111,4 @@ const ProfessionalSummaryPhrasesPopup = ({
   );
 };
 
-export default ProfessionalSummaryPhrasesPopup;
+export default EmploymentHistoryPhrasesPopup;
