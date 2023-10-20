@@ -1,15 +1,15 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import LoadingSpinner from '@/components/core/LoadingSpinner';
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover';
-import { ChevronLeft, Search } from 'lucide-react';
-import { POPULAR_SUMMARIES } from './constants';
-import { useAction } from 'convex/react';
-import { api } from '../../../../convex/_generated/api';
 import { useDebounce } from '@/hooks/useDebounce';
-import LoadingSpinner from '@/components/core/LoadingSpinner';
+import { useAction } from 'convex/react';
+import { ChevronLeft, Search } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
+import { api } from '../../../../convex/_generated/api';
+import { POPULAR_SUMMARIES } from './constants';
 
 type ProfessionalSummaryPhrasesPopupProps = {
   wrapperClass?: string;

@@ -29,7 +29,9 @@ export default defineSchema({
         })
       ),
     }),
+    profileSummaryTitle: v.string(),
     profileSummary: v.optional(v.string()),
+    employmentHistoryTitle: v.string(),
     employmentHistory: v.array(
       v.object({
         id: v.string(),
@@ -41,6 +43,7 @@ export default defineSchema({
         description: v.optional(v.string()),
       })
     ),
+    educationTitle: v.string(),
     education: v.array(
       v.object({
         id: v.string(),
@@ -52,6 +55,7 @@ export default defineSchema({
         description: v.optional(v.string()),
       })
     ),
+    socialLinksTitle: v.string(),
     socialLinks: v.array(
       v.object({
         id: v.string(),
@@ -59,12 +63,31 @@ export default defineSchema({
         link: v.optional(v.string()),
       })
     ),
+    skillsTitle: v.string(),
     skills: v.array(
       v.object({
         id: v.string(),
         skill: v.optional(v.string()),
         level: v.string(),
       })
+    ),
+    hobbies: v.optional(
+      v.object({
+        title: v.string(),
+        content: v.optional(v.string()),
+      })
+    ),
+    coursesTitle: v.optional(v.string()),
+    courses: v.optional(
+      v.array(
+        v.object({
+          id: v.string(),
+          course: v.optional(v.string()),
+          institution: v.optional(v.string()),
+          startDate: v.optional(v.string()),
+          endDate: v.optional(v.string()),
+        })
+      )
     ),
   }),
   customSection: defineTable({

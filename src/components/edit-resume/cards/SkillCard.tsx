@@ -8,10 +8,10 @@ import {
   SelectContent,
   SelectItem,
   SelectTrigger,
-  SelectValue,
 } from '@/components/ui/select';
 import { useDebounce } from '@/hooks/useDebounce';
 import { SKILL_LEVELS } from '@/utils/constants';
+import { getSkillByName } from '@/utils/helpers';
 import { Skill } from '@/utils/types';
 import { useMutation } from 'convex/react';
 import { ChevronDown, Trash } from 'lucide-react';
@@ -19,7 +19,6 @@ import { useEffect, useMemo, useState } from 'react';
 import { api } from '../../../../convex/_generated/api';
 import { Id } from '../../../../convex/_generated/dataModel';
 import FieldControl from '../FieldControl';
-import { getSkillByName } from '@/utils/helpers';
 
 type SkillCardProps = {
   resumeId: Id<'resume'>;

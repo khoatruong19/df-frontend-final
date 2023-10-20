@@ -7,8 +7,8 @@ import { useMutation } from 'convex/react';
 import { api } from '../../../../convex/_generated/api';
 import { useDebounce } from '@/hooks/useDebounce';
 import { Id } from '../../../../convex/_generated/dataModel';
-import useUploadResumeCoverImg from '@/hooks/useUploadResumeCoverImg';
 import ProfileImageUpload from '../profile-image-upload/ProfileImageUpload';
+import SectionTitleInput from '../SectionTitleInput';
 
 type PersonalDetailsProps = {
   resumeId: Id<'resume'>;
@@ -82,12 +82,7 @@ const PersonalDetails = ({ resumeId, details }: PersonalDetailsProps) => {
 
   return (
     <section>
-      <input
-        className="mb-3 text-xl font-semibold bg-transparent outline-none"
-        type="text"
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-      />
+      <SectionTitleInput value={title} setValue={setTitle} />
 
       <div className="grid grid-cols-2 gap-y-5 gap-x-10">
         <FieldControl

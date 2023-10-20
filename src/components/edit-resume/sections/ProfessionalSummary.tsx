@@ -11,31 +11,36 @@ import { api } from '../../../../convex/_generated/api';
 import { Id } from '../../../../convex/_generated/dataModel';
 import Editor from '../editor/Editor';
 import ProfessionalSummaryPhrasesPopup from '../pre-written-phrases-popups/ProfessionalSummaryPhrasesPopup';
+import SectionTitleInput from '../SectionTitleInput';
 
 type ProfessionalSummaryProps = {
   resumeId: Id<'resume'>;
+  profileSummaryTitle: string;
   profileSummary?: string;
 };
 
 const ProfessionalSummary = ({
   resumeId,
+  profileSummaryTitle,
   profileSummary,
 }: ProfessionalSummaryProps) => {
-  const [value, setValue] = useState(profileSummary ?? '');
+  const [summaryTitle, setSummaryTitle] = useState(profileSummaryTitle);
+  const [summary, setSummary] = useState(profileSummary ?? '');
   const [openEditor, setOpenEditor] = useState(false);
   const [refreshEditor, setRefreshEditor] = useState(false);
 
-  const debouncedValue = useDebounce(value, 500);
+  const debouncedSummary = useDebounce(summary, 500);
+  const debouncedSummaryTitle = useDebounce(summaryTitle, 500);
 
   const parsedValue: { type: string; content: any[] } = useMemo(() => {
     let result = { type: 'doc', content: [] };
     try {
-      result = JSON.parse(debouncedValue);
+      result = JSON.parse(debouncedSummary);
     } catch (error) {
       console.log(error);
     }
     return result;
-  }, [debouncedValue]);
+  }, [debouncedSummary]);
 
   const selectPrewrittenPhrase = (phrase: string) => {
     setRefreshEditor(true);
@@ -44,22 +49,37 @@ const ProfessionalSummary = ({
       text: phrase.replaceAll(`\n`, ''),
     };
     parsedValue.content.push(paragraph);
-    setValue(JSON.stringify(parsedValue));
+    setSummary(JSON.stringify(parsedValue));
     setTimeout(() => {
       setRefreshEditor(false);
     }, 500);
   };
 
-  const updatePersonalDetails = useMutation(api.resume.updateProfileSummary);
+  const updateProfileSummary = useMutation(api.resume.updateProfileSummary);
+  const updateProfileSummaryTitle = useMutation(
+    api.resume.updateProfileSummaryTitle
+  );
 
   useEffect(() => {
-    updatePersonalDetails({ id: resumeId, profileSummary: debouncedValue });
-  }, [debouncedValue]);
+    updateProfileSummary({ id: resumeId, profileSummary: debouncedSummary });
+  }, [debouncedSummary]);
+
+  useEffect(() => {
+    updateProfileSummaryTitle({
+      id: resumeId,
+      profileSummaryTitle: debouncedSummaryTitle,
+    });
+  }, [debouncedSummaryTitle]);
+
+  useEffect(() => {
+    if (summaryTitle !== profileSummaryTitle)
+      setSummaryTitle(profileSummaryTitle);
+  }, [profileSummaryTitle]);
 
   return (
     <section className="relative">
       <div className="mb-3">
-        <h3 className="mb-2 text-xl">Professional Summary</h3>
+        <SectionTitleInput value={summaryTitle} setValue={setSummaryTitle} />
         <p className="text-sm text-gray-400">
           Write 2-4 short & energetic sentences to interest the reader! Mention
           your role, experience & most importantly - your biggest achievements,
@@ -88,7 +108,11 @@ const ProfessionalSummary = ({
           </div>
         </CollapsibleTrigger>
         <CollapsibleContent>
-          <Editor isRefresh={refreshEditor} value={value} setValue={setValue} />
+          <Editor
+            isRefresh={refreshEditor}
+            value={summary}
+            setValue={setSummary}
+          />
         </CollapsibleContent>
       </Collapsible>
 

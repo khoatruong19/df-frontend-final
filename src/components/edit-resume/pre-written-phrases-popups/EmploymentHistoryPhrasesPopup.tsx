@@ -10,7 +10,6 @@ import { ChevronLeft, Search } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
 import { api } from '../../../../convex/_generated/api';
 import { POPULAR_EMPLOYMENT_HISTORIES } from './constants';
-import { findEmploymentHistories } from '../../../../convex/chat';
 
 type EmploymentHistoryPhrasesPopupProps = {
   jobTitle?: string;

@@ -11,7 +11,9 @@ import SocialLinks from './sections/SocialLinks';
 import Skills from './sections/Skills';
 import AddSection from './sections/AddSection';
 import CustomSection from './sections/CustomSection';
-import useUploadResumeCoverImg from '@/hooks/useUploadResumeCoverImg';
+import Hobbies from './sections/Hobbies';
+import Courses from './sections/Courses';
+// import useUploadResumeCoverImg from '@/hooks/useUploadResumeCoverImg';
 
 type ResumeFormProps = {
   resume: Doc<'resume'>;
@@ -27,7 +29,7 @@ const ResumeForm = ({ resume }: ResumeFormProps) => {
   const debouncedValue = useDebounce<string>(title, 500);
   const updateResumeTitle = useMutation(api.resume.updateTitle);
 
-  useUploadResumeCoverImg({ resumeId: resume._id });
+  // useUploadResumeCoverImg({ resumeId: resume._id });
 
   useEffect(() => {
     updateResumeTitle({ id: resume._id, title });
@@ -50,15 +52,39 @@ const ResumeForm = ({ resume }: ResumeFormProps) => {
         />
         <ProfessionalSummary
           resumeId={resume._id}
-          profileSummary={resume.profileSummary}
+          profileSummary={resume?.profileSummary}
+          profileSummaryTitle={resume.profileSummaryTitle}
         />
         <EmploymentHistory
           resumeId={resume._id}
+          employmentHistoryTitle={resume.employmentHistoryTitle}
           employmentHistories={resume.employmentHistory}
         />
-        <Education resumeId={resume._id} educations={resume.education} />
-        <SocialLinks resumeId={resume._id} socialLinks={resume.socialLinks} />
-        <Skills resumeId={resume._id} skills={resume.skills} />
+        <Education
+          resumeId={resume._id}
+          educationTitle={resume.educationTitle}
+          educations={resume.education}
+        />
+        <SocialLinks
+          socialLinksTitle={resume.socialLinksTitle}
+          resumeId={resume._id}
+          socialLinks={resume.socialLinks}
+        />
+        <Skills
+          resumeId={resume._id}
+          skillsTitle={resume.skillsTitle}
+          skills={resume.skills}
+        />
+        {resume.hobbies && (
+          <Hobbies resumeId={resume._id} hobbies={resume.hobbies} />
+        )}
+        {resume.courses && (
+          <Courses
+            resumeId={resume._id}
+            coursesTitle={resume.coursesTitle!}
+            courses={resume.courses}
+          />
+        )}
         {customSections &&
           customSections.map((section) => (
             <CustomSection key={section._id} customSection={section} />

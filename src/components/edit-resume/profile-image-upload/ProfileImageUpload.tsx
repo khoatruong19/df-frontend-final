@@ -1,13 +1,14 @@
+import NoProfileImg from '@/assets/no-profile-img.jpg';
 import { ProfileImage } from '@/utils/types';
+import { Dialog } from '@radix-ui/react-dialog';
+import { useMutation } from 'convex/react';
+import { Trash } from 'lucide-react';
 import Image from 'next/image';
 import React, { useRef, useState } from 'react';
-import { Button } from '../../ui/button';
-import { Dialog, DialogTrigger } from '@radix-ui/react-dialog';
-import CropProfileImage from './CropProfileImage';
-import { Trash } from 'lucide-react';
-import { useMutation } from 'convex/react';
 import { api } from '../../../../convex/_generated/api';
 import { Id } from '../../../../convex/_generated/dataModel';
+import { Button } from '../../ui/button';
+import CropProfileImage from './CropProfileImage';
 
 type ProfileImageUploadProps = {
   profileImage?: ProfileImage;
@@ -78,11 +79,7 @@ const ProfileImageUpload = ({
   return (
     <div className="flex items-center mt-2">
       <Image
-        src={
-          !!photoURL
-            ? photoURL
-            : 'https:www.politihogskolen.no/globalassets/etter-og-videreutdanning/ansattprofiler/politihogskolen-dummy-profilbilde.jpg'
-        }
+        src={!!photoURL ? photoURL : NoProfileImg}
         alt=""
         width={64}
         height={64}

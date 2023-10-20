@@ -22,6 +22,11 @@ export const create = mutation({
       personalDetails: {
         title: DEFAULT_RESUME_SECTION_TITLES.PROFILE_DETAILS,
       },
+      profileSummaryTitle: DEFAULT_RESUME_SECTION_TITLES.PROFESSIONAL_SUMMARY,
+      employmentHistoryTitle: DEFAULT_RESUME_SECTION_TITLES.EMPLOYMENT_HISTORY,
+      educationTitle: DEFAULT_RESUME_SECTION_TITLES.EDUCATION,
+      socialLinksTitle: DEFAULT_RESUME_SECTION_TITLES.SOCIAL_LINK,
+      skillsTitle: DEFAULT_RESUME_SECTION_TITLES.SKILLS,
       education: [],
       employmentHistory: [],
       socialLinks: [],
@@ -53,6 +58,24 @@ export const deleteOne = mutation({
 
     if (document?.userId !== userId) {
       throw new Error('Not authenticated');
+    }
+
+    const exisitingCoverImage = document?.coverImage?.id;
+
+    if (
+      exisitingCoverImage &&
+      (await ctx.storage.getUrl(exisitingCoverImage))
+    ) {
+      await ctx.storage.delete(exisitingCoverImage);
+    }
+
+    const exisitingProfileImage = document?.personalDetails.profileImage?.id;
+
+    if (
+      exisitingProfileImage &&
+      (await ctx.storage.getUrl(exisitingProfileImage))
+    ) {
+      await ctx.storage.delete(exisitingProfileImage);
     }
 
     await ctx.db.delete(args.id);
@@ -176,10 +199,10 @@ export const updateProfileDetail = mutation({
   },
 });
 
-export const updateProfileSummary = mutation({
+export const updateProfileSummaryTitle = mutation({
   args: {
     id: v.id('resume'),
-    profileSummary: v.string(),
+    profileSummaryTitle: v.string(),
   },
   handler: async (ctx, args) => {
     const identity = await ctx.auth.getUserIdentity();
@@ -190,11 +213,61 @@ export const updateProfileSummary = mutation({
 
     const userId = identity.subject;
 
-    const { id, profileSummary: value } = args;
+    const { id, profileSummaryTitle } = args;
 
     const document = await ctx.db.patch(id, {
       userId,
-      profileSummary: value === '' ? undefined : value,
+      profileSummaryTitle,
+    });
+
+    return document;
+  },
+});
+
+export const updateProfileSummary = mutation({
+  args: {
+    id: v.id('resume'),
+    profileSummary: v.optional(v.string()),
+  },
+  handler: async (ctx, args) => {
+    const identity = await ctx.auth.getUserIdentity();
+
+    if (!identity) {
+      throw new Error('Not authenticated');
+    }
+
+    const userId = identity.subject;
+
+    const { id, profileSummary } = args;
+
+    const document = await ctx.db.patch(id, {
+      userId,
+      profileSummary,
+    });
+
+    return document;
+  },
+});
+
+export const updateEmploymentHistoryTitle = mutation({
+  args: {
+    id: v.id('resume'),
+    employmentHistoryTitle: v.string(),
+  },
+  handler: async (ctx, args) => {
+    const identity = await ctx.auth.getUserIdentity();
+
+    if (!identity) {
+      throw new Error('Not authenticated');
+    }
+
+    const userId = identity.subject;
+
+    const { id, employmentHistoryTitle } = args;
+
+    const document = await ctx.db.patch(id, {
+      userId,
+      employmentHistoryTitle,
     });
 
     return document;
@@ -306,6 +379,31 @@ export const deleteEmploymentHistory = mutation({
   },
 });
 
+export const updateEducationTitle = mutation({
+  args: {
+    id: v.id('resume'),
+    educationTitle: v.string(),
+  },
+  handler: async (ctx, args) => {
+    const identity = await ctx.auth.getUserIdentity();
+
+    if (!identity) {
+      throw new Error('Not authenticated');
+    }
+
+    const userId = identity.subject;
+
+    const { id, educationTitle } = args;
+
+    const document = await ctx.db.patch(id, {
+      userId,
+      educationTitle,
+    });
+
+    return document;
+  },
+});
+
 export const addEducation = mutation({
   args: {
     id: v.id('resume'),
@@ -409,6 +507,32 @@ export const deleteEducation = mutation({
   },
 });
 
+export const updateSocialLinksTitle = mutation({
+  args: {
+    id: v.id('resume'),
+    socialLinksTitle: v.string(),
+  },
+  handler: async (ctx, args) => {
+    const identity = await ctx.auth.getUserIdentity();
+
+    if (!identity) {
+      throw new Error('Not authenticated');
+    }
+
+    const userId = identity.subject;
+
+    const { id, socialLinksTitle } = args;
+
+    const document = await ctx.db.patch(id, {
+      userId,
+
+      socialLinksTitle,
+    });
+
+    return document;
+  },
+});
+
 export const addSocialLink = mutation({
   args: {
     id: v.id('resume'),
@@ -504,6 +628,32 @@ export const deleteSocialLink = mutation({
     socialLinks = socialLinks.filter((socialLink) => socialLink.id !== id);
 
     await ctx.db.patch(resumeId, { socialLinks });
+
+    return document;
+  },
+});
+
+export const updateSkillsTitle = mutation({
+  args: {
+    id: v.id('resume'),
+    skillsTitle: v.string(),
+  },
+  handler: async (ctx, args) => {
+    const identity = await ctx.auth.getUserIdentity();
+
+    if (!identity) {
+      throw new Error('Not authenticated');
+    }
+
+    const userId = identity.subject;
+
+    const { id, skillsTitle } = args;
+
+    const document = await ctx.db.patch(id, {
+      userId,
+
+      skillsTitle,
+    });
 
     return document;
   },
@@ -715,5 +865,267 @@ export const deleteResumeProfileImage = mutation({
         },
       });
     } else throw Error('Profile image not found!');
+  },
+});
+
+export const addHobbiesSection = mutation({
+  args: {
+    resumeId: v.id('resume'),
+  },
+  handler: async (ctx, args) => {
+    const identity = await ctx.auth.getUserIdentity();
+
+    if (!identity) {
+      throw new Error('Not authenticated');
+    }
+
+    const { resumeId } = args;
+
+    const document = await ctx.db.get(resumeId);
+
+    if (!document) {
+      throw new Error('Resume not found!');
+    }
+
+    if (document.userId !== identity.subject) {
+      throw new Error('Not authorized!');
+    }
+
+    await ctx.db.patch(resumeId, {
+      ...document,
+      hobbies: {
+        title: DEFAULT_RESUME_SECTION_TITLES.HOBBIES,
+      },
+    });
+
+    return document;
+  },
+});
+
+export const updateHobbiesSection = mutation({
+  args: {
+    resumeId: v.id('resume'),
+    title: v.string(),
+    content: v.optional(v.string()),
+  },
+  handler: async (ctx, args) => {
+    const identity = await ctx.auth.getUserIdentity();
+
+    if (!identity) {
+      throw new Error('Not authenticated');
+    }
+
+    const { resumeId, title, content } = args;
+
+    const document = await ctx.db.get(resumeId);
+
+    if (!document) {
+      throw new Error('Resume not found!');
+    }
+
+    if (document.userId !== identity.subject) {
+      throw new Error('Not authorized!');
+    }
+
+    await ctx.db.patch(resumeId, {
+      ...document,
+      hobbies: {
+        title: title === '' ? DEFAULT_RESUME_SECTION_TITLES.HOBBIES : title,
+        content,
+      },
+    });
+
+    return document;
+  },
+});
+
+export const deleteHobbiesSection = mutation({
+  args: {
+    resumeId: v.id('resume'),
+  },
+  handler: async (ctx, args) => {
+    const identity = await ctx.auth.getUserIdentity();
+
+    if (!identity) {
+      throw new Error('Not authenticated');
+    }
+
+    const { resumeId } = args;
+
+    const document = await ctx.db.get(resumeId);
+
+    if (!document) {
+      throw new Error('Resume not found!');
+    }
+
+    if (document.userId !== identity.subject) {
+      throw new Error('Not authorized!');
+    }
+
+    await ctx.db.patch(resumeId, {
+      ...document,
+      hobbies: undefined,
+    });
+
+    return document;
+  },
+});
+
+export const addCoursesSection = mutation({
+  args: {
+    resumeId: v.id('resume'),
+  },
+  handler: async (ctx, args) => {
+    const identity = await ctx.auth.getUserIdentity();
+
+    if (!identity) {
+      throw new Error('Not authenticated');
+    }
+
+    const { resumeId } = args;
+
+    const document = await ctx.db.get(resumeId);
+
+    if (!document) {
+      throw new Error('Resume not found!');
+    }
+
+    if (document.userId !== identity.subject) {
+      throw new Error('Not authorized!');
+    }
+
+    await ctx.db.patch(resumeId, {
+      ...document,
+      coursesTitle: DEFAULT_RESUME_SECTION_TITLES.COURSES,
+      courses: [],
+    });
+
+    return document;
+  },
+});
+
+export const updateCoursesTitle = mutation({
+  args: {
+    id: v.id('resume'),
+    coursesTitle: v.string(),
+  },
+  handler: async (ctx, args) => {
+    const identity = await ctx.auth.getUserIdentity();
+
+    if (!identity) {
+      throw new Error('Not authenticated');
+    }
+
+    const userId = identity.subject;
+
+    const { id, coursesTitle } = args;
+
+    const document = await ctx.db.patch(id, {
+      userId,
+      coursesTitle,
+    });
+
+    return document;
+  },
+});
+
+export const addCourse = mutation({
+  args: {
+    resumeId: v.id('resume'),
+  },
+  handler: async (ctx, args) => {
+    const identity = await ctx.auth.getUserIdentity();
+
+    if (!identity) {
+      throw new Error('Not authenticated');
+    }
+
+    const { resumeId } = args;
+
+    const document = await ctx.db.get(resumeId);
+
+    if (!document) {
+      throw new Error('Resume not found!');
+    }
+
+    const courses = document?.courses ?? [];
+
+    courses.push({ id: uuid() });
+
+    await ctx.db.patch(resumeId, { courses });
+
+    return document;
+  },
+});
+
+export const updateCourse = mutation({
+  args: {
+    resumeId: v.id('resume'),
+    id: v.string(),
+    course: v.optional(v.string()),
+    institution: v.optional(v.string()),
+    startDate: v.optional(v.string()),
+    endDate: v.optional(v.string()),
+  },
+  handler: async (ctx, args) => {
+    const identity = await ctx.auth.getUserIdentity();
+
+    if (!identity) {
+      throw new Error('Not authenticated');
+    }
+
+    const { resumeId, id, ...rest } = args;
+
+    const document = await ctx.db.get(resumeId);
+
+    if (!document) {
+      throw new Error('Resume not found');
+    }
+
+    let courses = document?.courses ?? [];
+
+    courses = courses.map((course) => {
+      if (course.id === id) {
+        return {
+          id: course.id,
+          ...rest,
+        };
+      }
+      return course;
+    });
+
+    await ctx.db.patch(resumeId, { courses });
+
+    return document;
+  },
+});
+
+export const deleteCourse = mutation({
+  args: {
+    resumeId: v.id('resume'),
+    id: v.string(),
+  },
+  handler: async (ctx, args) => {
+    const identity = await ctx.auth.getUserIdentity();
+
+    if (!identity) {
+      throw new Error('Not authenticated');
+    }
+
+    const { resumeId, id } = args;
+
+    const document = await ctx.db.get(resumeId);
+
+    if (!document) {
+      throw new Error('Not found resume');
+    }
+
+    let courses = document?.courses ?? [];
+
+    courses = courses.filter((course) => course.id !== id);
+
+    await ctx.db.patch(resumeId, { courses });
+
+    return document;
   },
 });

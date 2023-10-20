@@ -1,7 +1,7 @@
-import { useAction, useMutation } from 'convex/react';
-import React, { useEffect } from 'react';
-import { api } from '../../convex/_generated/api';
 import { exportAsImage } from '@/lib/html2canvas';
+import { useAction, useMutation } from 'convex/react';
+import { useEffect } from 'react';
+import { api } from '../../convex/_generated/api';
 import { Id } from '../../convex/_generated/dataModel';
 
 const useUploadResumeCoverImg = ({ resumeId }: { resumeId: Id<'resume'> }) => {

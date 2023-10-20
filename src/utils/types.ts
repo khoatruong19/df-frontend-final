@@ -65,3 +65,16 @@ export type ProfileImage = {
   id: string;
   url: string;
 };
+
+export type Hobbies = {
+  title: string;
+  content?: string;
+};
+
+export type Course = {
+  id: string;
+  course?: string;
+  institution?: string;
+  startDate?: string;
+  endDate?: string;
+};

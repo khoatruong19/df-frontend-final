@@ -1,10 +1,10 @@
+import { useDebounce } from '@/hooks/useDebounce';
 import { useMutation } from 'convex/react';
 import { PlusIcon, Trash } from 'lucide-react';
-import { api } from '../../../../convex/_generated/api';
-import { Doc, Id } from '../../../../convex/_generated/dataModel';
-import CustomSectionItemCard from '../cards/CustomSectionItemCard';
 import { useEffect, useState } from 'react';
-import { useDebounce } from '@/hooks/useDebounce';
+import { api } from '../../../../convex/_generated/api';
+import { Doc } from '../../../../convex/_generated/dataModel';
+import CustomSectionItemCard from '../cards/CustomSectionItemCard';
 
 type CustomSectionProps = {
   customSection: Doc<'customSection'>;
