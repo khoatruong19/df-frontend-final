@@ -1,14 +1,14 @@
 'use client';
 
 import React, { useEffect, useMemo, useState } from 'react';
-import FieldControl from '../FieldControl';
+import FieldControl from '../form/FieldControl';
 import { ResumePersonalDetails } from '@/utils/types';
 import { useMutation } from 'convex/react';
 import { api } from '../../../../convex/_generated/api';
 import { useDebounce } from '@/hooks/useDebounce';
 import { Id } from '../../../../convex/_generated/dataModel';
 import ProfileImageUpload from '../profile-image-upload/ProfileImageUpload';
-import SectionTitleInput from '../SectionTitleInput';
+import SectionTitleInput from '../form/SectionTitleInput';
 
 type PersonalDetailsProps = {
   resumeId: Id<'resume'>;

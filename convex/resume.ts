@@ -6,8 +6,10 @@ import { api, internal } from './_generated/api';
 import { DEFAULT_RESUME_SECTION_TITLES } from './constants';
 
 export const create = mutation({
-  args: {},
-  handler: async (ctx, args) => {
+  args: {
+    template: v.string(),
+  },
+  handler: async (ctx, { template }) => {
     const identity = await ctx.auth.getUserIdentity();
 
     if (!identity) {
@@ -19,6 +21,7 @@ export const create = mutation({
     const document = await ctx.db.insert('resume', {
       userId,
       title: 'Untitled',
+      template,
       personalDetails: {
         title: DEFAULT_RESUME_SECTION_TITLES.PROFILE_DETAILS,
       },
@@ -146,6 +149,29 @@ export const updateTitle = mutation({
     const document = await ctx.db.patch(args.id, {
       userId,
       title: args.title.length === 0 ? 'Untitled' : args.title,
+    });
+
+    return document;
+  },
+});
+
+export const updateTemplate = mutation({
+  args: {
+    id: v.id('resume'),
+    template: v.string(),
+  },
+  handler: async (ctx, { id, template }) => {
+    const identity = await ctx.auth.getUserIdentity();
+
+    if (!identity) {
+      throw Error('Not authenticated');
+    }
+
+    const userId = identity.subject;
+
+    const document = await ctx.db.patch(id, {
+      userId,
+      template,
     });
 
     return document;

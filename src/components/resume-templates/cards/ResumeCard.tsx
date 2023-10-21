@@ -26,7 +26,7 @@ const ResumeCard = ({ template }: ResumeCardProps) => {
       signInButtonRef.current?.click();
       return;
     }
-    createResume().then((documentId) =>
+    createResume({ template: template.name }).then((documentId) =>
       router.push(`${APP_ROUTES.EDIT_TEMPLATE.path + documentId}`)
     );
   };

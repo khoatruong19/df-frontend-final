@@ -6,45 +6,48 @@ import { APP_ROUTES } from '@/utils/constants';
 import { Button } from '../ui/button';
 import { SignInButton } from '@clerk/clerk-react';
 import { useUser } from '@clerk/nextjs';
-import { useRouter } from 'next/navigation';
+import Image from 'next/image';
+import LogoImg from '@/assets/logo.png';
+import { Popover, PopoverTrigger } from '../ui/popover';
+import UserPopoverContent from './UserPopoverContent';
 
 const Header = () => {
   const { user } = useUser();
-  const router = useRouter();
 
   return (
     <header className="font-display p-4 flex items-center justify-between">
       <nav>
         <Link href={APP_ROUTES.HOME.path} className="flex items-center gap-2">
-          <img
-            className="w-8 h-8 object-cover"
+          <Image
             alt="logo"
-            src={
-              'https://www.freeiconspng.com/thumbs/resume-icon-png/resume-icon-png-15.png'
-            }
+            src={LogoImg}
+            width={32}
+            height={32}
+            className="object-cover"
           />
           <h2 className="font-semibold text-xl">resume.ai</h2>
         </Link>
       </nav>
       {!user ? (
-        <SignInButton
-          mode="modal"
-          // redirectUrl={APP_ROUTES.RESUME_TEMPLATES.path}
-        >
+        <SignInButton mode="modal">
           <Button size={'lg'}>Log In</Button>
         </SignInButton>
       ) : (
-        <div
-          className="flex items-center gap-2"
-          onClick={() => router.push('/resumes')}
-        >
-          <img
-            className="w-10 h-10 object-cover rounded-full"
-            src={user.imageUrl}
-            alt=""
-          />
-          <span className="font-semibold">{user.fullName}</span>
-        </div>
+        <Popover>
+          <PopoverTrigger>
+            <div className="flex items-center gap-2">
+              <Image
+                alt=""
+                src={user.imageUrl}
+                width={40}
+                height={40}
+                className="object-cover rounded-full"
+              />
+              <span className="font-semibold">{user.fullName}</span>
+            </div>
+          </PopoverTrigger>
+          <UserPopoverContent />
+        </Popover>
       )}
     </header>
   );

@@ -17,6 +17,17 @@ module.exports = {
     },
     fontFamily: {
       display: ['Rockedex'],
+      diblin: [
+        'TT Commons',
+        'system-ui',
+        '-apple-system',
+        'Segoe UI',
+        'Roboto',
+        'Ubuntu',
+        'Cantarell',
+        'Noto Sans',
+        'sans-serif',
+      ],
     },
 
     extend: {
@@ -76,6 +87,7 @@ module.exports = {
       },
       fontSize: {
         xxs: '0.65rem',
+        xxxs: '0.5rem',
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',

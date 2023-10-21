@@ -7,6 +7,7 @@ const nextConfig = {
       'avatars.githubusercontent.com',
       'www.politihogskolen.no',
       'dapper-condor-940.convex.cloud',
+      'img.clerk.com',
     ],
   },
 };

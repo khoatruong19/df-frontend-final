@@ -11,7 +11,7 @@ import { useEffect, useState } from 'react';
 import { SocialIcon } from 'react-social-icons';
 import { api } from '../../../../convex/_generated/api';
 import { Id } from '../../../../convex/_generated/dataModel';
-import FieldControl from '../FieldControl';
+import FieldControl from '../form/FieldControl';
 
 type SocialLinkCardProps = {
   resumeId: Id<'resume'>;

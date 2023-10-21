@@ -10,8 +10,8 @@ import { useEffect, useMemo, useState } from 'react';
 import { api } from '../../../../convex/_generated/api';
 import { Id } from '../../../../convex/_generated/dataModel';
 import Editor from '../editor/Editor';
-import ProfessionalSummaryPhrasesPopup from '../pre-written-phrases-popups/ProfessionalSummaryPhrasesPopup';
-import SectionTitleInput from '../SectionTitleInput';
+import ProfessionalSummaryPhrasesPopup from '../popups/ProfessionalSummaryPhrasesPopup';
+import SectionTitleInput from '../form/SectionTitleInput';
 
 type ProfessionalSummaryProps = {
   resumeId: Id<'resume'>;

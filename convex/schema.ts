@@ -4,6 +4,7 @@ import { v } from 'convex/values';
 export default defineSchema({
   resume: defineTable({
     title: v.string(),
+    template: v.string(),
     coverImage: v.optional(
       v.object({
         id: v.string(),

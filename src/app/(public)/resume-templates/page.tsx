@@ -2,8 +2,9 @@
 
 import MainLayout from '@/components/layouts/MainLayout';
 import ResumeCard from '@/components/resume-templates/cards/ResumeCard';
+import { RESUME_TEMPLATES } from '@/components/resume-templates/constants';
 import { Button } from '@/components/ui/button';
-import { APP_ROUTES, RESUME_TEMPLATES } from '@/utils/constants';
+import { APP_ROUTES } from '@/utils/constants';
 import { useUser } from '@clerk/clerk-react';
 import Link from 'next/link';
 

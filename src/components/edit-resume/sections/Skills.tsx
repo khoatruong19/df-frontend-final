@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import SkillBadge from '../SkillBadge';
+import SkillBadge from '../badges/SkillBadge';
 import { Skill } from '@/utils/types';
 import SkillCard from '../cards/SkillCard';
 import { Id } from '../../../../convex/_generated/dataModel';
@@ -7,7 +7,7 @@ import { useMutation } from 'convex/react';
 import { api } from '../../../../convex/_generated/api';
 import { PlusIcon } from 'lucide-react';
 import { useDebounce } from '@/hooks/useDebounce';
-import SectionTitleInput from '../SectionTitleInput';
+import SectionTitleInput from '../form/SectionTitleInput';
 
 type SkillsProps = {
   resumeId: Id<'resume'>;
@@ -52,7 +52,7 @@ const Skills = ({ resumeId, skillsTitle, skills }: SkillsProps) => {
       </div>
 
       <div className="flex items-center gap-2 flex-wrap mb-5">
-        {['asjdfkldf', 'jskldfhjkl', 'kdlfk;jds'].map((skill) => (
+        {['Time management', 'Team work', 'NodeJS'].map((skill) => (
           <SkillBadge
             clickHandler={addSkillWithBadge}
             key={skill}

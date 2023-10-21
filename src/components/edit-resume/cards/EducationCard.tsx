@@ -10,8 +10,8 @@ import { ChevronDown, Trash } from 'lucide-react';
 import { useEffect, useMemo, useState } from 'react';
 import { api } from '../../../../convex/_generated/api';
 import { Id } from '../../../../convex/_generated/dataModel';
-import { DatePicker } from '../DatePicker';
-import FieldControl from '../FieldControl';
+import { DatePicker } from '../form/DatePicker';
+import FieldControl from '../form/FieldControl';
 import Editor from '../editor/Editor';
 
 type EducationCardProps = {

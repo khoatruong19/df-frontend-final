@@ -18,7 +18,7 @@ import { ChevronDown, Trash } from 'lucide-react';
 import { useEffect, useMemo, useState } from 'react';
 import { api } from '../../../../convex/_generated/api';
 import { Id } from '../../../../convex/_generated/dataModel';
-import FieldControl from '../FieldControl';
+import FieldControl from '../form/FieldControl';
 
 type SkillCardProps = {
   resumeId: Id<'resume'>;

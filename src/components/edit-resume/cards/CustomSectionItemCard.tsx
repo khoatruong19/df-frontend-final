@@ -10,8 +10,8 @@ import { ChevronDown, Trash } from 'lucide-react';
 import { useEffect, useMemo, useState } from 'react';
 import { Id } from '../../../../convex/_generated/dataModel';
 import { api } from '../../../../convex/_generated/api';
-import FieldControl from '../FieldControl';
-import { DatePicker } from '../DatePicker';
+import FieldControl from '../form/FieldControl';
+import { DatePicker } from '../form/DatePicker';
 import Editor from '../editor/Editor';
 
 type CustomSectionCardProps = {

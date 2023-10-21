@@ -4,7 +4,7 @@ import { useMutation } from 'convex/react';
 import { useEffect, useMemo, useState } from 'react';
 import { api } from '../../../../convex/_generated/api';
 import { Id } from '../../../../convex/_generated/dataModel';
-import SectionTitleInput from '../SectionTitleInput';
+import SectionTitleInput from '../form/SectionTitleInput';
 import { Trash } from 'lucide-react';
 
 type HobbiesProps = {

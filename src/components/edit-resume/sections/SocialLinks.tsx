@@ -6,7 +6,7 @@ import { useMutation } from 'convex/react';
 import { api } from '../../../../convex/_generated/api';
 import { PlusIcon } from 'lucide-react';
 import { useDebounce } from '@/hooks/useDebounce';
-import SectionTitleInput from '../SectionTitleInput';
+import SectionTitleInput from '../form/SectionTitleInput';
 
 type SocialLinksProps = {
   resumeId: Id<'resume'>;

@@ -5,7 +5,7 @@ import { api } from '../../../../convex/_generated/api';
 import { Id } from '../../../../convex/_generated/dataModel';
 import EmploymentCard from '../cards/EmploymentCard';
 import { useEffect, useState } from 'react';
-import SectionTitleInput from '../SectionTitleInput';
+import SectionTitleInput from '../form/SectionTitleInput';
 import { useDebounce } from '@/hooks/useDebounce';
 
 type EmploymentHistoryProps = {
