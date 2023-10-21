@@ -20,6 +20,10 @@ export default function ResumePage() {
           Your Resumes
         </h1>
 
+        <Link className="mx-auto" href={APP_ROUTES.RESUME_TEMPLATES.path}>
+          <Button textSize={'lg'}>Create new one</Button>
+        </Link>
+
         <div className="max-w-6xl mx-auto mt-5 flex gap-4">
           {resumes && resumes.length === 0 && (
             <div className="flex flex-col items-center gap-2 mt-10">
