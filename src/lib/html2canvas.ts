@@ -35,3 +35,23 @@ export const exportPDF = async () => {
 
   resume.classList.remove('tracking-for-pdf');
 };
+
+export const exportAsImage = async () => {
+  const resume = document.getElementById('resume');
+
+  if (!resume) return alert("Can't download PDF!");
+
+  resume.classList.add('tracking-for-pdf');
+
+  const canvas = await html2canvas(resume!, {
+    useCORS: true,
+    allowTaint: true,
+    logging: false,
+    backgroundColor: '#ffffff',
+    scale: 1,
+  });
+
+  const image = canvas.toDataURL('image/png');
+
+  return image;
+};
