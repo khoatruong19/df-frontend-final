@@ -15,23 +15,32 @@ export const exportPDF = async () => {
     backgroundColor: '#ffffff',
     scale: 1,
   });
+  const contentWidth = canvas.width;
+  const contentHeight = canvas.height;
 
-  const image = canvas.toDataURL('image/png');
-  const imgWidth = 190;
-  const pageHeight = 290;
-  const imgHeight = (canvas.height * imgWidth) / canvas.width;
-  let heightLeft = imgHeight;
-  const doc = new jsPDF('p', 'mm');
+  const pageHeight = (contentWidth / 592.28) * 841.89;
+  let leftHeight = contentHeight;
   let position = 0;
-  doc.addImage(image, 'PNG', 10, 0, imgWidth, imgHeight + 25);
-  heightLeft -= pageHeight;
-  while (heightLeft >= 0) {
-    position = heightLeft - imgHeight;
-    doc.addPage();
-    doc.addImage(image, 'PNG', 10, position, imgWidth, imgHeight + 25);
-    heightLeft -= pageHeight;
+  const imgWidth = 595.28;
+  const imgHeight = (592.28 / contentWidth) * contentHeight;
+
+  const pageData = canvas.toDataURL('image/jpeg', 1.0);
+
+  const pdf = new jsPDF('p', 'pt', 'a4');
+
+  if (leftHeight < pageHeight) {
+    pdf.addImage(pageData, 'JPEG', 0, 0, imgWidth, imgHeight);
+  } else {
+    while (leftHeight > 0) {
+      pdf.addImage(pageData, 'JPEG', 0, position, imgWidth, imgHeight);
+      leftHeight -= pageHeight;
+      position -= 841.89;
+      if (leftHeight > 0) {
+        pdf.addPage();
+      }
+    }
   }
-  doc.save('download.pdf');
+  pdf.save('stone.pdf');
 
   resume.classList.remove('tracking-for-pdf');
 };
