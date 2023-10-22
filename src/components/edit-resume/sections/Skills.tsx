@@ -46,7 +46,7 @@ const Skills = ({ resumeId, skillsTitle, skills }: SkillsProps) => {
     <section>
       <div className="mb-5">
         <SectionTitleInput value={title} setValue={setTitle} />
-        <p className="text-sm text-gray-400">
+        <p className="text-sm text-grayText font-semibold">
           Show the employer what skills you have!
         </p>
       </div>
@@ -68,7 +68,7 @@ const Skills = ({ resumeId, skillsTitle, skills }: SkillsProps) => {
 
         <button
           onClick={addMoreSkill}
-          className="py-2 px-5 hover:bg-slate-200 flex items-center gap-2 text-base cursor-pointer duration-100"
+          className="py-2 px-5 hover:bg-white flex items-center gap-2 text-base cursor-pointer duration-100"
         >
           <PlusIcon size={15} />
           <span>

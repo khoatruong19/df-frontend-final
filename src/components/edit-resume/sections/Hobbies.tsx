@@ -36,7 +36,7 @@ const Hobbies = ({ hobbies, resumeId }: HobbiesProps) => {
     <section className="group relative">
       <div className="mb-3">
         <SectionTitleInput value={title} setValue={setTitle} />
-        <p className="text-sm text-gray-400">What do you like?</p>
+        <p className="text-sm text-grayText font-semibold">What do you like?</p>
       </div>
 
       <textarea

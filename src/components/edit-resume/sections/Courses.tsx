@@ -38,7 +38,9 @@ const Courses = ({ coursesTitle, courses, resumeId }: CoursesProps) => {
     <section>
       <div className="mb-3">
         <SectionTitleInput value={title} setValue={setTitle} />
-        <p className="text-sm text-gray-400">What courses have you taken?</p>
+        <p className="text-sm text-grayText font-semibold">
+          What courses have you taken?
+        </p>
       </div>
 
       <div className="flex flex-col gap-3">
@@ -48,7 +50,7 @@ const Courses = ({ coursesTitle, courses, resumeId }: CoursesProps) => {
 
         <button
           onClick={addMoreCourse}
-          className="py-2 px-5 hover:bg-slate-200 flex items-center gap-2 text-base cursor-pointer duration-100"
+          className="py-2 px-5 hover:bg-white flex items-center gap-2 text-base cursor-pointer duration-100"
         >
           <PlusIcon size={15} />
           <span>

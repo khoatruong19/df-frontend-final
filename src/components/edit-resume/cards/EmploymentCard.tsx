@@ -106,7 +106,7 @@ const EmploymentCard = ({ resumeId, employment }: EmploymentCardProps) => {
     <Collapsible
       open={openEditor}
       onOpenChange={(value) => setOpenEditor(value)}
-      className="group relative border-2 cursor-pointer px-5 py-2"
+      className="group relative border-2 border-white rounded-md cursor-pointer px-5 py-2"
     >
       <CollapsibleTrigger asChild>
         <div className=" relative text-base min-h-[56px] flex items-center justify-between hover:opacity-60">
@@ -144,7 +144,7 @@ const EmploymentCard = ({ resumeId, employment }: EmploymentCardProps) => {
                     value={startDate}
                     onChange={(e) => setStartDate(e.target.value)}
                     placeholder={'MM/YYYY'}
-                    className="px-3 py-2.5 outline-none bg-slate-200 text-lg font-medium w-full text-center"
+                    className="px-3 py-2.5 outline-none bg-white text-lg font-medium w-full text-center"
                   />
                 }
               />
@@ -155,7 +155,7 @@ const EmploymentCard = ({ resumeId, employment }: EmploymentCardProps) => {
                     value={endDate}
                     onChange={(e) => setEndDate(e.target.value)}
                     placeholder={'MM/YYYY'}
-                    className="px-3 py-2.5 outline-none bg-slate-200 text-lg font-medium w-full text-center"
+                    className="px-3 py-2.5 outline-none bg-white text-lg font-medium w-full text-center"
                   />
                 }
               />
@@ -176,14 +176,14 @@ const EmploymentCard = ({ resumeId, employment }: EmploymentCardProps) => {
       </CollapsibleContent>
       <button
         onClick={deleteEmployementHistoryOnClick}
-        className="hidden group-hover:flex absolute top-5 right-[-40px] px-2 py-1 justify-end hover:opacity-80 text-red-500"
+        className="hidden group-hover:flex absolute top-5 right-[-40px] px-2 py-1 justify-end hover:opacity-80 text-danger"
       >
         <Trash />
       </button>
       {openEditor && (
         <EmploymentHistoryPhrasesPopup
           jobTitle={debouncedValues.jobTitle}
-          wrapperClass="absolute top-60 right-0 z-50 mt-2 mr-4 "
+          wrapperClass="absolute top-60 right-0 z-50 mt-1.5 mr-4 "
           triggerElement={
             <button className="flex items-center gap-2 hover:text-blue-400">
               <span className="text-base">Pre-written phase</span>

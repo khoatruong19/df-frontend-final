@@ -12,7 +12,6 @@ import { APP_ROUTES } from '@/utils/constants';
 import { Id } from '../../../../convex/_generated/dataModel';
 
 const PreviewResumeTooltip = ({ resumeId }: { resumeId: Id<'resume'> }) => {
-  console.log(APP_ROUTES.RESUME_PREVIEW);
   return (
     <TooltipProvider>
       <Tooltip>

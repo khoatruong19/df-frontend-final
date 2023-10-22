@@ -96,7 +96,7 @@ const ProfileImageUpload = ({
       {profileImage && (
         <Trash
           onClick={deleteImage}
-          className="text-red-400 cursor-pointer hover:opacity-50 ml-3"
+          className="text-danger cursor-pointer hover:opacity-50 ml-3"
         />
       )}
       <input

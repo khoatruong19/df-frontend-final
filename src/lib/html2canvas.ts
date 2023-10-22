@@ -1,30 +1,37 @@
 import html2canvas from 'html2canvas';
 import { jsPDF } from 'jspdf';
 
-export const exportAsImage = async () => {
-  const ele = document.getElementById('viewing-resume');
+export const exportPDF = async () => {
+  const resume = document.getElementById('resume');
 
-  const canvas = await html2canvas(ele!, {
+  if (!resume) return alert("Can't download PDF!");
+
+  resume.classList.add('tracking-for-pdf');
+
+  const canvas = await html2canvas(resume!, {
     useCORS: true,
-    logging: true,
-    allowTaint: false,
+    allowTaint: true,
+    logging: false,
     backgroundColor: '#ffffff',
     scale: 1,
   });
+
   const image = canvas.toDataURL('image/png');
+  const imgWidth = 190;
+  const pageHeight = 290;
+  const imgHeight = (canvas.height * imgWidth) / canvas.width;
+  let heightLeft = imgHeight;
+  const doc = new jsPDF('p', 'mm');
+  let position = 0;
+  doc.addImage(image, 'PNG', 10, 0, imgWidth, imgHeight + 25);
+  heightLeft -= pageHeight;
+  while (heightLeft >= 0) {
+    position = heightLeft - imgHeight;
+    doc.addPage();
+    doc.addImage(image, 'PNG', 10, position, imgWidth, imgHeight + 25);
+    heightLeft -= pageHeight;
+  }
+  doc.save('download.pdf');
 
-  //   const link = document.createElement('a');
-
-  //   if (typeof link.download === 'string') {
-  //     link.href = image;
-  //     link.download = 'image.jpg';
-
-  //     document.body.appendChild(link);
-  //     link.click();
-  //     document.body.removeChild(link);
-  //   } else {
-  //     window.open(image);
-  //   }
-
-  return image;
+  resume.classList.remove('tracking-for-pdf');
 };

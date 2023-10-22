@@ -5,6 +5,7 @@ import PreviewResumeTooltip from './tooltips/PreviewResumeTooltip';
 import { Id } from '../../../convex/_generated/dataModel';
 import Link from 'next/link';
 import { Button } from '../ui/button';
+import { exportPDF } from '@/lib/html2canvas';
 
 type ResumeActionsProps = {
   resumeId: Id<'resume'>;
@@ -20,13 +21,13 @@ const ResumeActions = ({ resumeId, resumeTemplate }: ResumeActionsProps) => {
         triggerElement={
           <button className="flex items-center gap-2 hover:bg-black/10 px-2 py-0.5 rounded-full">
             <LayoutTemplate />
-            <span>Select Template</span>
+            <span className="font-medium">Select Template</span>
           </button>
         }
       />
       <div className="flex items-center gap-3">
         <PreviewResumeTooltip resumeId={resumeId} />
-        <Button>Download PDF</Button>
+        <Button onClick={exportPDF}>Download PDF</Button>
       </div>
     </div>
   );

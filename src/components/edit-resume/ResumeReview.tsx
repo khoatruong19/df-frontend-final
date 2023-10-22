@@ -30,7 +30,6 @@ const ResumeReview = ({ resume, downScale = true }: ResumeReviewProps) => {
 
   return (
     <section
-      id="viewing-resume"
       className={cn(
         'relative w-[50%] flex flex-col items-center justify-center scale-85',
         {

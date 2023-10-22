@@ -17,21 +17,14 @@ module.exports = {
     },
     fontFamily: {
       display: ['Playfair Display', 'sans-serif'],
-      diblin: [
-        'TT Commons',
-        'system-ui',
-        '-apple-system',
-        'Segoe UI',
-        'Roboto',
-        'Ubuntu',
-        'Cantarell',
-        'Noto Sans',
-        'sans-serif',
-      ],
+      roboto: ['Roboto', 'sans-serif'],
+      dublin: ['Poppins', 'sans-serif'],
     },
 
     extend: {
       colors: {
+        grayText: '#5B5B5B',
+        danger: '#CD1818',
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',

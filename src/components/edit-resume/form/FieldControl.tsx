@@ -12,12 +12,12 @@ const FieldControl = (props: FieldControlProps) => {
 
   return (
     <div className="flex flex-col gap-2 w-full">
-      <label className="text-sm text-gray-400">{label}</label>
+      <label className="text-sm text-black">{label}</label>
       <input
         value={value}
         onChange={(e) => setValue(e.target.value)}
         placeholder={placeholder}
-        className="px-3 py-2.5 outline-none bg-slate-200 text-lg font-medium"
+        className="px-3 py-2.5 outline-none bg-white text-lg font-medium rounded-md"
       />
     </div>
   );

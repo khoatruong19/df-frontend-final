@@ -67,7 +67,7 @@ const EducationCard = ({ resumeId, education }: EducationCardProps) => {
   }, [debouncedValues]);
 
   return (
-    <Collapsible className="group relative border-2 cursor-pointer px-5 py-2">
+    <Collapsible className="group relative border-2 border-white rounded-md cursor-pointer px-5 py-2">
       <CollapsibleTrigger asChild>
         <div className=" relative text-base min-h-[56px] flex items-center justify-between hover:opacity-60">
           {!hasBasicInfo && <p>&#40;Not specified&#41;</p>}
@@ -100,7 +100,7 @@ const EducationCard = ({ resumeId, education }: EducationCardProps) => {
                     value={startDate}
                     onChange={(e) => setStartDate(e.target.value)}
                     placeholder={'MM/YYYY'}
-                    className="px-3 py-2.5 outline-none bg-slate-200 text-lg font-medium w-full text-center"
+                    className="px-3 py-2.5 outline-none bg-white text-lg font-medium w-full text-center"
                   />
                 }
               />
@@ -111,7 +111,7 @@ const EducationCard = ({ resumeId, education }: EducationCardProps) => {
                     value={endDate}
                     onChange={(e) => setEndDate(e.target.value)}
                     placeholder={'MM/YYYY'}
-                    className="px-3 py-2.5 outline-none bg-slate-200 text-lg font-medium w-full text-center"
+                    className="px-3 py-2.5 outline-none bg-white text-lg font-medium w-full text-center"
                   />
                 }
               />
@@ -128,7 +128,7 @@ const EducationCard = ({ resumeId, education }: EducationCardProps) => {
       </CollapsibleContent>
       <button
         onClick={deleteEducationOnClick}
-        className="hidden group-hover:flex absolute top-5 right-[-40px] px-2 py-1 justify-end hover:opacity-80 text-red-500"
+        className="hidden group-hover:flex absolute top-5 right-[-40px] px-2 py-1 justify-end hover:opacity-80 text-danger"
       >
         <Trash />
       </button>

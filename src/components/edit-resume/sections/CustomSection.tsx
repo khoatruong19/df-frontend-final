@@ -51,7 +51,7 @@ const CustomSection = ({ customSection }: CustomSectionProps) => {
 
         <button
           onClick={addMoreItem}
-          className="py-2 px-5 hover:bg-slate-200 flex items-center gap-2 text-base cursor-pointer duration-100"
+          className="py-2 px-5 hover:bg-white flex items-center gap-2 text-base cursor-pointer duration-100"
         >
           <PlusIcon size={15} />
           <span>

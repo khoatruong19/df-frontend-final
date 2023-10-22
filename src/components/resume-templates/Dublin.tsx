@@ -1,9 +1,6 @@
 import { generateHTMLFromJSON } from '@/utils/generateHTMLFromJSON';
 import { getSkillProgress } from '@/utils/helpers';
-import { BadgeCheck, Briefcase, School, Star, User } from 'lucide-react';
 import Image from 'next/image';
-import { useRef } from 'react';
-import { SocialIcon } from 'react-social-icons';
 import { Doc } from '../../../convex/_generated/dataModel';
 
 type DublinProps = {
@@ -23,17 +20,12 @@ const Dublin = ({ resume, customSections }: DublinProps) => {
   } = resume.personalDetails;
   const personalDetailsInArray = Object.entries(details);
 
-  const sectionRef = useRef<HTMLElement | null>(null);
-
   const profileSummaryHTML = generateHTMLFromJSON(resume.profileSummary ?? '');
 
   return (
-    <section
-      ref={sectionRef}
-      className="min-h-screen bg-white aspect-[12/16] rounded-md overflow-auto scrollbar-none"
-    >
-      <div className="font-diblin h-full flex items-start">
-        <div className="py-12 w-1/3 h-full flex flex-col gap-5 bg-emerald-900">
+    <section className="min-h-screen h-full bg-white aspect-[12/16] rounded-md overflow-auto scrollbar-none">
+      <div id="resume" className="font-dublin min-h-screen flex items-stretch">
+        <div className="py-12 w-1/3 min-h-screen grow flex flex-col gap-5 bg-emerald-900">
           {/* Profile Image */}
           <div className="flex flex-col items-center justify-start text-white ">
             {profileImage && (
@@ -46,12 +38,12 @@ const Dublin = ({ resume, customSections }: DublinProps) => {
               />
             )}
 
-            <h2 className="text-lg font-bold mb-2">
+            <h2 className="text-lg font-bold">
               {firstName} {lastName}
             </h2>
             {jobTitle && (
               <>
-                <div className="h-0.5 w-3 bg-slate-500 mb-2"></div>
+                <div className="h-0.5 w-3 bg-slate-500 my-2"></div>
                 <p className="text-xxs font-medium tracking-widest text-slate-300">
                   {jobTitle}
                 </p>

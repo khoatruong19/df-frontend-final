@@ -32,7 +32,7 @@ const Editor = (props: EditorProps) => {
   }, [value]);
 
   return (
-    <div className="border-2 bg-slate-200 px-2 z-[999999] min-h-[300px] ">
+    <div className="border-2 bg-white px-2 z-[999999] min-h-[300px] ">
       {isRefresh && (
         <div className="mt-8 w-fit mx-auto">
           <LoadingSpinner />

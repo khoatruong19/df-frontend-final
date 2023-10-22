@@ -42,7 +42,7 @@ const Education = ({
     <section>
       <div className="mb-3">
         <SectionTitleInput value={title} setValue={setTitle} />
-        <p className="text-sm text-gray-400">
+        <p className="text-sm text-grayText font-semibold">
           A varied education on your resume sums up the value that your
           learnings and background will bring to job
         </p>
@@ -59,7 +59,7 @@ const Education = ({
 
         <button
           onClick={addMoreEducation}
-          className="py-2 px-5 hover:bg-slate-200 flex items-center gap-2 text-base cursor-pointer duration-100"
+          className="py-2 px-5 hover:bg-white flex items-center gap-2 text-base cursor-pointer duration-100"
         >
           <PlusIcon size={15} />
           <span>

@@ -58,14 +58,16 @@ const SkillCard = ({ resumeId, skill }: SkillCardProps) => {
   const hasInformation = skill.level || skill.level;
 
   return (
-    <Collapsible className="group relative border-2 cursor-pointer px-5 py-2">
+    <Collapsible className="group relative border-2 border-white rounded-md cursor-pointer px-5 py-2">
       <CollapsibleTrigger asChild>
         <div className=" relative text-base min-h-[56px] flex items-center justify-between hover:opacity-60">
           {!hasInformation && <p>&#40;Not specified&#41;</p>}
           {hasInformation && (
             <div>
               <h3>{name}</h3>
-              <p className="text-sm text-gray-400 capitalize">{level.name}</p>
+              <p className="text-sm text-grayText font-semibold capitalize">
+                {level.name}
+              </p>
             </div>
           )}
           <ChevronDown />
@@ -75,7 +77,7 @@ const SkillCard = ({ resumeId, skill }: SkillCardProps) => {
         <div className="flex items-end gap-x-10 mt-3">
           <FieldControl value={name} setValue={setName} label="Skill" />
           <Select onValueChange={onChangeSkillLevel}>
-            <SelectTrigger className="h-12 px-3 capitalize text-center ">
+            <SelectTrigger className="h-12 px-3 capitalize text-center border-4 border-white">
               {level.name}
             </SelectTrigger>
             <SelectContent>
@@ -94,7 +96,7 @@ const SkillCard = ({ resumeId, skill }: SkillCardProps) => {
       </CollapsibleContent>
       <button
         onClick={deleteSkillOnClick}
-        className="hidden group-hover:flex absolute top-5 right-[-40px] px-2 py-1 justify-end hover:opacity-80 text-red-500"
+        className="hidden group-hover:flex absolute top-5 right-[-40px] px-2 py-1 justify-end hover:opacity-80 text-danger"
       >
         <Trash />
       </button>
