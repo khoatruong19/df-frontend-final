@@ -28,9 +28,6 @@ export default function ResumePage() {
           {resumes && resumes.length === 0 && (
             <div className="flex flex-col items-center gap-2 mt-10">
               <h2 className="text-xl">No resumes found!</h2>
-              <Link href={APP_ROUTES.RESUME_TEMPLATES.path}>
-                <Button>Create one</Button>
-              </Link>
             </div>
           )}
           {resumes &&

@@ -18,7 +18,7 @@ const ResumeTemplateCard = ({
     <div
       onClick={selectTemplate}
       className={cn(
-        'relative w-full py-5 bg-black/5 cursor-pointer hover:bg-black/10 group',
+        'relative w-full py-6 bg-black/5 cursor-pointer hover:bg-black/10 group flex flex-col items-center justify-center gap-2',
         {
           'border-2 border-black': isSelected,
         }
@@ -27,6 +27,7 @@ const ResumeTemplateCard = ({
       <div className="relative w-full h-[200px]">
         <Image src={template.coverImage} alt="" fill objectFit="contain" />
       </div>
+      <h3 className="absolute bottom-0 font-semibold">{template.name}</h3>
     </div>
   );
 };
