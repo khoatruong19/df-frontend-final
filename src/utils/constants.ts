@@ -1,5 +1,4 @@
 import { GraduationCap, Settings2, Trophy } from 'lucide-react';
-import { ResumeTemplate } from './types';
 
 export const APP_ROUTES = {
   HOME: {
@@ -16,6 +15,10 @@ export const APP_ROUTES = {
   },
   MY_RESUMES: {
     path: '/resumes',
+    isPublic: false,
+  },
+  RESUME_PREVIEW: {
+    path: '/resume-preview/',
     isPublic: false,
   },
 };

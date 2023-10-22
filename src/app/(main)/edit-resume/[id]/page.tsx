@@ -6,6 +6,7 @@ import { useQuery } from 'convex/react';
 import { Id } from '../../../../../convex/_generated/dataModel';
 import { api } from '../../../../../convex/_generated/api';
 import UserPopoverTrigger from '@/components/edit-resume/popover/UserPopoverTrigger';
+import ResumeActions from '@/components/edit-resume/ResumeActions';
 
 type EditResumePageProps = {
   params: { id: Id<'resume'> };
@@ -19,6 +20,7 @@ const EditResumePage = ({ params: { id } }: EditResumePageProps) => {
     <main className="relative max-h-screen flex overflow-hidden">
       <ResumeForm resume={resume} />
       <ResumeReview resume={resume} />
+      <ResumeActions resumeId={resume._id} resumeTemplate={resume.template} />
       <UserPopoverTrigger className="absolute top-4 right-5" />
     </main>
   );

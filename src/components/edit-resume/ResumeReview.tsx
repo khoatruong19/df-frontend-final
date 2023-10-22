@@ -1,19 +1,18 @@
 import { useQuery } from 'convex/react';
+import { useCallback } from 'react';
 import { api } from '../../../convex/_generated/api';
 import { Doc } from '../../../convex/_generated/dataModel';
-import Stockholm from '../resume-templates/Stockholm';
 import Dublin from '../resume-templates/Dublin';
 import Madrid from '../resume-templates/Madrid';
-import { LayoutTemplate } from 'lucide-react';
-import { Button } from '../ui/button';
-import SelectTemplatesDialog from './dialogs/SelectTemplatesDialog';
-import { useCallback } from 'react';
+import Stockholm from '../resume-templates/Stockholm';
+import { cn } from '@/lib/utils';
 
 type ResumeReviewProps = {
   resume: Doc<'resume'>;
+  downScale?: boolean;
 };
 
-const ResumeReview = ({ resume }: ResumeReviewProps) => {
+const ResumeReview = ({ resume, downScale = true }: ResumeReviewProps) => {
   const customSections = useQuery(api.customSection.getAll, {
     resumeId: resume._id,
   });
@@ -32,21 +31,13 @@ const ResumeReview = ({ resume }: ResumeReviewProps) => {
   return (
     <section
       id="viewing-resume"
-      className="relative w-[50%] flex flex-col items-center justify-center scale-85 "
+      className={cn(
+        'relative w-[50%] flex flex-col items-center justify-center scale-85',
+        {
+          'scale-100': !downScale,
+        }
+      )}
     >
-      <div className="absolute w-full top-[-60px] px-12 flex items-center justify-between">
-        <SelectTemplatesDialog
-          resumeId={resume._id}
-          resumeTemplate={resume.template}
-          triggerElement={
-            <button className="flex items-center gap-2 hover:bg-black/10 px-2 py-0.5 rounded-full">
-              <LayoutTemplate />
-              <span>Select Template</span>
-            </button>
-          }
-        />
-        <Button>Download PDF</Button>
-      </div>
       {_renderTemplate()}
     </section>
   );

@@ -16,7 +16,7 @@ module.exports = {
       },
     },
     fontFamily: {
-      display: ['Rockedex'],
+      display: ['Playfair Display', 'sans-serif'],
       diblin: [
         'TT Commons',
         'system-ui',
