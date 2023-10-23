@@ -116,7 +116,7 @@ blockquote {
 }
 
 .prose {
-  max-width: 85ch !important;
+  max-width: 100ch !important;
 }
 
 .custom-scrollbar {
@@ -137,4 +137,8 @@ blockquote {
 
 .leading-for-pdf {
   @apply leading-[0.1em];
+}
+
+#slash-command button:last-child {
+  display: none !important;
 }

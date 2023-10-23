@@ -74,12 +74,12 @@ const Madrid = ({ resume, customSections }: MadridProps) => {
           {/* Profile Summary */}
           {profileSummaryHTML && profileSummaryHTML.length > 0 && (
             <div className="flex">
-              <div className="max-w-[90%]">
+              <div className="max-w-full">
                 <h3 className="process text-xxs leading font-semibold mb-2 h-5 tracking-widest uppercase px-2 bg-black text-white w-fit">
                   {resume.profileSummaryTitle}
                 </h3>
                 <div
-                  className="text-xs break-words prose"
+                  className="text-xs break-words prose max-w-full"
                   dangerouslySetInnerHTML={{
                     __html: profileSummaryHTML,
                   }}
@@ -91,7 +91,7 @@ const Madrid = ({ resume, customSections }: MadridProps) => {
           {/* Employment History */}
           {resume?.employmentHistory.length > 0 && (
             <div className="flex">
-              <div className="max-w-[90%]">
+              <div className="max-w-full">
                 <h3 className="text-xxs leading font-semibold mb-2 h-5 tracking-widest uppercase px-2 bg-black text-white w-fit">
                   {resume.employmentHistoryTitle}
                 </h3>
@@ -134,7 +134,7 @@ const Madrid = ({ resume, customSections }: MadridProps) => {
           {/* Education */}
           {resume?.education.length > 0 && (
             <div className="flex">
-              <div className="max-w-[90%]">
+              <div className="max-w-full">
                 <h3 className="text-xxs leading font-semibold mb-2 h-5 tracking-widest uppercase px-2 bg-black text-white w-fit">
                   {resume.educationTitle}
                 </h3>
@@ -177,7 +177,7 @@ const Madrid = ({ resume, customSections }: MadridProps) => {
           {/* Courses */}
           {resume?.courses && resume.courses.length > 0 && (
             <div className="flex">
-              <div className="max-w-[90%]">
+              <div className="max-w-full">
                 <h3 className="text-xxs leading font-semibold mb-2 h-5 tracking-widest uppercase px-2 bg-black text-white w-fit">
                   {resume.coursesTitle}
                 </h3>
@@ -204,7 +204,7 @@ const Madrid = ({ resume, customSections }: MadridProps) => {
           {customSections.length > 0 &&
             customSections.map((section) => (
               <div key={section._id} className="flex">
-                <div className="max-w-[90%]">
+                <div className="max-w-full">
                   <h3 className="text-xxs leading font-semibold mb-2 h-5 tracking-widest uppercase px-2 bg-black text-white w-fit">
                     {section.title}
                   </h3>
