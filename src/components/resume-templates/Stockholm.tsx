@@ -32,37 +32,30 @@ const Stockholm = ({ resume, customSections }: StockholmProps) => {
       >
         <div className="flex items-center gap-5 justify-start ">
           {profileImage && (
-            <Image
+            //Can't use Next Image for rendering image properly when converting to PDF so i use 'img' tag instead!
+            <img
+              className="w-14 h-14 rounded-md object-cover"
               src={profileImage.url}
               alt=""
-              width={56}
-              height={56}
-              className="object-cover rounded-md"
             />
           )}
-
           <div>
-            <h2 className="text-2xl font-semibold">
+            <h2 className="text-2xl font-semibold mb-0.5">
               {firstName} {lastName}
             </h2>
-            <p className="text-xxs">{jobTitle}</p>
+            <p className="text-xxs m-0">{jobTitle}</p>
           </div>
         </div>
         <div className="mt-5 flex items-start">
-          <div className="w-2/3 flex flex-col gap-5">
+          <div className="w-2/3 flex flex-col gap-4">
             {/* Profile Summary */}
             {profileSummaryHTML && profileSummaryHTML.length > 0 && (
-              <div className="flex">
-                <div className="w-6">
-                  <User
-                    fill="#000"
-                    className="mt-0.5"
-                    size={15}
-                    strokeWidth={3}
-                  />
+              <div className="flex items-start">
+                <div className="icon w-6 mt-0.5">
+                  <User fill="#000" size={15} strokeWidth={3} />
                 </div>
                 <div className="max-w-[90%]">
-                  <h2 className=" font-semibold">
+                  <h2 className=" font-semibold mb-0.5">
                     {resume.profileSummaryTitle}
                   </h2>
                   <div
@@ -78,11 +71,11 @@ const Stockholm = ({ resume, customSections }: StockholmProps) => {
             {/* Employment History */}
             {resume?.employmentHistory.length > 0 && (
               <div className="flex">
-                <div className="w-6">
+                <div className="w-6 icon">
                   <Briefcase className="mt-1" size={13} strokeWidth={3} />
                 </div>
                 <div className="max-w-[90%]">
-                  <h2 className=" font-semibold">
+                  <h2 className=" font-semibold mb-0.5">
                     {resume.employmentHistoryTitle}
                   </h2>
                   {resume?.employmentHistory.map(
@@ -95,7 +88,7 @@ const Stockholm = ({ resume, customSections }: StockholmProps) => {
                       endDate,
                       startDate,
                     }) => (
-                      <div key={id} className="mb-1">
+                      <div key={id} className="mb-2">
                         {(jobTitle || company || city) && (
                           <h3 className="text-xs font-semibold">
                             {jobTitle} - {company} {city && `, ${city}`}
@@ -124,11 +117,13 @@ const Stockholm = ({ resume, customSections }: StockholmProps) => {
             {/* Education */}
             {resume?.education.length > 0 && (
               <div className="flex">
-                <div className="w-6">
+                <div className="w-6 icon">
                   <School className="mt-0.5" size={15} strokeWidth={3} />
                 </div>
                 <div className="max-w-[90%]">
-                  <h2 className=" font-semibold">{resume.educationTitle}</h2>
+                  <h2 className=" font-semibold mb-0.5">
+                    {resume.educationTitle}
+                  </h2>
                   {resume?.education.map(
                     ({
                       id,
@@ -139,7 +134,7 @@ const Stockholm = ({ resume, customSections }: StockholmProps) => {
                       endDate,
                       startDate,
                     }) => (
-                      <div key={id} className="mb-1">
+                      <div key={id} className="mb-2">
                         {(school || degree || city) && (
                           <h3 className="text-xs font-semibold">
                             {school} - {degree} {city && `, ${city}`}
@@ -168,14 +163,16 @@ const Stockholm = ({ resume, customSections }: StockholmProps) => {
             {/* Courses */}
             {resume?.courses && resume.courses.length > 0 && (
               <div className="flex">
-                <div className="w-6">
+                <div className="w-6 icon">
                   <BadgeCheck className="mt-0.5" size={15} strokeWidth={3} />
                 </div>
                 <div className="max-w-[90%]">
-                  <h2 className=" font-semibold">{resume.coursesTitle}</h2>
+                  <h2 className=" font-semibold mb-0.5">
+                    {resume.coursesTitle}
+                  </h2>
                   {resume.courses.map(
                     ({ id, course, institution, endDate, startDate }) => (
-                      <div key={id} className="mb-1">
+                      <div key={id} className="mb-2">
                         {(course || institution) && (
                           <h3 className="text-xs font-semibold">
                             {course} - {institution}
@@ -196,7 +193,7 @@ const Stockholm = ({ resume, customSections }: StockholmProps) => {
             {customSections.length > 0 &&
               customSections.map((section) => (
                 <div key={section._id} className="flex">
-                  <div className="w-6">
+                  <div className="w-6 icon">
                     <Star
                       fill="#000"
                       className="mt-1"
@@ -205,7 +202,7 @@ const Stockholm = ({ resume, customSections }: StockholmProps) => {
                     />
                   </div>
                   <div className="max-w-[90%]">
-                    <h2 className=" font-semibold">{section.title}</h2>
+                    <h2 className=" font-semibold mb-0.5">{section.title}</h2>
                     {section?.items.map(
                       ({
                         id,
@@ -215,7 +212,7 @@ const Stockholm = ({ resume, customSections }: StockholmProps) => {
                         endDate,
                         startDate,
                       }) => (
-                        <div key={id} className="mb-1">
+                        <div key={id} className="mb-2">
                           {(content || city) && (
                             <h3 className="text-xs font-semibold">
                               {content} {city && `, ${city}`}
@@ -276,7 +273,7 @@ const Stockholm = ({ resume, customSections }: StockholmProps) => {
                 </h3>
                 {resume?.socialLinks?.map((socialLink) => (
                   <div key={socialLink.id} className="flex items-center mb-2">
-                    <span>
+                    <span className="icon">
                       <SocialIcon
                         style={{ height: 15, width: 15 }}
                         color="red"
@@ -304,7 +301,7 @@ const Stockholm = ({ resume, customSections }: StockholmProps) => {
                     <p className="text-xs break-all">{skill.skill}</p>
                     <span
                       style={{ width: getSkillProgress(skill?.level ?? '') }}
-                      className="block h-0.5 bg-blue-400 mt-0.5"
+                      className=" block h-0.5 bg-blue-400 mt-0.5 process"
                     />
                   </div>
                 ))}

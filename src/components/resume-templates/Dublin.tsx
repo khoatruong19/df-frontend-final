@@ -29,12 +29,11 @@ const Dublin = ({ resume, customSections }: DublinProps) => {
           {/* Profile Image */}
           <div className="flex flex-col items-center justify-start text-white ">
             {profileImage && (
-              <Image
+              //Can't use Next Image for rendering image properly when converting to PDF so i use 'img' tag instead!
+              <img
+                className="w-12 h-12 rounded-full object-cover  mb-1"
                 src={profileImage.url}
                 alt=""
-                width={44}
-                height={44}
-                className="object-cover rounded-full mb-1"
               />
             )}
 
@@ -43,7 +42,7 @@ const Dublin = ({ resume, customSections }: DublinProps) => {
             </h2>
             {jobTitle && (
               <>
-                <div className="h-0.5 w-3 bg-slate-500 my-2"></div>
+                <div className="h-0.5 w-3 bg-slate-500 my-2 process"></div>
                 <p className="text-xxs font-medium tracking-widest text-slate-300">
                   {jobTitle}
                 </p>
@@ -107,7 +106,7 @@ const Dublin = ({ resume, customSections }: DublinProps) => {
                     <p className="text-xxs break-all">{skill.skill}</p>
                     <span
                       style={{ width: getSkillProgress(skill?.level ?? '') }}
-                      className="block h-1 bg-white mt-1.5"
+                      className="block h-1 bg-white mt-0.5 process"
                     />
                   </div>
                 ))}
@@ -163,7 +162,7 @@ const Dublin = ({ resume, customSections }: DublinProps) => {
                     endDate,
                     startDate,
                   }) => (
-                    <div key={id} className="mb-1">
+                    <div key={id} className="mb-2">
                       {(jobTitle || company || city) && (
                         <h3 className="text-xs font-semibold">
                           {jobTitle} - {company} {city && `, ${city}`}
@@ -204,7 +203,7 @@ const Dublin = ({ resume, customSections }: DublinProps) => {
                     endDate,
                     startDate,
                   }) => (
-                    <div key={id} className="mb-1">
+                    <div key={id} className="mb-2">
                       {(school || degree || city) && (
                         <h3 className="text-xs font-semibold">
                           {school} - {degree} {city && `, ${city}`}
@@ -237,7 +236,7 @@ const Dublin = ({ resume, customSections }: DublinProps) => {
                 <h2 className="mb-1 font-semibold">{resume.coursesTitle}</h2>
                 {resume.courses.map(
                   ({ id, course, institution, endDate, startDate }) => (
-                    <div key={id} className="mb-1">
+                    <div key={id} className="mb-2">
                       {(course || institution) && (
                         <h3 className="text-xs font-semibold">
                           {course} - {institution}
@@ -269,7 +268,7 @@ const Dublin = ({ resume, customSections }: DublinProps) => {
                       endDate,
                       startDate,
                     }) => (
-                      <div key={id} className="mb-1">
+                      <div key={id} className="mb-2">
                         {(content || city) && (
                           <h3 className="text-xs font-semibold">
                             {content} {city && `, ${city}`}

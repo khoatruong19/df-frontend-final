@@ -124,5 +124,17 @@ blockquote {
 }
 
 .tracking-for-pdf {
-  letter-spacing: 0.1px;
+  letter-spacing: 1px;
+}
+
+.icon-for-pdf {
+  @apply h-7 flex items-end;
+}
+
+.process-for-pdf {
+  @apply mt-3;
+}
+
+.leading-for-pdf {
+  @apply leading-[0.1em];
 }
