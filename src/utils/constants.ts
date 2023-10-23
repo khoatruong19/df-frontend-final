@@ -68,3 +68,5 @@ export const ADD_SECTIONS = [
     dataField: 'hobbies',
   },
 ];
+
+export const DEFAULT_SKILLS = ['Time management', 'Team work', 'NodeJS'];

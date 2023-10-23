@@ -78,7 +78,7 @@ const PersonalDetails = ({ resumeId, details }: PersonalDetailsProps) => {
 
   useEffect(() => {
     if (title !== details.title) setTitle(details.title);
-  }, [details]);
+  }, [details.title]);
 
   return (
     <section>

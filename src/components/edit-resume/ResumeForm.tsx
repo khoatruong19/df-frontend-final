@@ -74,6 +74,7 @@ const ResumeForm = ({ resume }: ResumeFormProps) => {
           resumeId={resume._id}
           skillsTitle={resume.skillsTitle}
           skills={resume.skills}
+          jobTitle={resume.personalDetails.jobTitle}
         />
         {resume.hobbies && (
           <Hobbies resumeId={resume._id} hobbies={resume.hobbies} />
