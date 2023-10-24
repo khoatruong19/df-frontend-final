@@ -63,7 +63,6 @@ const CustomSectionCard = ({
         cleanedValues[key as keyof CustomSectionItem] = value;
       }
     });
-
     updateSectionItem({ customSectionId, ...cleanedValues });
   }, [debouncedValues]);
 
@@ -96,7 +95,7 @@ const CustomSectionCard = ({
           <FieldControl value={city} setValue={setCity} label="City" />
 
           <div className="flex flex-col gap-2 w-full">
-            <label className="text-sm text-gray-400">Start & End Date</label>
+            <label className="text-sm">Start & End Date</label>
             <div className="flex items-center gap-3 w-full">
               <DatePicker
                 setValue={setStartDate}
@@ -105,7 +104,7 @@ const CustomSectionCard = ({
                     value={startDate}
                     onChange={(e) => setStartDate(e.target.value)}
                     placeholder={'MM/YYYY'}
-                    className="px-3 py-2.5 outline-none bg-slate-200 text-lg font-medium w-full text-center"
+                    className="px-3 py-2.5 outline-none bg-appSecondary text-appMainTextColor text-lg font-medium w-full text-center"
                   />
                 }
               />
@@ -116,7 +115,7 @@ const CustomSectionCard = ({
                     value={endDate}
                     onChange={(e) => setEndDate(e.target.value)}
                     placeholder={'MM/YYYY'}
-                    className="px-3 py-2.5 outline-none bg-slate-200 text-lg font-medium w-full text-center"
+                    className="px-3 py-2.5 outline-none bg-appSecondary text-appMainTextColor text-lg font-medium w-full text-center"
                   />
                 }
               />
@@ -125,7 +124,7 @@ const CustomSectionCard = ({
         </div>
 
         <div className="mt-5">
-          <label className="text-sm text-gray-400">Description</label>
+          <label className="text-sm">Description</label>
           <Editor value={description} setValue={setDescription} />
         </div>
       </CollapsibleContent>

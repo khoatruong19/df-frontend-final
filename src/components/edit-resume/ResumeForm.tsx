@@ -13,7 +13,7 @@ import AddSection from './sections/AddSection';
 import CustomSection from './sections/CustomSection';
 import Hobbies from './sections/Hobbies';
 import Courses from './sections/Courses';
-// import useUploadResumeCoverImg from '@/hooks/useUploadResumeCoverImg';
+import useUploadResumeCoverImg from '@/hooks/useUploadResumeCoverImg';
 
 type ResumeFormProps = {
   resume: Doc<'resume'>;
@@ -24,12 +24,13 @@ const ResumeForm = ({ resume }: ResumeFormProps) => {
 
   const customSections = useQuery(api.customSection.getAll, {
     resumeId: resume._id,
+    userId: resume.userId,
   });
 
   const debouncedValue = useDebounce<string>(title, 500);
   const updateResumeTitle = useMutation(api.resume.updateTitle);
 
-  // useUploadResumeCoverImg({ resumeId: resume._id });
+  useUploadResumeCoverImg({ resumeId: resume._id });
 
   useEffect(() => {
     updateResumeTitle({ id: resume._id, title });

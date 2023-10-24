@@ -90,7 +90,7 @@ const Madrid = ({ resume, customSections }: MadridProps) => {
 
           {/* Employment History */}
           {resume?.employmentHistory.length > 0 && (
-            <div className="flex">
+            <div className="flex process">
               <div className="max-w-full">
                 <h3 className="text-xxs leading font-semibold mb-2 h-5 tracking-widest uppercase px-2 bg-black text-white w-fit">
                   {resume.employmentHistoryTitle}

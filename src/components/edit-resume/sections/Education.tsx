@@ -42,7 +42,7 @@ const Education = ({
     <section>
       <div className="mb-3">
         <SectionTitleInput value={title} setValue={setTitle} />
-        <p className="text-sm text-grayText font-semibold">
+        <p className="text-sm text-appSecondaryTextColor font-semibold">
           A varied education on your resume sums up the value that your
           learnings and background will bring to job
         </p>

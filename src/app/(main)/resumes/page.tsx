@@ -37,13 +37,13 @@ export default function ResumePage() {
                   href={`/edit-resume/${resume._id}`}
                   className="flex flex-col items-center"
                 >
-                  <div className="relative w-[200px] h-[280px] overflow-hidden">
+                  <div className="relative w-[200px] h-[280px] overflow-hidden shadow-md rounded-sm">
                     <Image
                       alt=""
                       src={resume?.coverImage?.url ?? ''}
                       layout="fill"
                       className="
-                   object-cover object-top	"
+                   object-cover object-top"
                     />
                   </div>
                   <h1 className="font-semibold text-lg text-center mt-2">

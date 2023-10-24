@@ -36,14 +36,16 @@ const Hobbies = ({ hobbies, resumeId }: HobbiesProps) => {
     <section className="group relative">
       <div className="mb-3">
         <SectionTitleInput value={title} setValue={setTitle} />
-        <p className="text-sm text-grayText font-semibold">What do you like?</p>
+        <p className="text-sm text-appSecondaryTextColor font-semibold">
+          What do you like?
+        </p>
       </div>
 
       <textarea
         value={content}
         onChange={(e) => setContent(e.target.value)}
         rows={3}
-        className="text-base w-full p-2 bg-slate-200 outline-none"
+        className="text-base w-full p-2 bg-appSecondary/70 text-appMainTextColor rounded-md min-h-[200px] outline-none"
         placeholder="e.g. Skiing, Skydiving, Painting"
       ></textarea>
 

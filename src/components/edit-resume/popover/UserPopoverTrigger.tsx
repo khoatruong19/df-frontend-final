@@ -7,6 +7,7 @@ import {
 import UserPopoverContent from '../../core/UserPopoverContent';
 import { useUser } from '@clerk/clerk-react';
 import Image from 'next/image';
+import ThemeSwitch from '@/components/core/ThemeSwitch';
 
 type UserPopoverTriggerProps = {
   className?: string;
@@ -28,6 +29,7 @@ const UserPopoverTrigger = ({ className = '' }: UserPopoverTriggerProps) => {
         </PopoverTrigger>
         <UserPopoverContent />
       </Popover>
+      <ThemeSwitch className="absolute bottom-3 right-12" />
     </aside>
   );
 };

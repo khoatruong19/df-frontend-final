@@ -15,6 +15,7 @@ type ResumeReviewProps = {
 const ResumeReview = ({ resume, downScale = true }: ResumeReviewProps) => {
   const customSections = useQuery(api.customSection.getAll, {
     resumeId: resume._id,
+    userId: resume.userId,
   });
 
   const _renderTemplate = useCallback(() => {
@@ -26,7 +27,7 @@ const ResumeReview = ({ resume, downScale = true }: ResumeReviewProps) => {
       return <Dublin resume={resume} customSections={customSections ?? []} />;
     if (resume.template === 'Madrid')
       return <Madrid resume={resume} customSections={customSections ?? []} />;
-  }, [resume]);
+  }, [resume, customSections]);
 
   return (
     <section

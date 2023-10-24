@@ -68,7 +68,7 @@ const Skills = ({
     <section>
       <div className="mb-5">
         <SectionTitleInput value={title} setValue={setTitle} />
-        <p className="text-sm text-grayText font-semibold">
+        <p className="text-sm text-appSecondaryTextColor font-semibold">
           Show the employer what skills you have!
         </p>
       </div>

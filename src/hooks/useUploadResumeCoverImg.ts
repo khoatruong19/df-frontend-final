@@ -35,7 +35,7 @@ const useUploadResumeCoverImg = ({ resumeId }: { resumeId: Id<'resume'> }) => {
   useEffect(() => {
     const interval = setInterval(async () => {
       await updateResumeCoverImageHandler();
-    }, 5000);
+    }, 1000 * 60 * 5);
     return () => clearInterval(interval);
   }, []);
 };

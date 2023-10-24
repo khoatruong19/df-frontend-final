@@ -89,7 +89,7 @@ const ProfileImageUpload = ({
       <Button
         onClick={openChooseFile}
         variant={'outline'}
-        className="border-2 ml-4"
+        className="border-2 border-white ml-4 font-semibold"
       >
         Upload
       </Button>

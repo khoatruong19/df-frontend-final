@@ -27,7 +27,9 @@ const ResumeTemplateCard = ({
       <div className="relative w-full h-[200px]">
         <Image src={template.coverImage} alt="" fill objectFit="contain" />
       </div>
-      <h3 className="absolute bottom-0 font-semibold">{template.name}</h3>
+      <h3 className="absolute bottom-0 font-semibold text-appMainTextColor">
+        {template.name}
+      </h3>
     </div>
   );
 };

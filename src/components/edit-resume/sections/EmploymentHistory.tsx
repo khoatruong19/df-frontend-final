@@ -47,7 +47,7 @@ const EmploymentHistory = ({
     <section>
       <div className="mb-3">
         <SectionTitleInput value={title} setValue={setTitle} />
-        <p className="text-sm text-grayText font-semibold">
+        <p className="text-sm text-appSecondaryTextColor font-semibold">
           Show your working experiences
         </p>
       </div>

@@ -65,7 +65,7 @@ const SkillCard = ({ resumeId, skill }: SkillCardProps) => {
           {hasInformation && (
             <div>
               <h3>{name}</h3>
-              <p className="text-sm text-grayText font-semibold capitalize">
+              <p className="text-sm text-appSecondaryTextColor font-semibold capitalize">
                 {level.name}
               </p>
             </div>
@@ -77,7 +77,7 @@ const SkillCard = ({ resumeId, skill }: SkillCardProps) => {
         <div className="flex items-end gap-x-10 mt-3">
           <FieldControl value={name} setValue={setName} label="Skill" />
           <Select onValueChange={onChangeSkillLevel}>
-            <SelectTrigger className="h-12 px-3 capitalize text-center border-4 border-white">
+            <SelectTrigger className="h-12 px-3 capitalize text-center border-4 border-appSecondary">
               {level.name}
             </SelectTrigger>
             <SelectContent>

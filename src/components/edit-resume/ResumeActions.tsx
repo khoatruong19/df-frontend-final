@@ -14,7 +14,7 @@ type ResumeActionsProps = {
 
 const ResumeActions = ({ resumeId, resumeTemplate }: ResumeActionsProps) => {
   return (
-    <div className="absolute w-1/2 right-0 top-3 px-24 flex items-center justify-between">
+    <div className="absolute w-1/2 right-1 top-3 px-28 flex items-center justify-between">
       <SelectTemplatesDialog
         resumeId={resumeId}
         resumeTemplate={resumeTemplate}

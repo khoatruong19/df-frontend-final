@@ -267,7 +267,7 @@ const Stockholm = ({ resume, customSections }: StockholmProps) => {
 
             {/* Links */}
             {resume?.socialLinks?.length > 0 && (
-              <div>
+              <div className="mb-5">
                 <h3 className="text-xs font-semibold mb-0.5">
                   {resume.socialLinksTitle}
                 </h3>

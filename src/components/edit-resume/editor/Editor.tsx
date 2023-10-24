@@ -32,7 +32,7 @@ const Editor = (props: EditorProps) => {
   }, [value]);
 
   return (
-    <div className="border-2 bg-white px-2 z-[999999] min-h-[300px] ">
+    <div className="border-2 bg-appSecondary/50 rounded-md px-2 z-[999999] min-h-[300px] ">
       {isRefresh && (
         <div className="mt-8 w-fit mx-auto">
           <LoadingSpinner />
@@ -42,7 +42,7 @@ const Editor = (props: EditorProps) => {
         <NovelEditor
           disableLocalStorage={true}
           defaultValue={defaultValue}
-          className="min-h-[300px] prose text-base text-gray-500 w-full"
+          className="min-h-[300px] prose text-base text-appMainTextColor/50 w-full"
           onUpdate={handleOnChangeContent}
         />
       )}

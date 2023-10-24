@@ -85,13 +85,13 @@
   }
 }
 
-body {
+/* body {
   background: linear-gradient(
       rgba(255, 255, 255, 0.8),
       rgba(252, 254, 255, 0.8)
     ),
     rgb(0, 0, 0);
-}
+} */
 
 ul > li,
 ol > li {
@@ -120,7 +120,7 @@ blockquote {
 }
 
 .custom-scrollbar {
-  @apply scrollbar-thin scrollbar-track-gray-100 scrollbar-thumb-neutral-400;
+  @apply scrollbar-thin scrollbar-track-appSecondary scrollbar-thumb-appMainTextColor;
 }
 
 .tracking-for-pdf {
@@ -141,4 +141,32 @@ blockquote {
 
 #slash-command button:last-child {
   display: none !important;
+}
+
+#slash-command button:nth-child(2) {
+  display: none !important;
+}
+
+#slash-command button:nth-child(4) {
+  display: none !important;
+}
+
+@layer base {
+  :root {
+    --app-primary: 237 237 237;
+    --app-secondary: 255 255 255;
+    --app-success: 106 156 137;
+    --app-main-text: 0 0 0;
+    --app-secondary-text: 91 91 91;
+    --app-danger: 254 0 0;
+  }
+
+  :root[data-theme='dark'] {
+    --app-primary: 82 109 130;
+    --app-secondary: 39 55 77;
+    --app-success: 106 156 137;
+    --app-danger: 212 173 252;
+    --app-main-text: 255 255 255;
+    --app-secondary-text: 63 46 62;
+  }
 }

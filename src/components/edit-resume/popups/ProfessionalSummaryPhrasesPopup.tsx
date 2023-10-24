@@ -58,18 +58,18 @@ const ProfessionalSummaryPhrasesPopup = ({
       <Popover>
         <PopoverTrigger>{triggerElement}</PopoverTrigger>
         <div className="relative">
-          <PopoverContent className="left-[40px] absolute w-[450px] shadow-md py-4 px-0 ">
+          <PopoverContent className="left-[40px] absolute w-[450px] shadow-md py-4 px-0  bg-appSecondary text-appMainTextColor">
             <div className="flex items-center gap-2 h-10 pb-4 border-b-2 px-3">
               <Search size={18} />
               <input
                 value={keyword}
                 onChange={(e) => setKeyword(e.target.value)}
-                className="flex-1 h-full px-2 outline-none"
+                className="flex-1 h-full px-2 outline-none bg-transparent font-semibold"
                 placeholder="Filter phrases by keyword and jpb title"
               />
             </div>
 
-            <div className="py-2 px-3 flex flex-col gap-3 text-sm  max-h-[50vh] overflow-auto custom-scrollbar text-gray-500">
+            <div className="py-2 px-3 flex flex-col gap-3 text-sm  max-h-[50vh] overflow-auto custom-scrollbar">
               {isLoading && (
                 <div className="mt-3 w-fit mx-auto">
                   <LoadingSpinner />

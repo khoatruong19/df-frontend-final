@@ -17,7 +17,7 @@ const EditResumePage = ({ params: { id } }: EditResumePageProps) => {
   if (!resume) return null;
 
   return (
-    <main className="relative max-h-screen flex overflow-hidden">
+    <main className="relative max-h-screen flex overflow-hidden bg-appPrimary">
       <ResumeForm resume={resume} />
       <ResumeReview resume={resume} />
       <ResumeActions resumeId={resume._id} resumeTemplate={resume.template} />

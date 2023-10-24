@@ -10,6 +10,7 @@ import Image from 'next/image';
 import LogoImg from '@/assets/logo.png';
 import { Popover, PopoverTrigger } from '../ui/popover';
 import UserPopoverContent from './UserPopoverContent';
+import ThemeSwitch from './ThemeSwitch';
 
 const Header = () => {
   const { user } = useUser();
@@ -28,27 +29,30 @@ const Header = () => {
           <h2 className="font-semibold text-xl">resume.ai</h2>
         </Link>
       </nav>
-      {!user ? (
-        <SignInButton mode="modal">
-          <Button size={'lg'}>Log In</Button>
-        </SignInButton>
-      ) : (
-        <Popover>
-          <PopoverTrigger>
-            <div className="flex items-center gap-2">
-              <Image
-                alt=""
-                src={user.imageUrl}
-                width={40}
-                height={40}
-                className="object-cover rounded-full"
-              />
-              <span className="font-semibold">{user.fullName}</span>
-            </div>
-          </PopoverTrigger>
-          <UserPopoverContent />
-        </Popover>
-      )}
+      <div className="flex items-center gap-2">
+        <ThemeSwitch />
+        {!user ? (
+          <SignInButton mode="modal">
+            <Button size={'lg'}>Log In</Button>
+          </SignInButton>
+        ) : (
+          <Popover>
+            <PopoverTrigger>
+              <div className="flex items-center gap-2 hover:opacity-70">
+                <Image
+                  alt=""
+                  src={user.imageUrl}
+                  width={40}
+                  height={40}
+                  className="object-cover rounded-full"
+                />
+                <span className="font-semibold">{user.fullName}</span>
+              </div>
+            </PopoverTrigger>
+            <UserPopoverContent />
+          </Popover>
+        )}
+      </div>
     </header>
   );
 };

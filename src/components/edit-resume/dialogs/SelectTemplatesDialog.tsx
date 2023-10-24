@@ -50,7 +50,7 @@ const SelectTemplatesDialog = ({
     <aside className={wrapperClass}>
       <Dialog>
         <DialogTrigger>{triggerElement}</DialogTrigger>
-        <DialogContent className="max-w-[700px] w-full">
+        <DialogContent className="max-w-[700px] w-full bg-appPrimary">
           <DialogHeader>
             <DialogTitle className="text-2xl text-center mb-3">
               Choose a template

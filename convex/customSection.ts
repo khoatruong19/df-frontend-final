@@ -39,19 +39,14 @@ export const create = mutation({
 export const getAll = query({
   args: {
     resumeId: v.id('resume'),
+    userId: v.string(),
   },
   handler: async (ctx, args) => {
-    const identity = await ctx.auth.getUserIdentity();
-
-    if (!identity) {
-      throw new Error('Not authenticated');
-    }
-
-    const { resumeId } = args;
+    const { resumeId, userId } = args;
 
     const customSections = await ctx.db
       .query('customSection')
-      .filter((q) => q.eq(q.field('userId'), identity.subject))
+      .filter((q) => q.eq(q.field('userId'), userId))
       .filter((q) => q.eq(q.field('resumeId'), resumeId))
       .collect();
     return customSections;

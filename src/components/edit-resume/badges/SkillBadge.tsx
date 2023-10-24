@@ -10,7 +10,7 @@ const SkillBadge = ({ content, clickHandler }: SkillBadgeProps) => {
   return (
     <button
       onClick={() => clickHandler(content)}
-      className="px-2 py-1 flex items-center gap-2 text-sm bg-white hover:opacity-75"
+      className="px-2 py-1 flex items-center gap-2 text-sm bg-appSecondary text-appMainTextColor hover:opacity-75 shadow-md rounded-sm"
     >
       <span>{content}</span>
       <Plus size={16} />

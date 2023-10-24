@@ -80,7 +80,7 @@ const ProfessionalSummary = ({
     <section className="relative">
       <div className="mb-3">
         <SectionTitleInput value={summaryTitle} setValue={setSummaryTitle} />
-        <p className="text-sm text-grayText font-semibold">
+        <p className="text-sm text-appSecondaryTextColor font-semibold">
           Write 2-4 short & energetic sentences to interest the reader! Mention
           your role, experience & most importantly - your biggest achievements,
           best qualities and skills.
@@ -92,11 +92,11 @@ const ProfessionalSummary = ({
         className="group relative border-2 border-white rounded-md cursor-pointer px-5 py-2"
       >
         <CollapsibleTrigger asChild>
-          <div className="text-lg flex items-center justify-center gap-2 h-10 hover:opacity-60">
+          <div className="text-lg flex items-center justify-center gap-2 h-10 hover:opacity-60 ">
             {openEditor && (
               <>
                 <Check size={18} />
-                <span className="mb-1">Done</span>
+                <span className="mb-1 ">Done</span>
               </>
             )}
             {!openEditor && (
@@ -120,7 +120,7 @@ const ProfessionalSummary = ({
         <ProfessionalSummaryPhrasesPopup
           wrapperClass="absolute top-16 right-0 z-50 "
           triggerElement={
-            <button className="flex items-center gap-2 hover:text-blue-400">
+            <button className="flex items-center gap-2 text-appMainTextColor hover:text-appSecondaryTextColor">
               <span className="text-base">Pre-written phase</span>
               <Plus size={18} />
             </button>

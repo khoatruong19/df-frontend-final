@@ -80,14 +80,14 @@ const Dublin = ({ resume, customSections }: DublinProps) => {
 
             {/* Links */}
             {resume?.socialLinks?.length > 0 && (
-              <div>
+              <div className="mb-8">
                 <h3 className="text-sm font-semibold mb-0.5">
                   {resume.socialLinksTitle}
                 </h3>
                 {resume?.socialLinks?.map((socialLink) => (
                   <p
                     key={socialLink.id}
-                    className="text-xxs break-all h-2 mb-1 leading-3 underline"
+                    className="text-xxxs break-all h-2 mb-2 leading-3 underline"
                   >
                     {socialLink.link}
                   </p>

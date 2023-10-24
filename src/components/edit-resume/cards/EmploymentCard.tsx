@@ -135,7 +135,7 @@ const EmploymentCard = ({ resumeId, employment }: EmploymentCardProps) => {
           <FieldControl value={company} setValue={setCompany} label="Company" />
 
           <div className="flex flex-col gap-2 w-full">
-            <label className="text-sm text-gray-400">Start & End Date</label>
+            <label className="text-sm">Start & End Date</label>
             <div className="flex items-center gap-3 w-full">
               <DatePicker
                 setValue={setStartDate}
@@ -144,7 +144,7 @@ const EmploymentCard = ({ resumeId, employment }: EmploymentCardProps) => {
                     value={startDate}
                     onChange={(e) => setStartDate(e.target.value)}
                     placeholder={'MM/YYYY'}
-                    className="px-3 py-2.5 outline-none bg-white text-lg font-medium w-full text-center"
+                    className="px-3 py-2.5 outline-none bg-appSecondary text-appMainTextColor rounded-md text-lg font-medium w-full text-center"
                   />
                 }
               />
@@ -155,7 +155,7 @@ const EmploymentCard = ({ resumeId, employment }: EmploymentCardProps) => {
                     value={endDate}
                     onChange={(e) => setEndDate(e.target.value)}
                     placeholder={'MM/YYYY'}
-                    className="px-3 py-2.5 outline-none bg-white text-lg font-medium w-full text-center"
+                    className="px-3 py-2.5 outline-none bg-appSecondary text-appMainTextColor rounded-md text-lg font-medium w-full text-center"
                   />
                 }
               />
@@ -165,8 +165,8 @@ const EmploymentCard = ({ resumeId, employment }: EmploymentCardProps) => {
           <FieldControl value={city} setValue={setCity} label="City" />
         </div>
 
-        <div>
-          <label className="text-sm text-gray-400">Description</label>
+        <div className="mt-5 mb-2">
+          <label className="text-sm">Description</label>
           <Editor
             isRefresh={refreshEditor}
             value={description}
@@ -183,9 +183,9 @@ const EmploymentCard = ({ resumeId, employment }: EmploymentCardProps) => {
       {openEditor && (
         <EmploymentHistoryPhrasesPopup
           jobTitle={debouncedValues.jobTitle}
-          wrapperClass="absolute top-60 right-0 z-50 mt-1.5 mr-4 "
+          wrapperClass="absolute top-64  right-0 z-50 mt-1.5 mr-4 "
           triggerElement={
-            <button className="flex items-center gap-2 hover:text-blue-400">
+            <button className="flex items-center gap-2 text-appMainTextColor hover:text-appSecondaryTextColor">
               <span className="text-base">Pre-written phase</span>
               <Plus size={18} />
             </button>

@@ -58,6 +58,12 @@ module.exports = {
           DEFAULT: 'hsl(var(--card))',
           foreground: 'hsl(var(--card-foreground))',
         },
+        appPrimary: 'rgb(var(--app-primary) / <alpha-value>)',
+        appSecondary: 'rgb(var(--app-secondary) / <alpha-value>)',
+        appSucess: 'rgb(var(--app-success) / <alpha-value>)',
+        danger: 'rgb(var(--app-danger) / <alpha-value>)',
+        appMainTextColor: 'rgb(var(--app-main-text) / <alpha-value>)',
+        appSecondaryTextColor: 'rgb(var(--app-secondary-text) / <alpha-value>)',
       },
       borderRadius: {
         lg: 'var(--radius)',

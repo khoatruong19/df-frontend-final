@@ -90,7 +90,7 @@ const CourseCard = ({ resumeId, courseData }: CourseCardProps) => {
           />
 
           <div className="flex flex-col gap-2 w-full">
-            <label className="text-sm text-gray-400">Start & End Date</label>
+            <label className="text-sm">Start & End Date</label>
             <div className="flex items-center gap-3 w-full">
               <DatePicker
                 setValue={setStartDate}
@@ -99,7 +99,7 @@ const CourseCard = ({ resumeId, courseData }: CourseCardProps) => {
                     value={startDate}
                     onChange={(e) => setStartDate(e.target.value)}
                     placeholder={'MM/YYYY'}
-                    className="px-3 py-2.5 outline-none bg-slate-200 text-lg font-medium w-full text-center"
+                    className="px-3 py-2.5 outline-none bg-appSecondary text-appMainTextColor rounded-md text-lg font-medium w-full text-center"
                   />
                 }
               />
@@ -110,7 +110,7 @@ const CourseCard = ({ resumeId, courseData }: CourseCardProps) => {
                     value={endDate}
                     onChange={(e) => setEndDate(e.target.value)}
                     placeholder={'MM/YYYY'}
-                    className="px-3 py-2.5 outline-none bg-slate-200 text-lg font-medium w-full text-center"
+                    className="px-3 py-2.5 outline-none bg-appSecondary text-appMainTextColor rounded-md text-lg font-medium w-full text-center"
                   />
                 }
               />

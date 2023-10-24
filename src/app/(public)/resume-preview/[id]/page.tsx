@@ -28,7 +28,7 @@ const ResumePreviewPage = ({ params: { id } }: ResumePreviewPageProps) => {
   }, []);
 
   return (
-    <main className="min-h-screen w-screen flex items-center justify-center ">
+    <main className="min-h-screen w-screen flex items-center justify-center bg-appPrimary ">
       {isLoading && <LoadingSpinner />}
       {!isLoading && resume && (
         <ResumeReview resume={resume} downScale={false} />

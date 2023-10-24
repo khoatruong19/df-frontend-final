@@ -17,7 +17,7 @@ const FieldControl = (props: FieldControlProps) => {
         value={value}
         onChange={(e) => setValue(e.target.value)}
         placeholder={placeholder}
-        className="px-3 py-2.5 outline-none bg-white text-base font-medium rounded-md"
+        className="px-3 py-2.5 outline-none bg-appSecondary text-appMainTextColor text-base font-medium rounded-md"
       />
     </div>
   );

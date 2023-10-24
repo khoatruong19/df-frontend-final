@@ -42,7 +42,7 @@ const SocialLinks = ({
     <section>
       <div className="mb-3">
         <SectionTitleInput value={title} setValue={setTitle} />
-        <p className="text-sm text-grayText font-semibold">
+        <p className="text-sm text-appSecondaryTextColor font-semibold">
           You can add links to websites you want hiring managers to see! Perhaps
           It will be a link to your portfolio, LinkedIn profile, or personal
           website
