@@ -1,36 +1,46 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Resume AI
+___
+![Minion](https://imgtr.ee/images/2023/10/24/77106094483f58e2c01d74d0deef7f00.png)
+![Minion](https://imgtr.ee/images/2023/10/24/452adad89fae65ba2e54b3efd3d9b1e0.png)
+## Description
+This is the Nextjs project called **Resume AI** where its implementation ideas based on [Resume IO]([https://resume.io]). Generally, this application helps you build resumes with all fundamental functionalities and together with the power of AI, now you can build your resume faster and better.
 
-## Getting Started
+This is the link of the project: [[https://df-frontend-final.vercel.app](https://df-frontend-final.vercel.app)].
+Hope you guys enjoy it!
 
-First, run the development server:
+## Technologies
+These are technologies and libraries used to build this application:
++ NextJS + Typescript
++ TailwindCSS + shadcn/ui
++ Convex
++ Clerk
++ OpenAI
++ More ...
+  
+## Features
++ CRUD resumes
++ Fill your resumes with provided information sections and your custom ones
++ Modify information sections
++ Providing different CV templates
++ Upload profile image
++ Pre-written phrases generating by AI
++ AI Continuing writting
++ Suggestions skills by AI
++ Authentication with social media accounts provided by Clerk
++ Two themes "dark" and "light"
++ Share CV online by preview link
++ Download PDF of CV
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Installation
+If you want to run the project at your local machine, here are the steps:
+1. Clone this repository and install all dependencies.
+2. Provide all env variables following "example.env" file, ping me in Discord(khoa123) if you don't want to get these variables by your own.
+3. Run projects using `npm run dev` script if you're using **npm** or `yarn dev` for **yarn** or `pnpm dev` for **pnpm**
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Contributing
+This is just a small side project for my personal works. Please don't use this project for:
+1. Commercial Purposes
+2. Distributing this project after modifying it
+3. You may not use this without appropriate attribution
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+**If you have any advices or suggestions to make the app better, feel free to submit them to this repo. Thanks!**
