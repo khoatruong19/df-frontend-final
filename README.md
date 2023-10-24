@@ -5,7 +5,7 @@ ___
 ## Description
 This is the Nextjs project called **Resume AI** where its implementation ideas based on [Resume IO]([https://resume.io]). Generally, this application helps you build resumes with all fundamental functionalities and together with the power of AI, now you can build your resume faster and better.
 
-This is the link of the project: [[https://df-frontend-final.vercel.app](https://df-frontend-final.vercel.app)].
+This is the link of the project: [https://df-frontend-final.vercel.app](https://df-frontend-final.vercel.app).
 Hope you guys enjoy it!
 
 ## Technologies
@@ -20,12 +20,12 @@ These are technologies and libraries used to build this application:
 ## Features
 + CRUD resumes
 + Fill your resumes with provided information sections and your custom ones
-+ Modify information sections
++ Modify information sections title
 + Providing different CV templates
 + Upload profile image
 + Pre-written phrases generating by AI
 + AI Continuing writting
-+ Suggestions skills by AI
++ Skills suggested by AI
 + Authentication with social media accounts provided by Clerk
 + Two themes "dark" and "light"
 + Share CV online by preview link
