@@ -3,7 +3,7 @@ ___
 ![Minion](https://imgtr.ee/images/2023/10/24/77106094483f58e2c01d74d0deef7f00.png)
 ![Minion](https://imgtr.ee/images/2023/10/24/452adad89fae65ba2e54b3efd3d9b1e0.png)
 ## Description
-This is the Nextjs project called **Resume AI** where its implementation ideas based on [Resume IO](https://resume.io). Generally, this application helps you build resumes with all fundamental functionalities and together with the power of AI, now you can build your resume faster and better.
+This is the Nextjs project called **Resume AI** where its implementation ideas based on [Resume IO](https://resume.io). Generally, this application helps you build resumes with all fundamental functionalities and together with the power of AI, now you can build your resume faster and better.[Notion]([https://resume.io](https://www.notion.so/product))
 
 This is the link of the project: [https://df-frontend-final.vercel.app](https://df-frontend-final.vercel.app).
 Hope you guys enjoy it!
